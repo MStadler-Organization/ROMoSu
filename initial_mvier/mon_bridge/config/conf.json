@@ -1,0 +1,6 @@
+{
+   "ros_bridge_host": "10.10.10.152",
+   "ros_bridge_port": 9090,
+   "mqtt_host": "10.10.10.1",
+   "mqtt_port": null
+}
