@@ -1,3 +1,4 @@
+
 html, body {
   height: 100%;
   margin: 0;
@@ -8,6 +9,7 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+
 ul {
   list-style-type: none;
 }
@@ -17,12 +19,13 @@ a {
   border: none;
   outline: none;
   color: inherit;
-}
-a:hover, a:visited {
-  text-decoration: none;
-  border: none;
-  outline: none;
-  color: inherit;
+
+  &:hover, &:visited {
+    text-decoration: none;
+    border: none;
+    outline: none;
+    color: inherit;
+  }
 }
 
-/*# sourceMappingURL=styles.css.map */
+

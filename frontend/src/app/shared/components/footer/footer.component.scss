@@ -1,3 +1,23 @@
 p {
   margin: 0;
 }
+
+
+.footer-ul {
+  display: flex;
+  margin: 0;
+  justify-content: center;
+  align-items: center;
+  list-style-type: none;
+
+  li {
+    margin: 0 1em;
+
+    a {
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
