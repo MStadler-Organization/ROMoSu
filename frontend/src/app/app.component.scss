@@ -1,0 +1,63 @@
+$footer-height: 50px;
+
+
+main {
+  padding: 3em;
+}
+
+p {
+  margin: 0
+}
+
+.wrapper {
+  min-height: calc(100vh - 68px);
+  /* Equal to height of footer */
+  /* But also accounting for potential margin-bottom of last child */
+  margin-bottom: -$footer-height;
+}
+
+.footer,
+.push {
+  height: $footer-height;
+}
+
+/*# sourceMappingURL=app.component.css.map */
+
+
+// Header
+
+.header-bar {
+  justify-content: space-between;
+
+  .title {
+    font-size: 1.25em;
+  }
+}
+
+
+// Side Nav
+
+.snav-wrapper {
+  height: 100%;
+  width: 100%;
+
+  .snav-container {
+    padding: 1.5em;
+
+    .snav-ul {
+      text-align: center;
+
+      li {
+        margin: 1em 0;
+
+        &:hover {
+          text-decoration: underline;
+        }
+
+        a {
+          font-weight: lighter;
+        }
+      }
+    }
+  }
+}
