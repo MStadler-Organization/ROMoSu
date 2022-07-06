@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 
 import {HomeRoutingModule} from './home-routing.module';
 import {HomeComponent} from './home.component';
-import {MatSliderModule} from "@angular/material/slider";
+import {SharedModule} from "../../shared/shared.module";
 
 
 @NgModule({
@@ -11,9 +11,9 @@ import {MatSliderModule} from "@angular/material/slider";
     HomeComponent
   ],
   imports: [
-    MatSliderModule,
     CommonModule,
-    HomeRoutingModule
+    HomeRoutingModule,
+    SharedModule
   ]
 })
 export class HomeModule {
