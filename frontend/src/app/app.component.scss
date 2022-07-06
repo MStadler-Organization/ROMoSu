@@ -33,3 +33,31 @@ p {
     font-size: 1.25em;
   }
 }
+
+
+// Side Nav
+
+.snav-wrapper {
+  height: 100%;
+  width: 100%;
+
+  .snav-container {
+    padding: 1.5em;
+
+    .snav-ul {
+      text-align: center;
+
+      li {
+        margin: 1em 0;
+
+        &:hover {
+          text-decoration: underline;
+        }
+
+        a {
+          font-weight: lighter;
+        }
+      }
+    }
+  }
+}

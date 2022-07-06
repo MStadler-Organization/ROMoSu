@@ -1,17 +1,31 @@
 <mat-sidenav-container>
   <!--  Sidenav -->
   <mat-sidenav #snav>
-    <p>This is the content of the side nav</p>
-    <p>Start</p>
-    <p>Start</p>
-    <p>Start</p>
-    <p>Start</p>
+    <div class="snav-wrapper">
+      <div class="snav-container">
+        <ul class="snav-ul">
+          <li><a routerLink='/home' (click)="snav.toggle()">Home</a></li>
+        </ul>
+        <hr>
+        <ul class="snav-ul">
+          <li><a routerLink='.' (click)="snav.toggle()">New Config</a></li> <!--TODO: implement-->
+          <li><a routerLink='.' (click)="snav.toggle()">Start Runtime Monitoring</a></li> <!--TODO: implement-->
+        </ul>
+        <hr>
+        <ul class="snav-ul">
+          <li><a (click)="snav.toggle()" routerLink='/about'>About</a></li>
+          <li><a (click)="snav.toggle()" routerLink='/legal-notice'>Legal Notice</a></li>
+          <li><a (click)="snav.toggle()" routerLink='/impress'>Impress</a></li>
+        </ul>
+      </div>
+    </div>
   </mat-sidenav>
 
   <mat-sidenav-content>
     <mat-toolbar class="header-bar">
       <div class="example-sidenav-content">
-        <button mat-icon-button class="menu-btn" aria-label="Icon-button with menu icon" (click)="snav.toggle()">
+        <button mat-icon-button onclick="this.blur()" class="menu-btn" aria-label="Icon-button with menu icon"
+                (click)="snav.toggle()">
           <mat-icon>menu</mat-icon>
         </button>
       </div>
