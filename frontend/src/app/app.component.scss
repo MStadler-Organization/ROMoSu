@@ -5,6 +5,10 @@ html, body {
   margin: 0;
 }
 
+main {
+  padding: 3em;
+}
+
 p {
   margin: 0
 }
@@ -22,3 +26,14 @@ p {
 }
 
 /*# sourceMappingURL=app.component.css.map */
+
+
+// Header
+
+.header-bar {
+  justify-content: space-between;
+
+  .title {
+    font-size: 1.25em;
+  }
+}
