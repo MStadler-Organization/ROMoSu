@@ -13,9 +13,15 @@
 
 ## Useful commands
 
-### Run API
+### Run Server
 
 ```python manage.py runserver```
+
+When using the above comamnd, Django starts two processes, one for the actual development server and other to reload
+your application when the code changes. To run only single instance with no reload (necessary to not start multiple ROS
+connectors):
+
+```python manage.py runserver --noreload```
 
 ### Migrate after adding a new model
 
