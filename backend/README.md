@@ -1,15 +1,12 @@
 # Backend
 
-## How to add new API endpoint
+## Setup
 
-1. Create Model (=DB entity) in ```models.py```
-2. (Register new model in ```admin.py```)
-3. Migrate new model (see useful commands)
-4. Create Serializer (transforms Models to JSON) in ```serializers.py```
-5. Create View for actual logic of API call in ```views.py```
-6. Add API endpoint to URLs in ``urls.py`` (depending on implementation in ```views.py```, respectively call function or
-   with the router)
-7. Run server and navigate to respective API endpoint
+1. Install at least Python 3.8
+2. Install pip
+3. Install Django ```python -m pip install Django```
+4. Install other required
+   packages: ```pip install djangorestframework``` ```pip install markdown``` ```pip install django-filter```
 
 ## Useful commands
 
@@ -17,7 +14,7 @@
 
 ```python manage.py runserver```
 
-When using the above comamnd, Django starts two processes, one for the actual development server and other to reload
+When using the above command, Django starts two processes, one for the actual development server and other to reload
 your application when the code changes. To run only single instance with no reload (necessary to not start multiple ROS
 connectors):
 
@@ -45,6 +42,17 @@ hero_2 = Hero(name="Batman", alias="BM")
 hero_1.save()
 hero_2.save()
 ```
+
+## How to add new API endpoint
+
+1. Create Model (=DB entity) in ```models.py```
+2. (Register new model in ```admin.py```)
+3. Migrate new model (see useful commands)
+4. Create Serializer (transforms Models to JSON) in ```serializers.py```
+5. Create View for actual logic of API call in ```views.py```
+6. Add API endpoint to URLs in ``urls.py`` (depending on implementation in ```views.py```, respectively call function or
+   with the router)
+7. Run server and navigate to respective API endpoint
 
 ## Useful Links
 
