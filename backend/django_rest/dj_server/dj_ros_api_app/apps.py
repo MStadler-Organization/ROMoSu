@@ -9,6 +9,10 @@ class DjRosApiAppConfig(AppConfig):
 
     def __init__(self, app_name, app_module):
         super().__init__(app_name, app_module)
-        RosConnector()
-
-
+        rc = RosConnector()
+        topics = rc.get_topics()
+        for i in topics:
+            print(i.in_topic)
+            print(i.type)
+            print('-----------\n')
+        rc.disconnect()
