@@ -17,14 +17,13 @@ from django.contrib import admin
 from django.urls import include, path
 from rest_framework import routers
 
-from dj_server.quickstart import views
+from dj_server.dj_ros_api_app import views
 
 router = routers.DefaultRouter()
-router.register(r'hero', views.HeroViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('herolist/', views.hero_list),
+    path('topiclist/', views.current_topic_list),
 ]

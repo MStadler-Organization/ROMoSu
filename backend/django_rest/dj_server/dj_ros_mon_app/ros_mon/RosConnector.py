@@ -7,8 +7,9 @@ class TopicInfo():
     def __init__(self, in_topic, type, out_topic='', period=0):
         self.in_topic = in_topic
         self.type = type
-        self.out_topic = out_topic
-        self.period = period
+
+    def encode(self):
+        return self.__dict__
 
 
 class RosConnector:
@@ -25,7 +26,7 @@ class RosConnector:
 
     def connect_to_ros(self):
         """Connects to the roscore and returns the client if this was successful"""
-        client = roslibpy.Ros(host='localhost', port=9090)
+        client = roslibpy.Ros(host='localhost', port=9090)  # TODO: change this here later with config
         client.run()
         if client.is_connected:
             logging.info('Successfully connected to ROS bridge')
