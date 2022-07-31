@@ -8,14 +8,16 @@ class TopicInfo():
         self.in_topic = in_topic
         self.type = type
 
-    def encode(self):
-        return self.__dict__
-
 
 class RosConnector:
     """Central ROS connector class, connects to the ROS-bridge"""
 
     def get_topics(self):
+        """Retrieves all ROS topics of the current configuration"""
+        if not self.ROS_CLIENT or not self.ROS_CLIENT.is_connected:
+            logging.error('ROS bridge is not connected properly!')
+            return None
+
         topics = self.ROS_CLIENT.get_topics()
         topic_list = []
         for i, topic in enumerate(topics):
@@ -24,7 +26,7 @@ class RosConnector:
             topic_list.append(topics)
         return topic_list
 
-    def connect_to_ros(self):
+    def _connect_to_ros(self):
         """Connects to the roscore and returns the client if this was successful"""
         client = roslibpy.Ros(host='localhost', port=9090)  # TODO: change this here later with config
         client.run()
@@ -45,4 +47,4 @@ class RosConnector:
 
     def __init__(self) -> None:
         super().__init__()
-        self.ROS_CLIENT = self.connect_to_ros()
+        self.ROS_CLIENT = self._connect_to_ros()
