@@ -25,6 +25,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('topiclist/', views.current_topic_list),
     path('possible-sums/', views.possible_sums),
+    path('props-for-sum/', views.properties_for_sum),
 ]
