@@ -16,3 +16,14 @@ def current_topic_list(request):
         # get all ROS topics
         topics = DjRosApiAppConfig.RC.get_topics()
         return JsonResponse(topics, encoder=DefaultEncoder, safe=False)
+
+
+@csrf_exempt
+def possible_sums(request):
+    """
+    Get current topic list
+    """
+    if request.method == 'GET':
+        # get all possible SuMs
+        sums = DjRosApiAppConfig.RC.get_sums()
+        return JsonResponse(sums, encoder=DefaultEncoder, safe=False)
