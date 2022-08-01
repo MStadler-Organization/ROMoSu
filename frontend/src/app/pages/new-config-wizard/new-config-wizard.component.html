@@ -1,1 +1,36 @@
-<p>new-config-wizard works!</p>
+<mat-stepper linear #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup" class="form-container">
+      <ng-template matStepLabel>Select SuM</ng-template>
+      <mat-selection-list #sums [multiple]="false" class="selection-container">
+        <mat-list-option *ngFor="let sum of this.possibleSums" [value]="sum">
+          {{sum}}
+        </mat-list-option>
+      </mat-selection-list>
+      <div>
+        <button mat-raised-button (click)="validateSumSelection(sums, stepper)">Next Step</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Fill out your address</ng-template>
+      <mat-form-field appearance="fill">
+        <mat-label>Address</mat-label>
+        <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY">
+      </mat-form-field>
+      <div>
+        <button mat-raised-button matStepperPrevious>Previous Step</button>
+        <button mat-raised-button matStepperNext>Next Step</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-raised-button matStepperPrevious>Previous Step</button>
+      <button mat-raised-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-stepper>
