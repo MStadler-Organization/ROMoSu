@@ -2,29 +2,18 @@ import logging
 
 import roslibpy
 
+from dj_server.dj_ros_api_app.utils import get_base_topic_string, get_sub_topic_string
+
 
 class TopicInfo():
-    def __init__(self, in_topic, type, out_topic='', period=0):
+    def __init__(self, in_topic, type, type_info):
         self.in_topic = in_topic
         self.type = type
+        self.type_info = type_info
 
 
 class RosConnector:
     """Central ROS connector class, connects to the ROS-bridge"""
-
-    def get_topics(self):
-        """Retrieves all ROS topics of the current configuration"""
-        if not self.ROS_CLIENT or not self.ROS_CLIENT.is_connected:
-            logging.error('ROS bridge is not connected properly!')
-            return None
-
-        topics = self.ROS_CLIENT.get_topics()
-        topic_list = []
-        for i, topic in enumerate(topics):
-            rtype = self.ROS_CLIENT.get_topic_type(topic)
-            topics = TopicInfo(topic, rtype)
-            topic_list.append(topics)
-        return topic_list
 
     def get_sums(self):
         """Retrieves all ROS topics of the current configuration"""
@@ -35,17 +24,36 @@ class RosConnector:
         topics = self.ROS_CLIENT.get_topics()
         possible_sums = []
         for topic in topics:
-            # remove preceding slash
-            trunc_topic_name = topic[1:]
-            # check if topic is a root-topic
-            if trunc_topic_name.count('/') > 0:
-                # no root-topic, get base topic
-                trunc_topic_name = trunc_topic_name[:trunc_topic_name.index('/')]
+            base_topic = get_base_topic_string(topic)
             # check if already contained in list
-            if trunc_topic_name not in possible_sums:
-                possible_sums.append(trunc_topic_name)
+            if base_topic not in possible_sums:
+                possible_sums.append(base_topic)
 
         return possible_sums
+
+    def get_properties_for_sum(self, p_selected_sum):
+        """
+        Collects properties based on selected SuM
+        """
+
+        # get all topics
+        topics = self.ROS_CLIENT.get_topics()
+
+        topic_list = []
+
+        for topic in topics:
+            # base topic name
+            base_topic = get_base_topic_string(topic)
+            # filter according to SuM and check if it is subtopic
+            if base_topic == p_selected_sum and topic.count('/') > 1 and topic not in topic_list:
+                # get details
+                sub_topic_name = get_sub_topic_string(topic)
+                topic_type = self.ROS_CLIENT.get_topic_type(topic)
+                type_info = self.ROS_CLIENT.get_message_details(topic_type)
+                # add to list
+                topic_to_add = TopicInfo(sub_topic_name, topic_type, type_info)
+                topic_list.append(topic_to_add)
+        return topic_list
 
     def _connect_to_ros(self):
         """Connects to the roscore and returns the client if this was successful"""
