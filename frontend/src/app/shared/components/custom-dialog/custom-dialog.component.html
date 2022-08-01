@@ -1,0 +1,24 @@
+<div class='outer-dialog-container'>
+  <div class='inner-dialog-container'>
+    <div class="dialog-header-container">
+      <div *ngIf="type===0" class="dialog-heading info">
+        <h1>Info</h1>
+        <i class="material-icons-outlined">info</i>
+      </div>
+      <div *ngIf="type===1" class="dialog-heading success">
+        <h1>Success</h1>
+        <i class="material-icons">done</i>
+      </div>
+      <div *ngIf="type===2" class="dialog-heading error">
+        <h1>Error</h1>
+        <i class="material-icons">error</i>
+      </div>
+    </div>
+    <div class="dialog-message">
+      <p>{{message}}</p>
+    </div>
+    <div class='button-container'>
+      <button mat-raised-button (click)='onClickOk()' class='ok-button'><span class='inner-ok-text'>OK</span></button>
+    </div>
+  </div>
+</div>

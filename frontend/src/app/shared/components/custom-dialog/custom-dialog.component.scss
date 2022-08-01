@@ -1,0 +1,33 @@
+.outer-dialog-container {
+  .inner-dialog-container {
+    .dialog-header-container {
+      .dialog-heading {
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        h1 {
+          font-weight: 400;
+          margin: 0.5em 0;
+        }
+      }
+
+      .error {
+        i {
+          color: tomato;
+        }
+      }
+
+      .success {
+        i {
+          color: green;
+        }
+      }
+    }
+
+    .dialog-message {
+
+    }
+  }
+}

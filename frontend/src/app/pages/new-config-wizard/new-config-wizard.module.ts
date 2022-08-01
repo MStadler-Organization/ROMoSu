@@ -9,22 +9,24 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 import {MatListModule} from "@angular/material/list";
+import {MatIconModule} from "@angular/material/icon";
 
 
 @NgModule({
   declarations: [
     NewConfigWizardComponent
   ],
-  imports: [
-    CommonModule,
-    NewConfigWizardRoutingModule,
-    MatStepperModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatListModule
-  ]
+    imports: [
+        CommonModule,
+        NewConfigWizardRoutingModule,
+        MatStepperModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        MatListModule,
+        MatIconModule
+    ]
 })
 export class NewConfigWizardModule {
 }

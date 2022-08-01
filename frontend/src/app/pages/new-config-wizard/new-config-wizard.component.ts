@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder} from "@angular/forms";
 import {MatStepper} from "@angular/material/stepper";
 import {NewConfigWizardService} from "./new-config-wizard.service";
+import {CustomDialogComponent} from "../../shared/components/custom-dialog/custom-dialog.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-new-config-wizard',
@@ -22,7 +24,7 @@ export class NewConfigWizardComponent implements OnInit {
 
   possibleSums: string[] = []
 
-  constructor(private _formBuilder: FormBuilder, public newConfigWizardService: NewConfigWizardService) {
+  constructor(private _formBuilder: FormBuilder, public newConfigWizardService: NewConfigWizardService, public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -39,9 +41,15 @@ export class NewConfigWizardComponent implements OnInit {
   validateSumSelection(sums: { selectedOptions: { selected: { value: string; }[]; }; }, stepper: MatStepper) {
     this.selectedSum = sums.selectedOptions.selected[0]?.value
     if (!this.selectedSum) {
-      // todo: show dialog or something
+      let dialogRef = this.dialog.open(CustomDialogComponent, {
+        data: {
+          type: 2, // create error
+          message: 'No System under Monitoring selected!'
+        },
+        autoFocus: false // disable default focus on button
+      });
     } else {
-      stepper.next()
+      stepper.next() // go to next step
     }
   }
 }
