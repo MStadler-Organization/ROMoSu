@@ -1,4 +1,5 @@
 <mat-stepper linear #stepper>
+  <!-- ########## STEP 1 ########## -->
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup" class="form-container">
       <ng-template matStepLabel>Select SuM</ng-template>
@@ -12,19 +13,40 @@
       </div>
     </form>
   </mat-step>
+
+  <!-- ########## STEP 2 ########## -->
   <mat-step [stepControl]="secondFormGroup">
     <form [formGroup]="secondFormGroup">
-      <ng-template matStepLabel>Fill out your address</ng-template>
-      <mat-form-field appearance="fill">
-        <mat-label>Address</mat-label>
-        <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY">
-      </mat-form-field>
+      <ng-template matStepLabel>Property Specification</ng-template>
+      <h1>{{this.selectedSum}}</h1>
+      <div class="tree-container">
+        <div *ngFor="let rootTopic of propertyData; index as i;" class="panel">
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <div class="panel-header-container">
+                <mat-panel-title>
+                  {{rootTopic.name}}
+                </mat-panel-title>
+                <mat-panel-description>
+                  {{rootTopic.type}}
+                </mat-panel-description>
+              </div>
+              <!--              <mat-icon>error</mat-icon>-->
+            </mat-expansion-panel-header>
+
+            <p>THIS IS SOME CONTENT IN HERE</p>
+
+          </mat-expansion-panel>
+        </div>
+      </div>
       <div>
         <button mat-raised-button matStepperPrevious onclick="this.blur()">Previous Step</button>
         <button mat-raised-button matStepperNext onclick="this.blur()">Next Step</button>
       </div>
     </form>
   </mat-step>
+
+  <!-- ########## STEP 3 ########## -->
   <mat-step>
     <ng-template matStepLabel>Done</ng-template>
     <p>You are now done.</p>
