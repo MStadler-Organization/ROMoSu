@@ -11,6 +11,7 @@
    2. ```pip install markdown```
    3. ```pip install django-filter```
    4. ```pip install roslibpy```
+   5. ```pip install django-cors-headers```
 5. Install ROS bridge for ROS noetic 
    1. ```sudo apt-get install -y ros-noetic-rosbridge-server```
    2. ```sudo apt-get install -y ros-noetic-tf2-web-republisher```

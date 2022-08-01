@@ -26,4 +26,5 @@ urlpatterns = [
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('topiclist/', views.current_topic_list),
+    path('possible-sums/', views.possible_sums),
 ]

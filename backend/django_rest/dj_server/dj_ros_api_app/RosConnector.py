@@ -26,6 +26,27 @@ class RosConnector:
             topic_list.append(topics)
         return topic_list
 
+    def get_sums(self):
+        """Retrieves all ROS topics of the current configuration"""
+        if not self.ROS_CLIENT or not self.ROS_CLIENT.is_connected:
+            logging.error('ROS bridge is not connected properly!')
+            return None
+
+        topics = self.ROS_CLIENT.get_topics()
+        possible_sums = []
+        for topic in topics:
+            # remove preceding slash
+            trunc_topic_name = topic[1:]
+            # check if topic is a root-topic
+            if trunc_topic_name.count('/') > 0:
+                # no root-topic, get base topic
+                trunc_topic_name = trunc_topic_name[:trunc_topic_name.index('/')]
+            # check if already contained in list
+            if trunc_topic_name not in possible_sums:
+                possible_sums.append(trunc_topic_name)
+
+        return possible_sums
+
     def _connect_to_ros(self):
         """Connects to the roscore and returns the client if this was successful"""
         client = roslibpy.Ros(host='localhost', port=9090)  # TODO: change this here later with config

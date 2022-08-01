@@ -7,10 +7,13 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatListModule} from "@angular/material/list";
+import { CustomDialogComponent } from './components/custom-dialog/custom-dialog.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
-    FooterComponent
+    FooterComponent,
+    CustomDialogComponent
   ],
   exports: [
     FooterComponent
@@ -22,7 +25,8 @@ import {MatListModule} from "@angular/material/list";
     MatIconModule,
     MatButtonModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    MatDialogModule
   ]
 })
 export class SharedModule {
