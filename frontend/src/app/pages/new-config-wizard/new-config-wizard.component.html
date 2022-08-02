@@ -26,15 +26,15 @@
         <ng-template matStepLabel>Property Specification</ng-template>
         <h1>{{this.selectedSum}}</h1>
         <div class="tree-container">
-          <div *ngFor="let rootTopic of rootTopics; index as i;" class="panel">
+          <div *ngFor="let leafProperty of treeData" class="panel">
             <mat-expansion-panel>
               <mat-expansion-panel-header>
                 <div class="panel-header-container">
                   <mat-panel-title>
-                    {{rootTopic.name}}
+                    {{leafProperty.name}}
                   </mat-panel-title>
                   <mat-panel-description>
-                    {{rootTopic.type}}
+                    {{leafProperty.dataType}}
                   </mat-panel-description>
                 </div>
                 <!--              <mat-icon>error</mat-icon>-->
@@ -53,13 +53,43 @@
                 </mat-form-field>
                 <h3 class="label-form-heading">Select (sub-)properties to monitor:</h3>
                 <div class="property-tree">
+                  <div class="leaf-node-container">
+                    <ul class="property-leaf-list">
+                      <li class="property-leaf-list-item">
+                        <mat-checkbox class="prop-checkbox">
+                          <span class="prop-name-container">{{leafProperty.name}}:</span>
+                          <span class="prop-type-container">{{leafProperty.dataType}}</span>
+                        </mat-checkbox>
+                      </li>
 
+                      <ul *ngIf="leafProperty.isExpandable" class="property-sub-list">
+                        <ng-container
+                          *ngTemplateOutlet="Recursion; context:{ list: leafProperty.children}"
+                        ></ng-container>
+                      </ul>
+                    </ul>
+                    <ng-template #Recursion let-list="list">
+                      <li *ngFor="let item of list">
+                        <mat-checkbox class="prop-checkbox">
+                          <span class="prop-name-container">{{item.name}}:</span>
+                          <span class="prop-type-container">{{item.dataType}}</span>
+                        </mat-checkbox>
+                        <ul *ngIf="item.isExpandable" class="property-sub-list">
+                          <ng-container
+                            *ngTemplateOutlet="Recursion; context:{ list: item.children }"
+                          ></ng-container>
+                        </ul>
+                      </li>
+                    </ng-template>
+                  </div>
                 </div>
               </div>
             </mat-expansion-panel>
           </div>
         </div>
         <div>
+          <!-- TODO: Add refresh buttons -->
+          <!-- TODO: refresh vars in onClick function for previous button -->
           <button mat-raised-button matStepperPrevious onclick="this.blur()" class="prev-button">Previous Step</button>
           <button mat-raised-button matStepperNext onclick="this.blur()">Next Step</button>
         </div>

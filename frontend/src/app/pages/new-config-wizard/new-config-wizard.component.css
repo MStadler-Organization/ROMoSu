@@ -17,5 +17,12 @@
   font-weight: 500;
   font-size: 1em;
 }
+.tree-container .panel-content-container .property-tree .leaf-node-container .property-leaf-list .property-sub-list {
+  margin-left: 2em;
+}
+.tree-container .panel-content-container .property-tree .leaf-node-container .property-leaf-list .prop-name-container {
+  margin-right: 1em;
+  text-decoration: underline;
+}
 
 /*# sourceMappingURL=new-config-wizard.component.css.map */

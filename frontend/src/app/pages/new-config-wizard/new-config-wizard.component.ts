@@ -10,6 +10,7 @@ interface TreeNodeElement {
   name: string;
   dataType: string;
   isExpandable: boolean;
+  isChecked: boolean;
   children?: TreeNodeElement[];
 }
 
@@ -35,7 +36,7 @@ export class NewConfigWizardComponent implements OnInit {
 
   selectedSum: string = ''
   possibleSums: string[] = []
-  rootTopics: any
+  treeData: TreeNodeElement[] = []
   showProgressBar: boolean = true
 
   // validate input
@@ -77,7 +78,6 @@ export class NewConfigWizardComponent implements OnInit {
       stepper.next() // go to next step
       this.showProgressBar = true
       this.newConfigWizardService.getPropsForSum(this.selectedSum).subscribe(sumDetails => {
-        console.log(sumDetails)
         this.setTreeData(sumDetails)
         this.showProgressBar = false
       })
@@ -89,14 +89,12 @@ export class NewConfigWizardComponent implements OnInit {
    * @param sumDetails the REST response
    */
   private setTreeData(sumDetails: any) {
-    let rootTopics: any[] = []
+
     let typeDefArray: any[] = []
-    let treeDataArray = []
+    let treeDataArray: TreeNodeElement[] = []
 
     // iterate over root topics
     for (const rootTopic of sumDetails) {
-      rootTopics.push({name: rootTopic['in_topic'], type: rootTopic['type']})
-
       // get the type definition of every topic and iterate over them
       typeDefArray = rootTopic.type_info.data.typedefs
 
@@ -104,9 +102,10 @@ export class NewConfigWizardComponent implements OnInit {
       const treeForRootTopic = this.getChildNodesForType(rootTopic.in_topic, rootTopic.type, typeDefArray)
 
       // add tree to the list
-      treeDataArray.push(treeForRootTopic)
+      treeDataArray.push(<TreeNodeElement>treeForRootTopic)
     }
-    this.rootTopics = rootTopics
+
+    this.treeData = treeDataArray
 
     console.log(treeDataArray)
   }
@@ -125,7 +124,8 @@ export class NewConfigWizardComponent implements OnInit {
       let primitiveTreeNodeElement: TreeNodeElement = {
         name: typeName,
         dataType: dataType,
-        isExpandable: false // since this is a primitive one
+        isExpandable: false, // since this is a primitive one
+        isChecked: false // default
       }
       return primitiveTreeNodeElement
     } else {
@@ -162,6 +162,7 @@ export class NewConfigWizardComponent implements OnInit {
           name: typeName,
           dataType: dataType,
           isExpandable: true,
+          isChecked: false,
           children: childrenTreeNodes
         }
         return nonPrimitiveTreeNodeElement

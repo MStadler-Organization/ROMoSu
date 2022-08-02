@@ -1,3 +1,6 @@
+$tree-margin: 2em;
+
+
 .form-container, .selection-container {
   margin: 1em 0;
 }
@@ -20,6 +23,33 @@
     .label-form-heading {
       font-weight: 500;
       font-size: 1em;
+    }
+
+    .property-tree {
+      .leaf-node-container {
+        .property-leaf-list {
+          .property-sub-list {
+            margin-left: $tree-margin;
+          }
+
+          .prop-name-container {
+            margin-right: 1em;
+            text-decoration: underline;
+          }
+
+          .prop-type-container {
+
+          }
+
+          .property-leaf-list-item {
+            .prop-checkbox {
+            }
+          }
+        }
+
+      }
+
+
     }
   }
 }
