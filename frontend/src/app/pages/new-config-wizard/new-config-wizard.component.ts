@@ -106,7 +106,7 @@ export class NewConfigWizardComponent implements OnInit {
       typeDefArray = rootTopic.type_info.data.typedefs
 
       // create tree data structure for the topic
-      const treeForRootTopic = this.getChildNodesForType(rootTopic.type, rootTopic.type, typeDefArray)
+      const treeForRootTopic = this.getChildNodesForType(rootTopic.in_topic, rootTopic.type, typeDefArray)
 
       // add tree to the list
       treeDataArray.push(treeForRootTopic)
