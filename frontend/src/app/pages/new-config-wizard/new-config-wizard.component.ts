@@ -1,10 +1,24 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder} from "@angular/forms";
+import {FormBuilder, FormControl, Validators} from "@angular/forms";
 import {MatStepper} from "@angular/material/stepper";
 import {NewConfigWizardService} from "./new-config-wizard.service";
 import {CustomDialogComponent} from "../../shared/components/custom-dialog/custom-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 
+
+interface TreeNodeElement {
+  name: string;
+  dataType: string;
+  isExpandable: boolean;
+  children?: TreeNodeElement[];
+}
+
+interface Field {
+  fieldName: string;
+  fieldDataType: string;
+}
+
+const PRIMITIVE_ROS_TYPES: string[] = ['bool', 'int8', 'uint8', 'int16', 'uint16', 'int32', 'uint32', 'int64', 'uint64', 'float32', 'float64', 'string'];
 
 @Component({
   selector: 'app-new-config-wizard',
@@ -23,11 +37,18 @@ export class NewConfigWizardComponent implements OnInit {
 
   selectedSum: string = ''
   possibleSums: string[] = []
-  propertyData: any
+  rootTopics: any
   showProgressBar: boolean = true
+
+  // validate input
+  FREQUENCY_FORM_CONTROL = new FormControl('', [Validators.required, Validators.pattern('\\d+([.]\\d+)?')]);
+
+  // primitive ROS datatypes
+
 
   constructor(private _formBuilder: FormBuilder, public newConfigWizardService: NewConfigWizardService, public dialog: MatDialog) {
   }
+
 
   ngOnInit(): void {
     this.newConfigWizardService.getSuMs().subscribe((possibleSums: string[]) => {
@@ -47,7 +68,7 @@ export class NewConfigWizardComponent implements OnInit {
 
 
     if (!this.selectedSum) {
-      let dialogRef = this.dialog.open(CustomDialogComponent, {
+      this.dialog.open(CustomDialogComponent, {
         data: {
           type: 2, // create error
           message: 'No System under Monitoring selected!'
@@ -69,15 +90,100 @@ export class NewConfigWizardComponent implements OnInit {
    * Sets the data for the tree view in step 2
    * @param sumDetails the REST response
    */
-  setTreeData(sumDetails: any) {
-    let treeData: any[] = []
+  private setTreeData(sumDetails: any) {
+    let rootTopics: any[] = []
 
     for (const rootTopic of sumDetails) {
-      treeData.push({name: rootTopic['in_topic'], type: rootTopic['type']})
+      rootTopics.push({name: rootTopic['in_topic'], type: rootTopic['type']})
+    }
+    this.rootTopics = rootTopics
+
+    let typeDefArray: any[] = []
+
+    function getChildNodesForType(typeName: string, dataType: string, typeDefArray: any[]) {
+
+      /**
+       * Checks whether a given string type is a primitive ROS datatype
+       * @param type a datatype name as string
+       */
+      function isPrimitiveDataType(type: string) {
+        return PRIMITIVE_ROS_TYPES.includes(type);
+      }
+
+      /***
+       * Returns the index of a type in an array of type definitions. If type is not contained, -1 is returned.
+       * @param typeName the type to search for
+       * @param typeDefArray the array in which the type is searched
+       * @private
+       */
+      function findIdxInTypeDef(typeName: string, typeDefArray: any) {
+        for (let i = 0; i < typeDefArray.length; i++) {
+          if (typeName === typeDefArray[i].type) {
+            return i
+          }
+        }
+        return -1
+      }
+
+      // check if type is a primitive
+      if (isPrimitiveDataType(dataType)) {
+        let primitiveTreeNodeElement: TreeNodeElement = {
+          name: typeName,
+          dataType: dataType,
+          isExpandable: false // since this is a primitive one
+        }
+        return primitiveTreeNodeElement
+      } else {
+        // const typeIdx = typeDefArray['type'].indexOf(typeName)
+        const typeIdx = findIdxInTypeDef(dataType, typeDefArray)
+        if (typeIdx != -1) {
+          // type exists
+
+          // get type in array
+          const singleTypeDef = typeDefArray[typeIdx]
+
+
+          // get fields of datatype
+          let fields: Field[] = []
+
+          // gather all the fields of the complex datatype
+          for (let i = 0; i < singleTypeDef.fieldnames.length; i++) {
+            let newField: Field = {
+              fieldName: singleTypeDef.fieldnames[i],
+              fieldDataType: singleTypeDef.fieldtypes[i]
+            }
+            fields.push(newField)
+          }
+
+          // get nodes of children for all fields
+          let childrenTreeNodes: TreeNodeElement[] = []
+          for (const singleField of fields) {
+            let newChildNode = getChildNodesForType(singleField.fieldName, singleField.fieldDataType, typeDefArray)
+            childrenTreeNodes.push(<TreeNodeElement>newChildNode)
+          }
+
+          // get childDataTypes
+          let nonPrimitiveTreeNodeElement: TreeNodeElement = {
+            name: typeName,
+            dataType: dataType,
+            isExpandable: true,
+            children: childrenTreeNodes
+          }
+          return nonPrimitiveTreeNodeElement
+        } else {
+          console.error('Something went wrong in creating data tree')
+          return []
+        }
+      }
     }
 
-    console.log(treeData)
+    // iterate over root topics
+    for (const rootTopic of sumDetails) {
+      // get the type definition of every topic and iterate over them
+      typeDefArray = rootTopic.type_info.data.typedefs
 
-    this.propertyData = treeData
+      const tree = getChildNodesForType(rootTopic.type, rootTopic.type, typeDefArray)
+      console.log(tree)
+    }
   }
 }

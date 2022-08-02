@@ -26,7 +26,7 @@
         <ng-template matStepLabel>Property Specification</ng-template>
         <h1>{{this.selectedSum}}</h1>
         <div class="tree-container">
-          <div *ngFor="let rootTopic of propertyData; index as i;" class="panel">
+          <div *ngFor="let rootTopic of rootTopics; index as i;" class="panel">
             <mat-expansion-panel>
               <mat-expansion-panel-header>
                 <div class="panel-header-container">
@@ -39,14 +39,28 @@
                 </div>
                 <!--              <mat-icon>error</mat-icon>-->
               </mat-expansion-panel-header>
+              <div class="panel-content-container">
+                <mat-form-field class="example-full-width" appearance="fill">
+                  <mat-label>Frequency in seconds</mat-label>
+                  <input matInput [formControl]="FREQUENCY_FORM_CONTROL" placeholder="e.g., 2.5">
+                  <mat-error
+                    *ngIf="FREQUENCY_FORM_CONTROL.hasError('float') && !FREQUENCY_FORM_CONTROL.hasError('required')">
+                    Please enter a valid frequency (float or number)
+                  </mat-error>
+                  <mat-error *ngIf="FREQUENCY_FORM_CONTROL.hasError('required')">
+                    Frequency is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+                <h3 class="label-form-heading">Select (sub-)properties to monitor:</h3>
+                <div class="property-tree">
 
-              <p>THIS IS SOME CONTENT IN HERE</p>
-
+                </div>
+              </div>
             </mat-expansion-panel>
           </div>
         </div>
         <div>
-          <button mat-raised-button matStepperPrevious onclick="this.blur()">Previous Step</button>
+          <button mat-raised-button matStepperPrevious onclick="this.blur()" class="prev-button">Previous Step</button>
           <button mat-raised-button matStepperNext onclick="this.blur()">Next Step</button>
         </div>
       </form>

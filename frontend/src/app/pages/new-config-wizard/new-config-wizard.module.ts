@@ -12,6 +12,8 @@ import {MatListModule} from "@angular/material/list";
 import {MatIconModule} from "@angular/material/icon";
 import {MatExpansionModule} from "@angular/material/expansion";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatTreeModule} from "@angular/material/tree";
 
 
 @NgModule({
@@ -29,7 +31,9 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
     MatListModule,
     MatIconModule,
     MatExpansionModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatCheckboxModule,
+    MatTreeModule
   ]
 })
 export class NewConfigWizardModule {

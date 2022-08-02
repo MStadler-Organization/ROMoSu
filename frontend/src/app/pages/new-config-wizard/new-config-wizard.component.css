@@ -6,8 +6,16 @@
   text-align: center;
 }
 
+.prev-button {
+  margin-right: 1em;
+}
+
 .tree-container {
   margin-bottom: 1em;
+}
+.tree-container .panel-content-container .label-form-heading {
+  font-weight: 500;
+  font-size: 1em;
 }
 
 /*# sourceMappingURL=new-config-wizard.component.css.map */
