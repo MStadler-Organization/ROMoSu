@@ -24,12 +24,14 @@ export class NewConfigWizardComponent implements OnInit {
   selectedSum: string = ''
   possibleSums: string[] = []
   propertyData: any
+  showProgressBar: boolean = true
 
   constructor(private _formBuilder: FormBuilder, public newConfigWizardService: NewConfigWizardService, public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
     this.newConfigWizardService.getSuMs().subscribe((possibleSums: string[]) => {
+      this.showProgressBar = false
       this.possibleSums = possibleSums.sort()
     })
   }
@@ -53,11 +55,13 @@ export class NewConfigWizardComponent implements OnInit {
         autoFocus: false // disable default focus on button
       });
     } else {
+      stepper.next() // go to next step
+      this.showProgressBar = true
       this.newConfigWizardService.getPropsForSum(this.selectedSum).subscribe(sumDetails => {
+        this.showProgressBar = false
         console.log(sumDetails)
         this.setTreeData(sumDetails)
       })
-      stepper.next() // go to next step
     }
   }
 

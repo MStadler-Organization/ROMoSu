@@ -11,6 +11,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatListModule} from "@angular/material/list";
 import {MatIconModule} from "@angular/material/icon";
 import {MatExpansionModule} from "@angular/material/expansion";
+import {MatProgressBarModule} from "@angular/material/progress-bar";
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import {MatExpansionModule} from "@angular/material/expansion";
     MatButtonModule,
     MatListModule,
     MatIconModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatProgressBarModule
   ]
 })
 export class NewConfigWizardModule {

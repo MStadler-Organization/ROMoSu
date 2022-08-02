@@ -1,59 +1,65 @@
-<mat-stepper linear #stepper>
-  <!-- ########## STEP 1 ########## -->
-  <mat-step [stepControl]="firstFormGroup">
-    <form [formGroup]="firstFormGroup" class="form-container">
-      <ng-template matStepLabel>Select SuM</ng-template>
-      <mat-selection-list #sums [multiple]="false" class="selection-container">
-        <mat-list-option *ngFor="let sum of this.possibleSums" [value]="sum">
-          {{sum}}
-        </mat-list-option>
-      </mat-selection-list>
-      <div>
-        <button mat-raised-button (click)="validateSumSelection(sums, stepper)" onclick="this.blur()">Next Step</button>
-      </div>
-    </form>
-  </mat-step>
-
-  <!-- ########## STEP 2 ########## -->
-  <mat-step [stepControl]="secondFormGroup">
-    <form [formGroup]="secondFormGroup">
-      <ng-template matStepLabel>Property Specification</ng-template>
-      <h1>{{this.selectedSum}}</h1>
-      <div class="tree-container">
-        <div *ngFor="let rootTopic of propertyData; index as i;" class="panel">
-          <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              <div class="panel-header-container">
-                <mat-panel-title>
-                  {{rootTopic.name}}
-                </mat-panel-title>
-                <mat-panel-description>
-                  {{rootTopic.type}}
-                </mat-panel-description>
-              </div>
-              <!--              <mat-icon>error</mat-icon>-->
-            </mat-expansion-panel-header>
-
-            <p>THIS IS SOME CONTENT IN HERE</p>
-
-          </mat-expansion-panel>
+<div>
+  <div *ngIf="this.showProgressBar" class="progress-spinner-container">
+    <!--    <mat-spinner></mat-spinner>-->
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </div>
+  <mat-stepper linear #stepper>
+    <!-- ########## STEP 1 ########## -->
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup" class="form-container">
+        <ng-template matStepLabel>Select SuM</ng-template>
+        <mat-selection-list #sums [multiple]="false" class="selection-container">
+          <mat-list-option *ngFor="let sum of this.possibleSums" [value]="sum">
+            {{sum}}
+          </mat-list-option>
+        </mat-selection-list>
+        <div>
+          <button mat-raised-button (click)="validateSumSelection(sums, stepper)" onclick="this.blur()">Next Step
+          </button>
         </div>
-      </div>
+      </form>
+    </mat-step>
+
+    <!-- ########## STEP 2 ########## -->
+    <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Property Specification</ng-template>
+        <h1>{{this.selectedSum}}</h1>
+        <div class="tree-container">
+          <div *ngFor="let rootTopic of propertyData; index as i;" class="panel">
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <div class="panel-header-container">
+                  <mat-panel-title>
+                    {{rootTopic.name}}
+                  </mat-panel-title>
+                  <mat-panel-description>
+                    {{rootTopic.type}}
+                  </mat-panel-description>
+                </div>
+                <!--              <mat-icon>error</mat-icon>-->
+              </mat-expansion-panel-header>
+
+              <p>THIS IS SOME CONTENT IN HERE</p>
+
+            </mat-expansion-panel>
+          </div>
+        </div>
+        <div>
+          <button mat-raised-button matStepperPrevious onclick="this.blur()">Previous Step</button>
+          <button mat-raised-button matStepperNext onclick="this.blur()">Next Step</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <!-- ########## STEP 3 ########## -->
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <p>You are now done.</p>
       <div>
         <button mat-raised-button matStepperPrevious onclick="this.blur()">Previous Step</button>
-        <button mat-raised-button matStepperNext onclick="this.blur()">Next Step</button>
+        <button mat-raised-button (click)="stepper.reset()" onclick="this.blur()">Reset</button>
       </div>
-    </form>
-  </mat-step>
-
-  <!-- ########## STEP 3 ########## -->
-  <mat-step>
-    <ng-template matStepLabel>Done</ng-template>
-    <p>You are now done.</p>
-    <div>
-      <button mat-raised-button matStepperPrevious onclick="this.blur()">Previous Step</button>
-      <button mat-raised-button (click)="stepper.reset()" onclick="this.blur()">Reset</button>
-    </div>
-  </mat-step>
-</mat-stepper>
-
+    </mat-step>
+  </mat-stepper>
+</div>
