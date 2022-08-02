@@ -18,8 +18,6 @@ interface Field {
   fieldDataType: string;
 }
 
-const PRIMITIVE_ROS_TYPES: string[] = ['bool', 'int8', 'uint8', 'int16', 'uint16', 'int32', 'uint32', 'int64', 'uint64', 'float32', 'float64', 'string'];
-
 @Component({
   selector: 'app-new-config-wizard',
   templateUrl: './new-config-wizard.component.html',
@@ -44,7 +42,7 @@ export class NewConfigWizardComponent implements OnInit {
   FREQUENCY_FORM_CONTROL = new FormControl('', [Validators.required, Validators.pattern('\\d+([.]\\d+)?')]);
 
   // primitive ROS datatypes
-
+  PRIMITIVE_ROS_TYPES: string[] = ['bool', 'int8', 'uint8', 'int16', 'uint16', 'int32', 'uint32', 'int64', 'uint64', 'float32', 'float64', 'string'];
 
   constructor(private _formBuilder: FormBuilder, public newConfigWizardService: NewConfigWizardService, public dialog: MatDialog) {
   }
@@ -100,90 +98,106 @@ export class NewConfigWizardComponent implements OnInit {
 
     let typeDefArray: any[] = []
 
-    function getChildNodesForType(typeName: string, dataType: string, typeDefArray: any[]) {
-
-      /**
-       * Checks whether a given string type is a primitive ROS datatype
-       * @param type a datatype name as string
-       */
-      function isPrimitiveDataType(type: string) {
-        return PRIMITIVE_ROS_TYPES.includes(type);
-      }
-
-      /***
-       * Returns the index of a type in an array of type definitions. If type is not contained, -1 is returned.
-       * @param typeName the type to search for
-       * @param typeDefArray the array in which the type is searched
-       * @private
-       */
-      function findIdxInTypeDef(typeName: string, typeDefArray: any) {
-        for (let i = 0; i < typeDefArray.length; i++) {
-          if (typeName === typeDefArray[i].type) {
-            return i
-          }
-        }
-        return -1
-      }
-
-      // check if type is a primitive
-      if (isPrimitiveDataType(dataType)) {
-        let primitiveTreeNodeElement: TreeNodeElement = {
-          name: typeName,
-          dataType: dataType,
-          isExpandable: false // since this is a primitive one
-        }
-        return primitiveTreeNodeElement
-      } else {
-        // const typeIdx = typeDefArray['type'].indexOf(typeName)
-        const typeIdx = findIdxInTypeDef(dataType, typeDefArray)
-        if (typeIdx != -1) {
-          // type exists
-
-          // get type in array
-          const singleTypeDef = typeDefArray[typeIdx]
-
-
-          // get fields of datatype
-          let fields: Field[] = []
-
-          // gather all the fields of the complex datatype
-          for (let i = 0; i < singleTypeDef.fieldnames.length; i++) {
-            let newField: Field = {
-              fieldName: singleTypeDef.fieldnames[i],
-              fieldDataType: singleTypeDef.fieldtypes[i]
-            }
-            fields.push(newField)
-          }
-
-          // get nodes of children for all fields
-          let childrenTreeNodes: TreeNodeElement[] = []
-          for (const singleField of fields) {
-            let newChildNode = getChildNodesForType(singleField.fieldName, singleField.fieldDataType, typeDefArray)
-            childrenTreeNodes.push(<TreeNodeElement>newChildNode)
-          }
-
-          // get childDataTypes
-          let nonPrimitiveTreeNodeElement: TreeNodeElement = {
-            name: typeName,
-            dataType: dataType,
-            isExpandable: true,
-            children: childrenTreeNodes
-          }
-          return nonPrimitiveTreeNodeElement
-        } else {
-          console.error('Something went wrong in creating data tree')
-          return []
-        }
-      }
-    }
+    let treeDataArray = []
 
     // iterate over root topics
     for (const rootTopic of sumDetails) {
       // get the type definition of every topic and iterate over them
       typeDefArray = rootTopic.type_info.data.typedefs
 
-      const tree = getChildNodesForType(rootTopic.type, rootTopic.type, typeDefArray)
-      console.log(tree)
+      // create tree data structure for the topic
+      const treeForRootTopic = this.getChildNodesForType(rootTopic.type, rootTopic.type, typeDefArray)
+
+      // add tree to the list
+      treeDataArray.push(treeForRootTopic)
+    }
+
+    console.log(treeDataArray)
+  }
+
+  /**
+   * Recursive function for creating TreeNodeElements based on a datatype and a typeDef array
+   * @param typeName the better human readably name of the type
+   * @param dataType the full datatype name, either a complex one or a primitive one as string (e.g., "sensor_msgs/JointState", or "float64")
+   * @param typeDefArray the type definition array provided by the ROS-bridge containing the information of the requested datatype
+   * @private
+   */
+  private getChildNodesForType(typeName: string, dataType: string, typeDefArray: any[]) {
+
+    // check if type is a primitive
+    if (this.isPrimitiveDataType(dataType)) {
+      let primitiveTreeNodeElement: TreeNodeElement = {
+        name: typeName,
+        dataType: dataType,
+        isExpandable: false // since this is a primitive one
+      }
+      return primitiveTreeNodeElement
+    } else {
+      // const typeIdx = typeDefArray['type'].indexOf(typeName)
+      const typeIdx = this.findIdxInTypeDef(dataType, typeDefArray)
+      if (typeIdx != -1) {
+        // type exists
+
+        // get type in array
+        const singleTypeDef = typeDefArray[typeIdx]
+
+
+        // get fields of datatype
+        let fields: Field[] = []
+
+        // gather all the fields of the complex datatype
+        for (let i = 0; i < singleTypeDef.fieldnames.length; i++) {
+          let newField: Field = {
+            fieldName: singleTypeDef.fieldnames[i],
+            fieldDataType: singleTypeDef.fieldtypes[i]
+          }
+          fields.push(newField)
+        }
+
+        // get nodes of children for all fields
+        let childrenTreeNodes: TreeNodeElement[] = []
+        for (const singleField of fields) {
+          let newChildNode = this.getChildNodesForType(singleField.fieldName, singleField.fieldDataType, typeDefArray)
+          childrenTreeNodes.push(<TreeNodeElement>newChildNode)
+        }
+
+        // get childDataTypes
+        let nonPrimitiveTreeNodeElement: TreeNodeElement = {
+          name: typeName,
+          dataType: dataType,
+          isExpandable: true,
+          children: childrenTreeNodes
+        }
+        return nonPrimitiveTreeNodeElement
+      } else {
+        console.error('Something went wrong in creating data tree')
+        return []
+      }
     }
   }
+
+  /***
+   * Returns the index of a type in an array of type definitions. If type is not contained, -1 is returned.
+   * @param typeName the type to search for
+   * @param typeDefArray the array in which the type is searched
+   * @private
+   */
+  private findIdxInTypeDef(typeName: string, typeDefArray: any) {
+    for (let i = 0; i < typeDefArray.length; i++) {
+      if (typeName === typeDefArray[i].type) {
+        return i
+      }
+    }
+    return -1
+  }
+
+
+  /**
+   * Checks whether a given string type is a primitive ROS datatype
+   * @param type a datatype name as string
+   */
+  private isPrimitiveDataType(type: string) {
+    return this.PRIMITIVE_ROS_TYPES.includes(type);
+  }
+
 }
