@@ -4,6 +4,7 @@ import {MatStepper} from "@angular/material/stepper";
 import {NewConfigWizardService} from "./new-config-wizard.service";
 import {CustomDialogComponent} from "../../shared/components/custom-dialog/custom-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
+import {MatCheckboxChange} from "@angular/material/checkbox";
 
 
 interface TreeNodeElement {
@@ -12,6 +13,7 @@ interface TreeNodeElement {
   isExpandable: boolean;
   isChecked: boolean;
   children?: TreeNodeElement[];
+  parent?: TreeNodeElement;
 }
 
 interface Field {
@@ -99,15 +101,16 @@ export class NewConfigWizardComponent implements OnInit {
       typeDefArray = rootTopic.type_info.data.typedefs
 
       // create tree data structure for the topic
-      const treeForRootTopic = this.getChildNodesForType(rootTopic.in_topic, rootTopic.type, typeDefArray)
+      let childTreeForRootTopic = this.getChildNodesForType(rootTopic.in_topic, rootTopic.type, typeDefArray)
+
 
       // add tree to the list
-      treeDataArray.push(<TreeNodeElement>treeForRootTopic)
+      treeDataArray.push(<TreeNodeElement>childTreeForRootTopic)
     }
 
     this.treeData = treeDataArray
 
-    console.log(treeDataArray)
+    console.log(this.treeData)
   }
 
   /**
@@ -197,4 +200,29 @@ export class NewConfigWizardComponent implements OnInit {
     return this.PRIMITIVE_ROS_TYPES.includes(type);
   }
 
+  /***
+   * Called when a checkbox in step 2 is checked or unchecked
+   * @param $event the event which happened (contains the data about checked or unchecked)
+   * @param treeNodeElement the treenode element which is clicked on
+   */
+  onCheckboxChange($event: MatCheckboxChange, treeNodeElement: TreeNodeElement) {
+    console.log($event)
+    console.log(treeNodeElement)
+    this.updateChildrenCheckboxes(treeNodeElement, $event.checked)
+  }
+
+  /***
+   * Updates the parent and children checkboxes of a tree node recursively, e.g., parent is checked -> all children are checked
+   * @param treeNodeElement the parent treenode element
+   * @param pChecked boolean whether to check or uncheck the nodes
+   * @private
+   */
+  private updateChildrenCheckboxes(treeNodeElement: TreeNodeElement, pChecked: boolean) {
+    if (treeNodeElement.isExpandable && treeNodeElement.children) {
+      for (const childNode of treeNodeElement.children) {
+        childNode.isChecked = pChecked
+        this.updateChildrenCheckboxes(childNode, pChecked)
+      }
+    }
+  }
 }
