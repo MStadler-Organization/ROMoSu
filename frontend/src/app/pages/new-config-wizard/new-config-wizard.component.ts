@@ -77,9 +77,9 @@ export class NewConfigWizardComponent implements OnInit {
       stepper.next() // go to next step
       this.showProgressBar = true
       this.newConfigWizardService.getPropsForSum(this.selectedSum).subscribe(sumDetails => {
-        this.showProgressBar = false
         console.log(sumDetails)
         this.setTreeData(sumDetails)
+        this.showProgressBar = false
       })
     }
   }
@@ -90,18 +90,13 @@ export class NewConfigWizardComponent implements OnInit {
    */
   private setTreeData(sumDetails: any) {
     let rootTopics: any[] = []
-
-    for (const rootTopic of sumDetails) {
-      rootTopics.push({name: rootTopic['in_topic'], type: rootTopic['type']})
-    }
-    this.rootTopics = rootTopics
-
     let typeDefArray: any[] = []
-
     let treeDataArray = []
 
     // iterate over root topics
     for (const rootTopic of sumDetails) {
+      rootTopics.push({name: rootTopic['in_topic'], type: rootTopic['type']})
+
       // get the type definition of every topic and iterate over them
       typeDefArray = rootTopic.type_info.data.typedefs
 
@@ -111,6 +106,7 @@ export class NewConfigWizardComponent implements OnInit {
       // add tree to the list
       treeDataArray.push(treeForRootTopic)
     }
+    this.rootTopics = rootTopics
 
     console.log(treeDataArray)
   }
