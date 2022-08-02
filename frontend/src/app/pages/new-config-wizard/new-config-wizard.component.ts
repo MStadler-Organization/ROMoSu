@@ -63,7 +63,7 @@ export class NewConfigWizardComponent implements OnInit {
    * @param sums the selection of the possible sum-list
    * @param stepper the stepper mat component
    */
-  validateSumSelection(sums: { selectedOptions: { selected: { value: string; }[]; }; }, stepper: MatStepper) {
+  goToStepTwoButtonClicked(sums: { selectedOptions: { selected: { value: string; }[]; }; }, stepper: MatStepper) {
 
     this.selectedSum = sums.selectedOptions.selected[0]?.value
 
@@ -224,5 +224,16 @@ export class NewConfigWizardComponent implements OnInit {
         this.updateChildrenCheckboxes(childNode, pChecked)
       }
     }
+  }
+
+  /***
+   * Called when clicking on 'Next'-button on step two
+   * @param stepper the stepper mat component
+   */
+  goToStepThreeButtonClicked(stepper: MatStepper) {
+    console.log('treedata:')
+    console.log(this.treeData)
+    console.log('formdata')
+    console.log(this.secondFormGroup)
   }
 }
