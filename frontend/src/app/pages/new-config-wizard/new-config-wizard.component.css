@@ -1,0 +1,13 @@
+.form-container, .selection-container {
+  margin: 1em 0;
+}
+
+.selection-container {
+  text-align: center;
+}
+
+.tree-container {
+  margin-bottom: 1em;
+}
+
+/*# sourceMappingURL=new-config-wizard.component.css.map */

@@ -1,0 +1,17 @@
+.outer-dialog-container .inner-dialog-container .dialog-header-container .dialog-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.outer-dialog-container .inner-dialog-container .dialog-header-container .dialog-heading h1 {
+  font-weight: 400;
+  margin: 0.5em 0;
+}
+.outer-dialog-container .inner-dialog-container .dialog-header-container .error i {
+  color: tomato;
+}
+.outer-dialog-container .inner-dialog-container .dialog-header-container .success i {
+  color: green;
+}
+
+/*# sourceMappingURL=custom-dialog.component.css.map */
