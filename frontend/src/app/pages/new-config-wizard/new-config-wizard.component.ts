@@ -280,13 +280,14 @@ export class NewConfigWizardComponent implements OnInit {
     }
 
     // validate frequency
-    for (const fq of this.frequencies) {
-      if (!fq.isCorrect) {
+    for (let i = 0; i < this.frequencies.length; i++) {
+      const fq = this.frequencies[i]
+      if (!fq.isCorrect && this.isAtLeastOnePropertySelected(i)) {
         // at least on frequency input is not correct
         this.dialog.open(CustomDialogComponent, {
           data: {
             type: 2, // create error
-            message: 'At least one frequency input field is not filled out properly. All frequencies must be assigned and filled only with floating point numbers!'
+            message: 'At least one frequency input field is not filled out properly. All frequencies in which properties are selected must be assigned and filled only with floating point numbers!'
           },
           autoFocus: false // disable default focus on button
         });
@@ -436,5 +437,36 @@ export class NewConfigWizardComponent implements OnInit {
         }
       }
     }
+  }
+
+  /**
+   * Checks whether a leafNode has at least one checked property.
+   * @param leafNodeIdx the index of the leafNode
+   * @private
+   */
+  private isAtLeastOnePropertySelected(leafNodeIdx: number) {
+    return this.isOneNodeChecked(this.treeData[leafNodeIdx]);
+  }
+
+  /**
+   * Checks whether a node or one of its sub-nodes is checked
+   * @param treeNodeElement the node in which the search is performed
+   * @private
+   */
+  private isOneNodeChecked(treeNodeElement: TreeNodeElement) {
+    // if this node is checked, return true
+    if (treeNodeElement.isChecked) return true
+    else {
+      // check child nodes
+      if (treeNodeElement.children) {
+        for (const childNode of treeNodeElement.children) {
+          if (this.isOneNodeChecked(childNode)) {
+            return true
+          }
+        }
+      }
+    }
+    // no node or sub-node is checked
+    return false
   }
 }
