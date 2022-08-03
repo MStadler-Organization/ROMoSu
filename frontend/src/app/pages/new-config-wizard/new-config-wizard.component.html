@@ -41,7 +41,8 @@
               <div class="panel-content-container">
                 <mat-form-field class="example-full-width" appearance="fill">
                   <mat-label>Frequency in seconds</mat-label>
-                  <input matInput (change)="onFrequencyChange($event, i)" placeholder="e.g., 2.5">
+                  <input matInput (change)="onFrequencyChange($event, i)" [formControl]="FREQUENCY_FORM_CONTROL"
+                         placeholder="e.g., 2.5" required>
                   <mat-error
                     *ngIf="FREQUENCY_FORM_CONTROL.hasError('float') && !FREQUENCY_FORM_CONTROL.hasError('required')">
                     Please enter a valid frequency (float or number)
@@ -98,7 +99,7 @@
           <!-- TODO: Add refresh buttons -->
           <!-- TODO: refresh vars in onClick function for previous button -->
           <button mat-raised-button matStepperPrevious onclick="this.blur()" class="prev-button">Previous Step</button>
-          <button mat-raised-button matStepperNext onclick="this.blur()" (click)="goToStepThreeButtonClicked(stepper)">
+          <button mat-raised-button onclick="this.blur()" (click)="goToStepThreeButtonClicked(stepper)">
             Next Step
           </button>
         </div>

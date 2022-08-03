@@ -43,12 +43,14 @@ export class NewConfigWizardComponent implements OnInit {
   showProgressBar: boolean = true
 
   // validate input
-  FREQUENCY_FORM_CONTROL = new FormControl('', [Validators.required, Validators.pattern('\\d+([.]\\d+)?')]);
+  FQ_PATTERN: string = '\\d+([.]\\d+)?'
+  FQ_REGEX = new RegExp(this.FQ_PATTERN);
+  FREQUENCY_FORM_CONTROL = new FormControl('', [Validators.required, Validators.pattern(this.FQ_PATTERN)]);
 
   // primitive ROS datatypes
   PRIMITIVE_ROS_TYPES: string[] = ['bool', 'int8', 'uint8', 'int16', 'uint16', 'int32', 'uint32', 'int64', 'uint64', 'float32', 'float64', 'string'];
 
-  frequencies: number[] = []
+  frequencies: { value: number, isCorrect: boolean }[] = []
   checkBoxes: any[] = []
 
   /////////// CONSTRUCTOR ///////////
@@ -118,7 +120,7 @@ export class NewConfigWizardComponent implements OnInit {
     this.treeData = treeDataArray
 
     // init Checkbox values
-    this.setCheckBoxes()
+    this.setCheckBoxesAndFQs()
 
     console.log(this.treeData)
   }
@@ -264,9 +266,36 @@ export class NewConfigWizardComponent implements OnInit {
    * @param stepper the stepper mat component
    */
   goToStepThreeButtonClicked(stepper: MatStepper) {
-    console.log(this.frequencies)
-    console.log(this.checkBoxes)
-    console.log(this.checkBoxes.filter(Boolean).length)
+    // validate checkbox selection
+    if (this.checkBoxes.filter(Boolean).length < 1) {
+      // at least one topic must be selected to monitor
+      this.dialog.open(CustomDialogComponent, {
+        data: {
+          type: 2, // create error
+          message: 'At least one property must be selected for monitoring!'
+        },
+        autoFocus: false // disable default focus on button
+      });
+      return
+    }
+
+    // validate frequency
+    for (const fq of this.frequencies) {
+      if (!fq.isCorrect) {
+        // at least on frequency input is not correct
+        this.dialog.open(CustomDialogComponent, {
+          data: {
+            type: 2, // create error
+            message: 'At least one frequency input field is not filled out properly. All frequencies must be assigned and filled only with floating point numbers!'
+          },
+          autoFocus: false // disable default focus on button
+        });
+        return;
+      }
+    }
+
+    // all inputs are correct, go to step three
+    stepper.next()
   }
 
   /***
@@ -276,7 +305,8 @@ export class NewConfigWizardComponent implements OnInit {
    * @param idx the index of the leafnode
    */
   onFrequencyChange($event: any, idx: number) {
-    this.frequencies[idx] = $event.target.value
+    const val = $event.target.value
+    this.frequencies[idx] = {value: val, isCorrect: this.FQ_REGEX.test(val)}
   }
 
   /**
@@ -319,9 +349,12 @@ export class NewConfigWizardComponent implements OnInit {
    * Helper function which initiates the checkboxes class variable with the length of the treenodes and sets them all to false
    * @private
    */
-  private setCheckBoxes() {
+  private setCheckBoxesAndFQs() {
     for (let i = 0; i < this.treeNodeIdx + 1; i++) {
       this.checkBoxes[i] = false
+    }
+    for (let j = 0; j < this.treeData.length; j++) {
+      this.frequencies[j] = {value: -1, isCorrect: false}
     }
   }
 
