@@ -222,11 +222,15 @@ export class NewConfigWizardComponent implements OnInit {
     if (searchNode) {
       const checkedAction = $event.checked
       // set data for form
+      searchNode['isChecked'] = $event.checked
       this.checkBoxes[searchNode.index] = checkedAction
       // update the children with value
       this.updateChildrenCheckboxes(searchNode, checkedAction)
 
-      //TODO: // if checked and all other children of a parent are also checked, parent must be checked
+      // if checked and all other children of a parent are also checked, parent must be checked
+      if (checkedAction) {
+        this.checkParentChecking(parentNodeIdx)
+      }
 
       // if unchecked, parent is also unchecked since at least on child is not checked
       if (!checkedAction && parentNodeIdx) {
@@ -244,7 +248,7 @@ export class NewConfigWizardComponent implements OnInit {
   private updateChildrenCheckboxes(treeNodeElement: TreeNodeElement, pChecked: boolean) {
     if (treeNodeElement.isExpandable && treeNodeElement.children) {
       for (const childNode of treeNodeElement.children) {
-        childNode.isChecked = pChecked
+        childNode['isChecked'] = pChecked
         this.checkBoxes[childNode.index] = pChecked
         this.updateChildrenCheckboxes(childNode, pChecked)
       }
@@ -331,6 +335,34 @@ export class NewConfigWizardComponent implements OnInit {
         let parentParentIdString = parentCheckbox.getAttribute('ng-reflect-name')
         if (parentParentIdString) {
           this.setParentOff(this.getCheckBoxIdFromString(parentParentIdString))
+        }
+      }
+    }
+  }
+
+  private checkParentChecking(parentNodeIdx: number) {
+    let parentSearchNode = this.searchTreeNode(parentNodeIdx)
+    if (parentSearchNode && parentSearchNode.children) {
+      let allChildrenChecked = true
+      for (const childNode of parentSearchNode.children) {
+        if (!childNode.isChecked) {
+          allChildrenChecked = false
+          break;
+        }
+      }
+      // all children are checked, check the parent
+      if (allChildrenChecked) {
+        parentSearchNode['isChecked'] = true
+        this.checkBoxes[parentNodeIdx] = true
+        let parentCheckbox = document.getElementById(this.getCcheckBoxIdString(parentNodeIdx))
+        if (parentCheckbox) {
+          // @ts-ignore
+          parentCheckbox.classList.add('mat-checkbox-checked')
+          // check if this one also has a parent
+          let parentParentIdString = parentCheckbox.getAttribute('ng-reflect-name')
+          if (parentParentIdString) {
+            this.checkParentChecking(this.getCheckBoxIdFromString(parentParentIdString))
+          }
         }
       }
     }
