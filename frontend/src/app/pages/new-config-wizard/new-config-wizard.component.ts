@@ -13,7 +13,7 @@ interface TreeNodeElement {
   isExpandable: boolean;
   isChecked: boolean;
   children?: TreeNodeElement[];
-  parent?: TreeNodeElement;
+  index: number;
 }
 
 interface Field {
@@ -36,6 +36,7 @@ export class NewConfigWizardComponent implements OnInit {
     // secondCtrl: ['', Validators.required],
   });
 
+  treeNodeIdx: number = -1
   selectedSum: string = ''
   possibleSums: string[] = []
   treeData: TreeNodeElement[] = []
@@ -46,6 +47,9 @@ export class NewConfigWizardComponent implements OnInit {
 
   // primitive ROS datatypes
   PRIMITIVE_ROS_TYPES: string[] = ['bool', 'int8', 'uint8', 'int16', 'uint16', 'int32', 'uint32', 'int64', 'uint64', 'float32', 'float64', 'string'];
+
+  frequencies: number[] = []
+  checkBoxes: number[] = []
 
   constructor(private _formBuilder: FormBuilder, public newConfigWizardService: NewConfigWizardService, public dialog: MatDialog) {
   }
@@ -122,13 +126,16 @@ export class NewConfigWizardComponent implements OnInit {
    */
   private getChildNodesForType(typeName: string, dataType: string, typeDefArray: any[]) {
 
+    this.treeNodeIdx += 1
+
     // check if type is a primitive
     if (this.isPrimitiveDataType(dataType)) {
       let primitiveTreeNodeElement: TreeNodeElement = {
         name: typeName,
         dataType: dataType,
         isExpandable: false, // since this is a primitive one
-        isChecked: false // default
+        isChecked: false, // default
+        index: this.treeNodeIdx
       }
       return primitiveTreeNodeElement
     } else {
@@ -166,7 +173,8 @@ export class NewConfigWizardComponent implements OnInit {
           dataType: dataType,
           isExpandable: true,
           isChecked: false,
-          children: childrenTreeNodes
+          children: childrenTreeNodes,
+          index: this.treeNodeIdx
         }
         return nonPrimitiveTreeNodeElement
       } else {
@@ -203,12 +211,15 @@ export class NewConfigWizardComponent implements OnInit {
   /***
    * Called when a checkbox in step 2 is checked or unchecked
    * @param $event the event which happened (contains the data about checked or unchecked)
-   * @param treeNodeElement the treenode element which is clicked on
+   * @param idx treeNodeElements index
    */
-  onCheckboxChange($event: MatCheckboxChange, treeNodeElement: TreeNodeElement) {
-    console.log($event)
-    console.log(treeNodeElement)
-    this.updateChildrenCheckboxes(treeNodeElement, $event.checked)
+  onCheckboxChange($event: MatCheckboxChange, idx: number) {
+    // find treeNode element in data
+    const searchNode = this.searchTreeNode(idx)
+    if (searchNode) {
+      // update the children with value
+      this.updateChildrenCheckboxes(searchNode, $event.checked)
+    }
   }
 
   /***
@@ -231,9 +242,41 @@ export class NewConfigWizardComponent implements OnInit {
    * @param stepper the stepper mat component
    */
   goToStepThreeButtonClicked(stepper: MatStepper) {
-    console.log('treedata:')
-    console.log(this.treeData)
-    console.log('formdata')
-    console.log(this.secondFormGroup)
+    console.log(this.frequencies)
+  }
+
+  /***
+   * <i>Workaround:</i>
+   * Called when a frequency changes and stores the value in the formgroup
+   * @param $event the event which is fired when the frequency changes
+   * @param idx the index of the leafnode
+   */
+  onFrequencyChange($event: any, idx: number) {
+    this.frequencies[idx] = $event.target.value
+  }
+
+  private searchTreeNode(idx: number) {
+    for (const leafNode of this.treeData) {
+      const searchedNode = this.searchForIdx(leafNode, idx)
+      if (searchedNode) return searchedNode
+    }
+    console.error(`Invalid index for treenode search: ${idx}`)
+    return null
+  }
+
+  private searchForIdx(treeNode: TreeNodeElement, idx: number): TreeNodeElement | null {
+    // check if this is the searched node
+    if (treeNode.index === idx) {
+      return treeNode
+    }
+    // check the children
+    if (treeNode.children) {
+      for (const childNode of treeNode.children) {
+        let searchNode = this.searchForIdx(childNode, idx)
+        if (searchNode) return searchNode
+      }
+    }
+    // if still not found, this node has not the index
+    return null
   }
 }

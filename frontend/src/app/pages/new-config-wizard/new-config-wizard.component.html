@@ -26,7 +26,7 @@
         <ng-template matStepLabel>Property Specification</ng-template>
         <h1>{{this.selectedSum}}</h1>
         <div class="tree-container">
-          <div *ngFor="let leafProperty of treeData" class="panel">
+          <div *ngFor="let leafProperty of treeData; let i = index" class="panel">
             <mat-expansion-panel>
               <mat-expansion-panel-header>
                 <div class="panel-header-container">
@@ -41,7 +41,7 @@
               <div class="panel-content-container">
                 <mat-form-field class="example-full-width" appearance="fill">
                   <mat-label>Frequency in seconds</mat-label>
-                  <input matInput [formControl]="FREQUENCY_FORM_CONTROL" placeholder="e.g., 2.5" [formGroup]="secondFormGroup">
+                  <input matInput (change)="onFrequencyChange($event, i)" placeholder="e.g., 2.5">
                   <mat-error
                     *ngIf="FREQUENCY_FORM_CONTROL.hasError('float') && !FREQUENCY_FORM_CONTROL.hasError('required')">
                     Please enter a valid frequency (float or number)
@@ -57,7 +57,7 @@
                       <li class="property-leaf-list-item">
                         <mat-checkbox class="prop-checkbox"
                                       [checked]="leafProperty.isChecked"
-                                      (change)="onCheckboxChange($event, leafProperty)"
+                                      (change)="onCheckboxChange($event, leafProperty.index)"
                         >
                           <span class="prop-name-container">{{leafProperty.name}}:</span>
                           <span class="prop-type-container">{{leafProperty.dataType}}</span>
@@ -73,7 +73,7 @@
                       <li *ngFor="let item of list">
                         <mat-checkbox class="prop-checkbox"
                                       [checked]="item.isChecked"
-                                      (change)="onCheckboxChange($event, item)"
+                                      (change)="onCheckboxChange($event, item.index)"
                         >
                           <span class="prop-name-container">{{item.name}}:</span>
                           <span class="prop-type-container">{{item.dataType}}</span>
@@ -95,7 +95,9 @@
           <!-- TODO: Add refresh buttons -->
           <!-- TODO: refresh vars in onClick function for previous button -->
           <button mat-raised-button matStepperPrevious onclick="this.blur()" class="prev-button">Previous Step</button>
-          <button mat-raised-button matStepperNext onclick="this.blur()" (click)="goToStepThreeButtonClicked(stepper)">Next Step</button>
+          <button mat-raised-button matStepperNext onclick="this.blur()" (click)="goToStepThreeButtonClicked(stepper)">
+            Next Step
+          </button>
         </div>
       </form>
     </mat-step>
