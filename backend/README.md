@@ -30,9 +30,9 @@ connectors):
 
 ### Migrate after adding a new model
 
-```python manage.py makemigrations quickstart```
+```python manage.py makemigrations dj_ros_api_app```
 
-```python manage.py migrate quickstart```
+```python manage.py migrate dj_ros_api_app```
 
 ### Create dummy data for API testing
 
