@@ -57,7 +57,8 @@
                       <li class="property-leaf-list-item">
                         <mat-checkbox class="prop-checkbox"
                                       [checked]="leafProperty.isChecked"
-                                      (change)="onCheckboxChange($event, leafProperty.index)"
+                                      (change)="onCheckboxChange($event, leafProperty.index, leafProperty.index)"
+                                      [id]="getCcheckBoxIdString(leafProperty.index)"
                         >
                           <span class="prop-name-container">{{leafProperty.name}}:</span>
                           <span class="prop-type-container">{{leafProperty.dataType}}</span>
@@ -65,22 +66,24 @@
                       </li>
                       <ul *ngIf="leafProperty.isExpandable" class="property-sub-list">
                         <ng-container
-                          *ngTemplateOutlet="Recursion; context:{ list: leafProperty.children}"
+                          *ngTemplateOutlet="Recursion; context:{ list: leafProperty.children, parentNode: leafProperty.index}"
                         ></ng-container>
                       </ul>
                     </ul>
-                    <ng-template #Recursion let-list="list">
+                    <ng-template #Recursion let-list="list" let-parentNode="parentNode">
                       <li *ngFor="let item of list">
                         <mat-checkbox class="prop-checkbox"
                                       [checked]="item.isChecked"
-                                      (change)="onCheckboxChange($event, item.index)"
+                                      (change)="onCheckboxChange($event, item.index, parentNode)"
+                                      [id]="getCcheckBoxIdString(item.index)"
+                                      [name]="getCcheckBoxIdString(parentNode)"
                         >
                           <span class="prop-name-container">{{item.name}}:</span>
                           <span class="prop-type-container">{{item.dataType}}</span>
                         </mat-checkbox>
                         <ul *ngIf="item.isExpandable" class="property-sub-list">
                           <ng-container
-                            *ngTemplateOutlet="Recursion; context:{ list: item.children }"
+                            *ngTemplateOutlet="Recursion; context:{ list: item.children, parentNode: item.index }"
                           ></ng-container>
                         </ul>
                       </li>

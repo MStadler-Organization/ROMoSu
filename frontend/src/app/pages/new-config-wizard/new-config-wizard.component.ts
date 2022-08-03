@@ -49,7 +49,7 @@ export class NewConfigWizardComponent implements OnInit {
   PRIMITIVE_ROS_TYPES: string[] = ['bool', 'int8', 'uint8', 'int16', 'uint16', 'int32', 'uint32', 'int64', 'uint64', 'float32', 'float64', 'string'];
 
   frequencies: number[] = []
-  checkBoxes: number[] = []
+  checkBoxes: any[] = []
 
   constructor(private _formBuilder: FormBuilder, public newConfigWizardService: NewConfigWizardService, public dialog: MatDialog) {
   }
@@ -70,7 +70,6 @@ export class NewConfigWizardComponent implements OnInit {
   goToStepTwoButtonClicked(sums: { selectedOptions: { selected: { value: string; }[]; }; }, stepper: MatStepper) {
 
     this.selectedSum = sums.selectedOptions.selected[0]?.value
-
 
     if (!this.selectedSum) {
       this.dialog.open(CustomDialogComponent, {
@@ -114,6 +113,9 @@ export class NewConfigWizardComponent implements OnInit {
 
     this.treeData = treeDataArray
 
+    // init Checkbox values
+    this.setCheckBoxes()
+
     console.log(this.treeData)
   }
 
@@ -127,6 +129,7 @@ export class NewConfigWizardComponent implements OnInit {
   private getChildNodesForType(typeName: string, dataType: string, typeDefArray: any[]) {
 
     this.treeNodeIdx += 1
+    const nodeIndex = this.treeNodeIdx
 
     // check if type is a primitive
     if (this.isPrimitiveDataType(dataType)) {
@@ -135,11 +138,10 @@ export class NewConfigWizardComponent implements OnInit {
         dataType: dataType,
         isExpandable: false, // since this is a primitive one
         isChecked: false, // default
-        index: this.treeNodeIdx
+        index: nodeIndex
       }
       return primitiveTreeNodeElement
     } else {
-      // const typeIdx = typeDefArray['type'].indexOf(typeName)
       const typeIdx = this.findIdxInTypeDef(dataType, typeDefArray)
       if (typeIdx != -1) {
         // type exists
@@ -174,7 +176,7 @@ export class NewConfigWizardComponent implements OnInit {
           isExpandable: true,
           isChecked: false,
           children: childrenTreeNodes,
-          index: this.treeNodeIdx
+          index: nodeIndex
         }
         return nonPrimitiveTreeNodeElement
       } else {
@@ -211,14 +213,25 @@ export class NewConfigWizardComponent implements OnInit {
   /***
    * Called when a checkbox in step 2 is checked or unchecked
    * @param $event the event which happened (contains the data about checked or unchecked)
-   * @param idx treeNodeElements index
+   * @param currentNodeIdx treeNodeElements index
+   * @param parentNodeIdx
    */
-  onCheckboxChange($event: MatCheckboxChange, idx: number) {
+  onCheckboxChange($event: MatCheckboxChange, currentNodeIdx: number, parentNodeIdx: number) {
     // find treeNode element in data
-    const searchNode = this.searchTreeNode(idx)
+    const searchNode = this.searchTreeNode(currentNodeIdx)
     if (searchNode) {
+      const checkedAction = $event.checked
+      // set data for form
+      this.checkBoxes[searchNode.index] = checkedAction
       // update the children with value
-      this.updateChildrenCheckboxes(searchNode, $event.checked)
+      this.updateChildrenCheckboxes(searchNode, checkedAction)
+
+      //TODO: // if checked and all other children of a parent are also checked, parent must be checked
+
+      // if unchecked, parent is also unchecked since at least on child is not checked
+      if (!checkedAction && parentNodeIdx) {
+        this.setParentOff(parentNodeIdx)
+      }
     }
   }
 
@@ -232,6 +245,7 @@ export class NewConfigWizardComponent implements OnInit {
     if (treeNodeElement.isExpandable && treeNodeElement.children) {
       for (const childNode of treeNodeElement.children) {
         childNode.isChecked = pChecked
+        this.checkBoxes[childNode.index] = pChecked
         this.updateChildrenCheckboxes(childNode, pChecked)
       }
     }
@@ -243,6 +257,8 @@ export class NewConfigWizardComponent implements OnInit {
    */
   goToStepThreeButtonClicked(stepper: MatStepper) {
     console.log(this.frequencies)
+    console.log(this.checkBoxes)
+    console.log(this.checkBoxes.filter(Boolean).length)
   }
 
   /***
@@ -278,5 +294,45 @@ export class NewConfigWizardComponent implements OnInit {
     }
     // if still not found, this node has not the index
     return null
+  }
+
+  private setCheckBoxes() {
+    for (let i = 0; i < this.treeNodeIdx + 1; i++) {
+      this.checkBoxes[i] = false
+    }
+  }
+
+  /**
+   * Adds a 'checkbox-' as prefix to a number and returns it as a string
+   * @param index the number to add as suffix
+   */
+  getCcheckBoxIdString(index: number): string {
+    return `checkbox-${index}`;
+  }
+
+  /**
+   * Returns the index contained in an id string as a number. E.g., 'checkbox-34' -> 34
+   * @param idString the id string
+   */
+  getCheckBoxIdFromString(idString: string): number {
+    return +idString.substring(idString.indexOf('-') + 1)
+  }
+
+  private setParentOff(parentNodeIdx: number) {
+    let parentSearchNode = this.searchTreeNode(parentNodeIdx)
+    if (parentSearchNode) {
+      parentSearchNode['isChecked'] = false
+      this.checkBoxes[parentNodeIdx] = false
+      let parentCheckbox = document.getElementById(this.getCcheckBoxIdString(parentNodeIdx))
+      if (parentCheckbox) {
+        // @ts-ignore
+        parentCheckbox.classList.remove('mat-checkbox-checked')
+        // check if this one also has a parent
+        let parentParentIdString = parentCheckbox.getAttribute('ng-reflect-name')
+        if (parentParentIdString) {
+          this.setParentOff(this.getCheckBoxIdFromString(parentParentIdString))
+        }
+      }
+    }
   }
 }
