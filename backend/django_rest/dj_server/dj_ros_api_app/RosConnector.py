@@ -36,8 +36,10 @@ class RosConnector:
         Collects properties based on selected SuM
         """
 
-        # get all topics
+        # get all topics and sort them
         topics = self.ROS_CLIENT.get_topics()
+        # sort ascending
+        topics.sort()
 
         topic_list = []
 
