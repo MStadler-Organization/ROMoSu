@@ -7,6 +7,8 @@ import {MatDialog} from "@angular/material/dialog";
 import {MatCheckboxChange} from "@angular/material/checkbox";
 
 
+/////////// TS INTERFACES ///////////
+
 interface TreeNodeElement {
   name: string;
   dataType: string;
@@ -21,20 +23,18 @@ interface Field {
   fieldDataType: string;
 }
 
+
 @Component({
   selector: 'app-new-config-wizard',
   templateUrl: './new-config-wizard.component.html',
   styleUrls: ['./new-config-wizard.component.scss']
 })
 export class NewConfigWizardComponent implements OnInit {
-  firstFormGroup = this._formBuilder.group({
-    firstCtrl: [''],
-    // firstCtrl: ['', Validators.required],
-  });
-  secondFormGroup = this._formBuilder.group({
-    secondCtrl: [''],
-    // secondCtrl: ['', Validators.required],
-  });
+
+  /////////// CLASS VARIABLES ///////////
+
+  firstFormGroup = this._formBuilder.group({});
+  secondFormGroup = this._formBuilder.group({});
 
   treeNodeIdx: number = -1
   selectedSum: string = ''
@@ -51,9 +51,13 @@ export class NewConfigWizardComponent implements OnInit {
   frequencies: number[] = []
   checkBoxes: any[] = []
 
+  /////////// CONSTRUCTOR ///////////
+
   constructor(private _formBuilder: FormBuilder, public newConfigWizardService: NewConfigWizardService, public dialog: MatDialog) {
   }
 
+
+  /////////// FUNCTIONS ///////////
 
   ngOnInit(): void {
     this.newConfigWizardService.getSuMs().subscribe((possibleSums: string[]) => {
@@ -275,24 +279,35 @@ export class NewConfigWizardComponent implements OnInit {
     this.frequencies[idx] = $event.target.value
   }
 
+  /**
+   * Searches for an index in the treeData and returns the corresponding TreeNode. If no treeNode is found, null is returned
+   * @param idx the index to search for in the treeData
+   * @private
+   */
   private searchTreeNode(idx: number) {
     for (const leafNode of this.treeData) {
-      const searchedNode = this.searchForIdx(leafNode, idx)
+      const searchedNode = this._searchForIdx(leafNode, idx)
       if (searchedNode) return searchedNode
     }
     console.error(`Invalid index for treenode search: ${idx}`)
     return null
   }
 
-  private searchForIdx(treeNode: TreeNodeElement, idx: number): TreeNodeElement | null {
+  /***
+   * Searches in a given treeNode for a specific index. <i>Do not use this class for searching a node, instead use "searchTreeNode" function!!!</i>
+   * @param treeNode the treeNode in which is searched
+   * @param pSearchIdx the index which is searched for
+   * @private
+   */
+  private _searchForIdx(treeNode: TreeNodeElement, pSearchIdx: number): TreeNodeElement | null {
     // check if this is the searched node
-    if (treeNode.index === idx) {
+    if (treeNode.index === pSearchIdx) {
       return treeNode
     }
     // check the children
     if (treeNode.children) {
       for (const childNode of treeNode.children) {
-        let searchNode = this.searchForIdx(childNode, idx)
+        let searchNode = this._searchForIdx(childNode, pSearchIdx)
         if (searchNode) return searchNode
       }
     }
@@ -300,6 +315,10 @@ export class NewConfigWizardComponent implements OnInit {
     return null
   }
 
+  /**
+   * Helper function which initiates the checkboxes class variable with the length of the treenodes and sets them all to false
+   * @private
+   */
   private setCheckBoxes() {
     for (let i = 0; i < this.treeNodeIdx + 1; i++) {
       this.checkBoxes[i] = false
@@ -322,8 +341,15 @@ export class NewConfigWizardComponent implements OnInit {
     return +idString.substring(idString.indexOf('-') + 1)
   }
 
+  /***
+   * Sets recursively a parent nodes to unchecked state.
+   * @param parentNodeIdx the index of the parent node which will be unchecked (and its parent)
+   * @private
+   */
   private setParentOff(parentNodeIdx: number) {
+    // get the actual node
     let parentSearchNode = this.searchTreeNode(parentNodeIdx)
+    // set the checked attribute to false
     if (parentSearchNode) {
       parentSearchNode['isChecked'] = false
       this.checkBoxes[parentNodeIdx] = false
@@ -333,6 +359,7 @@ export class NewConfigWizardComponent implements OnInit {
         parentCheckbox.classList.remove('mat-checkbox-checked')
         // check if this one also has a parent
         let parentParentIdString = parentCheckbox.getAttribute('ng-reflect-name')
+        // if this node is unchecked, also uncheck the parents parent if a parent exists (no leaf nodes)
         if (parentParentIdString) {
           this.setParentOff(this.getCheckBoxIdFromString(parentParentIdString))
         }
@@ -340,17 +367,25 @@ export class NewConfigWizardComponent implements OnInit {
     }
   }
 
+  /***
+   * Checks recursively if a given node index's children are checked and then checks the parent
+   * @param parentNodeIdx the index of the parent node
+   * @private
+   */
   private checkParentChecking(parentNodeIdx: number) {
+    // get the node of the parent
     let parentSearchNode = this.searchTreeNode(parentNodeIdx)
     if (parentSearchNode && parentSearchNode.children) {
+      // set initial value to true
       let allChildrenChecked = true
       for (const childNode of parentSearchNode.children) {
         if (!childNode.isChecked) {
+          // found a children which is not checked -> do not check this parent
           allChildrenChecked = false
           break;
         }
       }
-      // all children are checked, check the parent
+      // if all children are checked, check the parent
       if (allChildrenChecked) {
         parentSearchNode['isChecked'] = true
         this.checkBoxes[parentNodeIdx] = true
@@ -360,6 +395,8 @@ export class NewConfigWizardComponent implements OnInit {
           parentCheckbox.classList.add('mat-checkbox-checked')
           // check if this one also has a parent
           let parentParentIdString = parentCheckbox.getAttribute('ng-reflect-name')
+
+          // since this node is now checked, also check this nodes parent
           if (parentParentIdString) {
             this.checkParentChecking(this.getCheckBoxIdFromString(parentParentIdString))
           }
