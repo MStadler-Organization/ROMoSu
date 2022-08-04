@@ -5,29 +5,7 @@ import {NewConfigWizardService} from "./new-config-wizard.service";
 import {CustomDialogComponent} from "../../shared/components/custom-dialog/custom-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 import {MatCheckboxChange} from "@angular/material/checkbox";
-
-
-/////////// TS INTERFACES ///////////
-
-interface TreeNodeElement {
-  name: string;
-  dataType: string;
-  isExpandable: boolean;
-  isChecked: boolean;
-  children?: TreeNodeElement[];
-  index: number;
-}
-
-interface Field {
-  fieldName: string;
-  fieldDataType: string;
-}
-
-interface SumType {
-  id: number;
-  name: string;
-}
-
+import {Field, SumType, TreeNodeElement} from "../../shared/models/interfaces";
 
 @Component({
   selector: 'app-new-config-wizard',
@@ -62,7 +40,6 @@ export class NewConfigWizardComponent implements OnInit {
   PRIMITIVE_ROS_TYPES: string[] = ['bool', 'int8', 'uint8', 'int16', 'uint16', 'int32', 'uint32', 'int64', 'uint64', 'float32', 'float64', 'string'];
 
   frequencies: { value: number, isCorrect: boolean }[] = []
-  checkBoxes: any[] = []
 
   // step 3 vars
   saveTypes: string[] = ['Complete (but complex)', 'Simple (but flattened)']
@@ -136,7 +113,7 @@ export class NewConfigWizardComponent implements OnInit {
     this.treeData = treeDataArray
 
     // init Checkbox values
-    this.setCheckBoxesAndFQs()
+    this.setFQs()
   }
 
   /**
@@ -243,7 +220,6 @@ export class NewConfigWizardComponent implements OnInit {
       const checkedAction = $event.checked
       // set data for form
       searchNode['isChecked'] = $event.checked
-      this.checkBoxes[searchNode.index] = checkedAction
       // update the children with value
       this.updateChildrenCheckboxes(searchNode, checkedAction)
 
@@ -269,7 +245,6 @@ export class NewConfigWizardComponent implements OnInit {
     if (treeNodeElement.isExpandable && treeNodeElement.children) {
       for (const childNode of treeNodeElement.children) {
         childNode['isChecked'] = pChecked
-        this.checkBoxes[childNode.index] = pChecked
         this.updateChildrenCheckboxes(childNode, pChecked)
       }
     }
@@ -281,7 +256,7 @@ export class NewConfigWizardComponent implements OnInit {
    */
   goToStepThreeButtonClicked(stepper: MatStepper) {
     // validate checkbox selection
-    if (this.checkBoxes.filter(Boolean).length < 1) {
+    if (!this.isAtLeastOneCheckedInTree()) {
       // at least one topic must be selected to monitor
       this.dialog.open(CustomDialogComponent, {
         data: {
@@ -370,10 +345,7 @@ export class NewConfigWizardComponent implements OnInit {
    * Helper function which initiates the checkboxes class variable with the length of the treenodes and sets them all to false
    * @private
    */
-  private setCheckBoxesAndFQs() {
-    for (let i = 0; i < this.treeNodeIdx + 1; i++) {
-      this.checkBoxes[i] = false
-    }
+  private setFQs() {
     for (let j = 0; j < this.treeData.length; j++) {
       this.frequencies[j] = {value: -1, isCorrect: false}
     }
@@ -406,7 +378,6 @@ export class NewConfigWizardComponent implements OnInit {
     // set the checked attribute to false
     if (parentSearchNode) {
       parentSearchNode['isChecked'] = false
-      this.checkBoxes[parentNodeIdx] = false
       let parentCheckbox = document.getElementById(this.getCcheckBoxIdString(parentNodeIdx))
       if (parentCheckbox) {
         // @ts-ignore
@@ -442,7 +413,6 @@ export class NewConfigWizardComponent implements OnInit {
       // if all children are checked, check the parent
       if (allChildrenChecked) {
         parentSearchNode['isChecked'] = true
-        this.checkBoxes[parentNodeIdx] = true
         let parentCheckbox = document.getElementById(this.getCcheckBoxIdString(parentNodeIdx))
         if (parentCheckbox) {
           // @ts-ignore
@@ -510,6 +480,8 @@ export class NewConfigWizardComponent implements OnInit {
     // show progressbar for finishing
     this.showProgressBar = true
 
+    this.createNewConfig()
+
     stepper.next()
   }
 
@@ -540,5 +512,40 @@ export class NewConfigWizardComponent implements OnInit {
       }
     }
     return false
+  }
+
+  private createNewConfig() {
+    // get data from input fields
+    // let new_config_data: ConfigFileData = []
+
+    const configFileName = this.thirdFormGroup.get('configFileName')
+    if (configFileName) {
+      console.log(configFileName.value)
+    }
+    const configSaveType = this.thirdFormGroup.get('configSaveType')
+    if (configSaveType) {
+      console.log(configSaveType.value)
+    }
+    const sumType = this.thirdFormGroup.get('sumType')
+    if (sumType) {
+      console.log(sumType.value)
+    }
+    const newSumTypeInput = this.thirdFormGroup.get('newSumTypeInput')
+    if (newSumTypeInput) {
+      console.log(newSumTypeInput.value)
+    }
+  }
+
+  /**
+   * Check if at least one property is selected in the treeData data
+   * @private
+   */
+  private isAtLeastOneCheckedInTree() {
+    for (const leafNode of this.treeData) {
+      if (this.isAtLeastOnePropertySelected(leafNode.index)) {
+        return true
+      }
+    }
+    return false;
   }
 }
