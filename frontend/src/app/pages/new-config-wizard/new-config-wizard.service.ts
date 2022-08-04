@@ -1,6 +1,7 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {ConfigFileData} from "../../shared/models/interfaces";
 
 interface SumType {
   id: number;
@@ -46,5 +47,13 @@ export class NewConfigWizardService {
    */
   addSumType(pSumType: string): Observable<SumType> {
     return this.http.post<SumType>(this.baseApiURL + "sum-types/", {name: pSumType});
+  }
+
+  /**
+   * REST call to server to generate and save a new configuration
+   * @param configFileData The data for the new configuration file
+   */
+  createNewConfigFile(configFileData: ConfigFileData): Observable<any> {
+    return this.http.post<any>(this.baseApiURL + "config-file/", {name: configFileData});
   }
 }

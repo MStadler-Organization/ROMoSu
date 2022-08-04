@@ -538,14 +538,17 @@ export class NewConfigWizardComponent implements OnInit {
           this.newConfigWizardService.addSumType(newSumTypeInput.value).subscribe((newSumType) => {
             // created new SuM type, now create the config file
             if (configFileName.value && configSaveType.value) {
-              const config_data_to_save: ConfigFileData = {
+              const configDataToSave: ConfigFileData = {
                 fileName: configFileName.value,
                 saveType: configSaveType.value,
                 sumTypeId: newSumType.id,
                 propertyTree: propertyTree,
                 frequencies: frequencyArray
               }
-              console.log(config_data_to_save)
+              console.log(configDataToSave)
+              this.newConfigWizardService.createNewConfigFile(configDataToSave).subscribe((response) => {
+                console.log(response)
+              })
             }
           })
         } else {
@@ -553,18 +556,20 @@ export class NewConfigWizardComponent implements OnInit {
         }
       } else {
         // no new SuM type -> create config with other params
-        const config_data_to_save: ConfigFileData = {
+        const configDataToSave: ConfigFileData = {
           fileName: configFileName.value,
           saveType: configSaveType.value,
           sumTypeId: +sumTypeIdField.value,
           propertyTree: propertyTree,
           frequencies: frequencyArray
         }
-        console.log(config_data_to_save)
+        console.log(configDataToSave)
+        this.newConfigWizardService.createNewConfigFile(configDataToSave).subscribe((response) => {
+          console.log(response)
+        })
       }
 
 
-      // TODO: post request for saving
     } else {
       console.error('At least one of the input params seems not to be filled out properly')
     }
