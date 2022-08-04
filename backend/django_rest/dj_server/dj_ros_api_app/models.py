@@ -9,3 +9,11 @@ class TopicList(models.Model):
 
     def __str__(self):
         return self.topiclist
+
+
+class SuMType(models.Model):
+    """Stores the different Types of SuM"""
+    name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name

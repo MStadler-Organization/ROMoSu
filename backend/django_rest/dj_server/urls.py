@@ -27,4 +27,6 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('possible-sums/', views.possible_sums),
     path('props-for-sum/', views.properties_for_sum),
+    path('sum-types/', views.sum_types),
+    path('sum-types/<int:pk>', views.sum_types),
 ]
