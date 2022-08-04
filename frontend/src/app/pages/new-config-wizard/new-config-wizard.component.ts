@@ -5,6 +5,7 @@ import {NewConfigWizardService} from "./new-config-wizard.service";
 import {CustomDialogComponent} from "../../shared/components/custom-dialog/custom-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 import {MatCheckboxChange} from "@angular/material/checkbox";
+import {MatRadioChange} from "@angular/material/radio";
 
 
 /////////// TS INTERFACES ///////////
@@ -23,6 +24,11 @@ interface Field {
   fieldDataType: string;
 }
 
+interface SumType {
+  id: number;
+  name: string;
+}
+
 
 @Component({
   selector: 'app-new-config-wizard',
@@ -35,6 +41,11 @@ export class NewConfigWizardComponent implements OnInit {
 
   firstFormGroup = this._formBuilder.group({});
   secondFormGroup = this._formBuilder.group({});
+  thirdFormGroup = this._formBuilder.group({
+    configSaveType: ['', Validators.required],
+    sumType: ['', Validators.required],
+    newSumTypeInput: ['']
+  });
 
   treeNodeIdx: number = -1
   selectedSum: string = ''
@@ -52,6 +63,11 @@ export class NewConfigWizardComponent implements OnInit {
 
   frequencies: { value: number, isCorrect: boolean }[] = []
   checkBoxes: any[] = []
+
+  // step 3 vars
+  saveTypes: string[] = ['Complete (but complex)', 'Simple (but flattened)']
+  sumTypes: SumType[] = []
+  isCreateNewSumTypeEnabled: boolean = false
 
   /////////// CONSTRUCTOR ///////////
 
@@ -297,6 +313,12 @@ export class NewConfigWizardComponent implements OnInit {
 
     // all inputs are correct, go to step three
     stepper.next()
+
+    // show progressbar until next data is loaded
+    this.showProgressBar = true
+
+    // get data for next step
+    this.setDataForStepThree()
   }
 
   /***
@@ -468,5 +490,38 @@ export class NewConfigWizardComponent implements OnInit {
     }
     // no node or sub-node is checked
     return false
+  }
+
+  /***
+   * Called when clicking on 'Next'-button on step three
+   * @param stepper the stepper mat component
+   */
+  goToStepFourButtonClicked(stepper: MatStepper) {
+    let temp = this.thirdFormGroup.get('configSaveType')
+    if (temp) {
+      console.log(temp.value)
+    }
+    let tempa = this.thirdFormGroup.get('sumType')
+    if (tempa) {
+      console.log(tempa.value)
+    }
+    let tempas = this.thirdFormGroup.get('newSumTypeInput')
+    if (tempas) {
+      console.log(tempas.value)
+    }
+    // stepper.next()
+  }
+
+  private setDataForStepThree() {
+    this.newConfigWizardService.getSumTypes().subscribe((restSumTypes) => {
+      for (const singleSumType of restSumTypes) {
+        this.sumTypes.push(singleSumType)
+      }
+      this.showProgressBar = false
+    })
+  }
+
+  onSumTypeChange($event: MatRadioChange, sumType: SumType) {
+    // console.log(`Current Selection: ${sumType.id}`)
   }
 }

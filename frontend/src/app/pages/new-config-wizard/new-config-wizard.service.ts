@@ -2,6 +2,11 @@ import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 
+interface SumType {
+  id: number;
+  name: string;
+}
+
 @Injectable({
   providedIn: "root"
 })
@@ -26,5 +31,20 @@ export class NewConfigWizardService {
    */
   getPropsForSum(pSum: string): Observable<any> {
     return this.http.get<any>(this.baseApiURL + `props-for-sum/?sum=${pSum}`);
+  }
+
+  /**
+   * REST call to server to get the Sum types
+   */
+  getSumTypes(): Observable<SumType[]> {
+    return this.http.get<SumType[]>(this.baseApiURL + "sum-types/");
+  }
+
+  /**
+   * REST call to server to get the Sum types
+   * @param pSumType The new sum type name which should be created
+   */
+  addSumType(pSumType: string): Observable<SumType> {
+    return this.http.post<SumType>(this.baseApiURL + "sum-types/", {name: pSumType});
   }
 }

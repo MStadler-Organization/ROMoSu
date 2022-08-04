@@ -14,27 +14,29 @@ import {MatExpansionModule} from "@angular/material/expansion";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatTreeModule} from "@angular/material/tree";
+import {MatRadioModule} from "@angular/material/radio";
 
 
 @NgModule({
   declarations: [
     NewConfigWizardComponent
   ],
-  imports: [
-    CommonModule,
-    NewConfigWizardRoutingModule,
-    MatStepperModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatListModule,
-    MatIconModule,
-    MatExpansionModule,
-    MatProgressBarModule,
-    MatCheckboxModule,
-    MatTreeModule
-  ]
+    imports: [
+        CommonModule,
+        NewConfigWizardRoutingModule,
+        MatStepperModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        MatListModule,
+        MatIconModule,
+        MatExpansionModule,
+        MatProgressBarModule,
+        MatCheckboxModule,
+        MatTreeModule,
+        MatRadioModule
+    ]
 })
 export class NewConfigWizardModule {
 }

@@ -7,7 +7,7 @@
     <!-- ########## STEP 1 ########## -->
     <mat-step [stepControl]="firstFormGroup">
       <form [formGroup]="firstFormGroup" class="form-container">
-        <ng-template matStepLabel>Select SuM</ng-template>
+        <ng-template matStepLabel>SuM Selection</ng-template>
         <mat-selection-list #sums [multiple]="false" class="selection-container">
           <mat-list-option *ngFor="let sum of this.possibleSums" [value]="sum">
             {{sum}}
@@ -23,7 +23,7 @@
     <!-- ########## STEP 2 ########## -->
     <mat-step [stepControl]="secondFormGroup">
       <form [formGroup]="secondFormGroup">
-        <ng-template matStepLabel>Property Specification</ng-template>
+        <ng-template matStepLabel>Property Selection</ng-template>
         <h1>{{this.selectedSum}}</h1>
         <div class="tree-container">
           <div *ngFor="let leafProperty of treeData; let i = index" class="panel">
@@ -107,12 +107,56 @@
     </mat-step>
 
     <!-- ########## STEP 3 ########## -->
+    <mat-step [stepControl]="thirdFormGroup">
+      <form [formGroup]="thirdFormGroup">
+        <ng-template matStepLabel>Config Details Specification</ng-template>
+        <div class="form-container-three">
+          <div class="save-mode">
+            <label class="label-emph">Choose save-mode of the configuration file:</label>
+            <mat-radio-group
+              class="save-type-selection"
+              formControlName="configSaveType"
+            >
+              <mat-radio-button class="sc-radio-button" *ngFor="let saveType of saveTypes" [value]="saveType">
+                {{saveType}}
+              </mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <div class="sum-type-selection-container">
+            <label class="label-emph">Choose the SuM Type</label>
+            <mat-radio-group
+              class="sum-type-selection"
+              formControlName="sumType"
+            >
+              <mat-radio-button class="st-radio-button" *ngFor="let sumType of sumTypes" [value]="sumType.id">
+                {{sumType.name}}
+              </mat-radio-button>
+              <mat-radio-button class="st-radio-button" [value]="-1" [checked]="isCreateNewSumTypeEnabled">
+                <mat-form-field class="example-full-width" appearance="fill">
+                  <mat-label>New SuM Type</mat-label>
+                  <input matInput placeholder="e.g., Dronemodel-XYZ" formControlName="newSumTypeInput"
+                         [disabled]="isCreateNewSumTypeEnabled">
+                </mat-form-field>
+              </mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div>
+          <button mat-raised-button matStepperPrevious onclick="this.blur()" class="prev-button">Previous Step</button>
+          <button mat-raised-button onclick="this.blur()" (click)="goToStepFourButtonClicked(stepper)">
+            Next Step
+          </button>
+        </div>
+      </form>
+    </mat-step>
+
+    <!-- ########## STEP 4 ########## -->
     <mat-step>
       <ng-template matStepLabel>Done</ng-template>
       <p>You are now done.</p>
       <div>
-        <button mat-raised-button matStepperPrevious onclick="this.blur()">Previous Step</button>
-        <button mat-raised-button (click)="stepper.reset()" onclick="this.blur()">Reset</button>
+        <button mat-raised-button matStepperPrevious onclick="this.blur()" class="prev-button">Previous Step</button>
+        <button mat-raised-button (click)="stepper.reset()" onclick="this.blur()">Save Config</button>
       </div>
     </mat-step>
   </mat-stepper>
