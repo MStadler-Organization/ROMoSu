@@ -5,7 +5,7 @@ import {NewConfigWizardService} from "./new-config-wizard.service";
 import {CustomDialogComponent} from "../../shared/components/custom-dialog/custom-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 import {MatCheckboxChange} from "@angular/material/checkbox";
-import {Field, SumType, TreeNodeElement} from "../../shared/models/interfaces";
+import {ConfigFileData, Field, SumType, TreeNodeElement} from "../../shared/models/interfaces";
 
 @Component({
   selector: 'app-new-config-wizard',
@@ -514,26 +514,62 @@ export class NewConfigWizardComponent implements OnInit {
     return false
   }
 
+  /**
+   * Uses the input params to create a new configuration file
+   * @private
+   */
   private createNewConfig() {
     // get data from input fields
-    // let new_config_data: ConfigFileData = []
-
     const configFileName = this.thirdFormGroup.get('configFileName')
-    if (configFileName) {
-      console.log(configFileName.value)
-    }
     const configSaveType = this.thirdFormGroup.get('configSaveType')
-    if (configSaveType) {
-      console.log(configSaveType.value)
+    const sumTypeIdField = this.thirdFormGroup.get('sumType')
+    const propertyTree = this.treeData
+    const frequencyArray = this.getFrequencyArray()
+
+    // check if all data is present
+    if (configFileName && configSaveType && sumTypeIdField && propertyTree && frequencyArray &&
+      configFileName.value && configSaveType.value && sumTypeIdField.value) {
+
+      // if it is a new Sum Type, first create the new SuM type
+      if (+sumTypeIdField.value == -1) {
+        // get the name of the new SuM type
+        const newSumTypeInput = this.thirdFormGroup.get('newSumTypeInput')
+        if (newSumTypeInput && newSumTypeInput.value) {
+          this.newConfigWizardService.addSumType(newSumTypeInput.value).subscribe((newSumType) => {
+            // created new SuM type, now create the config file
+            if (configFileName.value && configSaveType.value) {
+              const config_data_to_save: ConfigFileData = {
+                fileName: configFileName.value,
+                saveType: configSaveType.value,
+                sumTypeId: newSumType.id,
+                propertyTree: propertyTree,
+                frequencies: frequencyArray
+              }
+              console.log(config_data_to_save)
+            }
+          })
+        } else {
+          console.error(`Something went wrong while creating a new SuM Type!`)
+        }
+      } else {
+        // no new SuM type -> create config with other params
+        const config_data_to_save: ConfigFileData = {
+          fileName: configFileName.value,
+          saveType: configSaveType.value,
+          sumTypeId: +sumTypeIdField.value,
+          propertyTree: propertyTree,
+          frequencies: frequencyArray
+        }
+        console.log(config_data_to_save)
+      }
+
+
+      // TODO: post request for saving
+    } else {
+      console.error('At least one of the input params seems not to be filled out properly')
     }
-    const sumType = this.thirdFormGroup.get('sumType')
-    if (sumType) {
-      console.log(sumType.value)
-    }
-    const newSumTypeInput = this.thirdFormGroup.get('newSumTypeInput')
-    if (newSumTypeInput) {
-      console.log(newSumTypeInput.value)
-    }
+
+
   }
 
   /**
@@ -547,5 +583,17 @@ export class NewConfigWizardComponent implements OnInit {
       }
     }
     return false;
+  }
+
+  /**
+   * Helper function which returns the values of the frequencies in a simple 1D array
+   * @private
+   */
+  private getFrequencyArray() {
+    let result = []
+    for (const fq of this.frequencies) {
+      result.push(+fq.value)
+    }
+    return result
   }
 }

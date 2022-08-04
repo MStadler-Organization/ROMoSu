@@ -23,6 +23,6 @@ export interface ConfigFileData {
   fileName: string;
   saveType: string;
   sumTypeId: number;
-  propertyTree: TreeNodeElement;
+  propertyTree: TreeNodeElement[];
   frequencies: number[];
 }
