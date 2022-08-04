@@ -541,8 +541,8 @@ export class NewConfigWizardComponent implements OnInit {
    * @private
    */
   private isAtLeastOneCheckedInTree() {
-    for (const leafNode of this.treeData) {
-      if (this.isAtLeastOnePropertySelected(leafNode.index)) {
+    for (let i = 0; i < this.treeData.length; i++) {
+      if (this.isAtLeastOnePropertySelected(i)) {
         return true
       }
     }
