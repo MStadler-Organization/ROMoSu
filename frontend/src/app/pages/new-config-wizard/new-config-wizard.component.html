@@ -111,6 +111,14 @@
       <form [formGroup]="thirdFormGroup">
         <ng-template matStepLabel>Config Details Specification</ng-template>
         <div class="form-container-three">
+          <div class="config-file-name-container">
+            <label class="label-emph">Choose name for configuration file:</label>
+            <mat-form-field class="file-name-input-field" appearance="standard">
+              <mat-label>Insert name</mat-label>
+              <input matInput placeholder="e.g., my-CONFIG-file_123" formControlName="configFileName">
+              <mat-error *ngIf="hasNameInputError()">Allowed characters: a-z A-z 0-9 - _</mat-error>
+            </mat-form-field>
+          </div>
           <div class="save-mode">
             <label class="label-emph">Choose save-mode of the configuration file:</label>
             <mat-radio-group
@@ -134,8 +142,7 @@
               <mat-radio-button class="st-radio-button" [value]="-1" [checked]="isCreateNewSumTypeEnabled">
                 <mat-form-field class="example-full-width" appearance="fill">
                   <mat-label>New SuM Type</mat-label>
-                  <input matInput placeholder="e.g., Dronemodel-XYZ" formControlName="newSumTypeInput"
-                         [disabled]="isCreateNewSumTypeEnabled">
+                  <input matInput placeholder="e.g., Dronemodel-XYZ" formControlName="newSumTypeInput">
                 </mat-form-field>
               </mat-radio-button>
             </mat-radio-group>

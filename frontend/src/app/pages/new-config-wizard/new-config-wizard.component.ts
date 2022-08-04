@@ -1,11 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, Validators} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormControl, Validators} from "@angular/forms";
 import {MatStepper} from "@angular/material/stepper";
 import {NewConfigWizardService} from "./new-config-wizard.service";
 import {CustomDialogComponent} from "../../shared/components/custom-dialog/custom-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 import {MatCheckboxChange} from "@angular/material/checkbox";
-import {MatRadioChange} from "@angular/material/radio";
 
 
 /////////// TS INTERFACES ///////////
@@ -44,7 +43,8 @@ export class NewConfigWizardComponent implements OnInit {
   thirdFormGroup = this._formBuilder.group({
     configSaveType: ['', Validators.required],
     sumType: ['', Validators.required],
-    newSumTypeInput: ['']
+    newSumTypeInput: [''],
+    configFileName: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9-_]+$')]]
   });
 
   treeNodeIdx: number = -1
@@ -137,8 +137,6 @@ export class NewConfigWizardComponent implements OnInit {
 
     // init Checkbox values
     this.setCheckBoxesAndFQs()
-
-    console.log(this.treeData)
   }
 
   /**
@@ -497,21 +495,28 @@ export class NewConfigWizardComponent implements OnInit {
    * @param stepper the stepper mat component
    */
   goToStepFourButtonClicked(stepper: MatStepper) {
-    let temp = this.thirdFormGroup.get('configSaveType')
-    if (temp) {
-      console.log(temp.value)
+    // validate inputs
+    if (!this.thirdFormGroup.valid) {
+      this.dialog.open(CustomDialogComponent, {
+        data: {
+          type: 2, // create error
+          message: 'At least on input is invalid or is not selected!'
+        },
+        autoFocus: false // disable default focus on button
+      });
+      return
     }
-    let tempa = this.thirdFormGroup.get('sumType')
-    if (tempa) {
-      console.log(tempa.value)
-    }
-    let tempas = this.thirdFormGroup.get('newSumTypeInput')
-    if (tempas) {
-      console.log(tempas.value)
-    }
-    // stepper.next()
+
+    // show progressbar for finishing
+    this.showProgressBar = true
+
+    stepper.next()
   }
 
+  /***
+   * Gathers data required for step three. Disables progressbar afterwards.
+   * @private
+   */
   private setDataForStepThree() {
     this.newConfigWizardService.getSumTypes().subscribe((restSumTypes) => {
       for (const singleSumType of restSumTypes) {
@@ -521,7 +526,19 @@ export class NewConfigWizardComponent implements OnInit {
     })
   }
 
-  onSumTypeChange($event: MatRadioChange, sumType: SumType) {
-    // console.log(`Current Selection: ${sumType.id}`)
+  /**
+   * Returns true if the configFileName input is invalid.
+   */
+  hasNameInputError() {
+    const configFileNameInput = this.thirdFormGroup.get('configFileName')
+    if (configFileNameInput) {
+      if (configFileNameInput.validator) {
+        const validator = configFileNameInput.validator({} as AbstractControl);
+        if (validator && validator['required']) {
+          return true;
+        }
+      }
+    }
+    return false
   }
 }

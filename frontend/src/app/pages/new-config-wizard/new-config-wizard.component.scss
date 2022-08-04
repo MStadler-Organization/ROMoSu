@@ -59,9 +59,22 @@ $tree-margin: 5em;
 .form-container-three {
   margin: 3em 0;
 
+  .config-file-name-container {
+    display: flex;
+    flex-direction: column;
+
+    .file-name-input-field {
+      max-width: 25em;
+    }
+  }
+
 
   .sum-type-selection-container {
     margin-top: 4em;
+  }
+
+  .save-mode {
+    margin-top: 3em
   }
 
   .save-type-selection, .sum-type-selection {
