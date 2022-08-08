@@ -10,8 +10,8 @@ from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 
 from dj_server.dj_ros_api_app.apps import DjRosApiAppConfig
-from dj_server.dj_ros_api_app.models import SuMType
-from dj_server.dj_ros_api_app.serializers import SuMTypeSerializer
+from dj_server.dj_ros_api_app.models import SuMType, MonitoringConfig
+from dj_server.dj_ros_api_app.serializers import SuMTypeSerializer, MonitoringConfigSerializer
 from dj_server.dj_ros_api_app.utils import DefaultEncoder
 
 
@@ -77,3 +77,30 @@ def sum_types(request):
         serializer = SuMTypeSerializer(sum_type_to_delete, many=False)
         sum_type_to_delete.delete()
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(['GET', 'POST'])
+def save_config(request):
+    """Create new config files"""
+    if request.method == 'GET':
+        # return all objects contained in db
+        mon_configs = MonitoringConfig.objects.all()
+        print(mon_configs)
+        serializer = MonitoringConfigSerializer(mon_configs, many=True)
+        return JsonResponse(serializer.data, encoder=DefaultEncoder, safe=False)
+
+    if request.method == 'POST':
+        # parse request body
+        config_file_data = JSONParser().parse(request)
+        print(config_file_data)
+        print('########')
+        print('########')
+        # # print(config_file_data)
+        serializer = MonitoringConfigSerializer(data=config_file_data)
+        print(serializer.is_valid())
+        # # check form of request data and save it
+        if serializer.is_valid():
+            serializer.save()
+            return Response('', status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        # return Response('', status=status.HTTP_201_CREATED)

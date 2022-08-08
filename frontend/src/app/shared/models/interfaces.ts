@@ -20,9 +20,10 @@ export interface SumType {
 }
 
 export interface ConfigFileData {
-  fileName: string;
-  saveType: string;
-  sumTypeId: number;
-  propertyTree: TreeNodeElement[];
+  file_name: string;
+  save_type: string;
+  sum_type_id: number;
+  property_tree: TreeNodeElement[];
   frequencies: number[];
+  ecore_file: string;
 }

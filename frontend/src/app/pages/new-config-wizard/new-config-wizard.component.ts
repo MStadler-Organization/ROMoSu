@@ -482,7 +482,7 @@ export class NewConfigWizardComponent implements OnInit {
 
     this.createNewConfig()
 
-    stepper.next()
+    // stepper.next()
   }
 
   /***
@@ -539,11 +539,14 @@ export class NewConfigWizardComponent implements OnInit {
             // created new SuM type, now create the config file
             if (configFileName.value && configSaveType.value) {
               const configDataToSave: ConfigFileData = {
-                fileName: configFileName.value,
-                saveType: configSaveType.value,
-                sumTypeId: newSumType.id,
-                propertyTree: propertyTree,
-                frequencies: frequencyArray
+                file_name: configFileName.value,
+                save_type: configSaveType.value,
+                sum_type_id: newSumType.id,
+                // property_tree: JSON.stringify(propertyTree),
+                // frequencies: JSON.stringify(frequencyArray),
+                property_tree: propertyTree,
+                frequencies: frequencyArray,
+                ecore_file: ''
               }
               console.log(configDataToSave)
               this.newConfigWizardService.createNewConfigFile(configDataToSave).subscribe((response) => {
@@ -557,11 +560,14 @@ export class NewConfigWizardComponent implements OnInit {
       } else {
         // no new SuM type -> create config with other params
         const configDataToSave: ConfigFileData = {
-          fileName: configFileName.value,
-          saveType: configSaveType.value,
-          sumTypeId: +sumTypeIdField.value,
-          propertyTree: propertyTree,
-          frequencies: frequencyArray
+          file_name: configFileName.value,
+          save_type: configSaveType.value,
+          sum_type_id: +sumTypeIdField.value,
+          // property_tree: JSON.stringify(propertyTree),
+          // frequencies: JSON.stringify(frequencyArray),
+          property_tree: propertyTree,
+          frequencies: frequencyArray,
+          ecore_file: ''
         }
         console.log(configDataToSave)
         this.newConfigWizardService.createNewConfigFile(configDataToSave).subscribe((response) => {
