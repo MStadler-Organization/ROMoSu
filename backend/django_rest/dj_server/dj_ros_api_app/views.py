@@ -1,4 +1,5 @@
 # Create your views here.
+import json
 import logging
 
 from django.http import JsonResponse
@@ -84,23 +85,30 @@ def save_config(request):
     """Create new config files"""
     if request.method == 'GET':
         # return all objects contained in db
-        mon_configs = MonitoringConfig.objects.all()
-        print(mon_configs)
-        serializer = MonitoringConfigSerializer(mon_configs, many=True)
-        return JsonResponse(serializer.data, encoder=DefaultEncoder, safe=False)
+        # mon_configs = MonitoringConfig.objects.all()
+        # print(mon_configs)
+        # serializer = MonitoringConfigSerializer(mon_configs, many=True)
+        return JsonResponse('serializer.data', encoder=DefaultEncoder, safe=False)
 
     if request.method == 'POST':
         # parse request body
-        config_file_data = JSONParser().parse(request)
-        print(config_file_data)
-        print('########')
-        print('########')
+        body_unicode = request.body.decode('utf-8')
+        body = json.loads(body_unicode)
+        print(body['configFileData']['file_name'])
+        # print('FILENAME\n\n\n')
+        # print(body['file_name'])
+        # print('ECORE DATA\n\n\n')
+        # print(body['ecore_data'])
+        # config_file_data = JSONParser().parse(request)
+        # print(config_file_data)
+        # print('########')
+        # print('########')
         # # print(config_file_data)
-        serializer = MonitoringConfigSerializer(data=config_file_data)
-        print(serializer.is_valid())
+        # serializer = MonitoringConfigSerializer(data=config_file_data)
+        # print(serializer.is_valid())
         # # check form of request data and save it
-        if serializer.is_valid():
-            serializer.save()
-            return Response('', status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        # if serializer.is_valid():
+        #     serializer.save()
+        #     return Response('', status=status.HTTP_201_CREATED)
+        return Response('serializer.errors', status=status.HTTP_400_BAD_REQUEST)
         # return Response('', status=status.HTTP_201_CREATED)

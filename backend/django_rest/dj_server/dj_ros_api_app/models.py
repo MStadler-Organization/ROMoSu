@@ -22,11 +22,7 @@ class SuMType(models.Model):
 class MonitoringConfig(models.Model):
     """Stores the monitoring configurations"""
     name = models.CharField(max_length=200)
-    save_type = models.CharField(max_length=200)
-    sum_type_id = models.IntegerField
-    property_tree = models.TextField()
-    frequencies = models.TextField()
-    ecore_file = models.TextField()
+    ecore_data = models.TextField()
 
     def __str__(self):
         return self.name
