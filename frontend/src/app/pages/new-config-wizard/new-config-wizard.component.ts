@@ -539,6 +539,7 @@ export class NewConfigWizardComponent implements OnInit {
             // created new SuM type, now create the config file
             if (configFileName.value && configSaveType.value) {
               const configDataToSave: ConfigFileData = {
+                // @ts-ignore
                 file_name: configFileName.value,
                 save_type: configSaveType.value,
                 sum_type_id: newSumType.id,
@@ -560,14 +561,16 @@ export class NewConfigWizardComponent implements OnInit {
       } else {
         // no new SuM type -> create config with other params
         const configDataToSave: ConfigFileData = {
+          // @ts-ignore
           file_name: configFileName.value,
-          save_type: configSaveType.value,
-          sum_type_id: +sumTypeIdField.value,
-          // property_tree: JSON.stringify(propertyTree),
-          // frequencies: JSON.stringify(frequencyArray),
-          property_tree: propertyTree,
-          frequencies: frequencyArray,
-          ecore_file: ''
+          // save_type: configSaveType.value,
+          // sum_type_id: +sumTypeIdField.value,
+          // // property_tree: JSON.stringify(propertyTree),
+          // // frequencies: JSON.stringify(frequencyArray),
+          // property_tree: propertyTree,
+          // frequencies: frequencyArray,
+          // @ts-ignore
+          ecore_data: propertyTree
         }
         console.log(configDataToSave)
         this.newConfigWizardService.createNewConfigFile(configDataToSave).subscribe((response) => {

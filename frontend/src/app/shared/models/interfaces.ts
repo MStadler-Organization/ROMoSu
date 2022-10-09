@@ -19,11 +19,19 @@ export interface SumType {
   name: string;
 }
 
+// export interface ConfigFileData {
+//   file_name: string;
+//   save_type: string;
+//   sum_type_id: number;
+//   property_tree: TreeNodeElement[];
+//   frequencies: number[];
+//   ecore_file: string;
+// }
 export interface ConfigFileData {
-  file_name: string;
-  save_type: string;
-  sum_type_id: number;
-  property_tree: TreeNodeElement[];
-  frequencies: number[];
-  ecore_file: string;
+  name: string;
+  // save_type: string;
+  // sum_type_id: number;
+  // property_tree: TreeNodeElement[];
+  // frequencies: number[];
+  ecore_data: string;
 }
