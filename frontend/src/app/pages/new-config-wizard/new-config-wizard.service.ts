@@ -54,10 +54,6 @@ export class NewConfigWizardService {
    * @param configFileData The data for the new configuration file
    */
   createNewConfigFile(configFileData: ConfigFileData): Observable<any> {
-    // @ts-ignore
-    configFileData.property_tree = ''
-    // @ts-ignore
-    configFileData.frequencies = ''
     return this.http.post<any>(this.baseApiURL + "config-file/", {configFileData});
   }
 }

@@ -20,8 +20,7 @@ class MonitoringConfigSerializer(serializers.HyperlinkedModelSerializer):
         model = MonitoringConfig
         fields = ('id',
                   'name',
+                  'frequencies',
                   'save_type',
                   'sum_type_id',
-                  'property_tree',
-                  'frequencies',
-                  'ecore_file')
+                  'ecore_data')

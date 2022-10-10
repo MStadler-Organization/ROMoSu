@@ -83,32 +83,30 @@ def sum_types(request):
 @api_view(['GET', 'POST'])
 def save_config(request):
     """Create new config files"""
+    global body
     if request.method == 'GET':
         # return all objects contained in db
-        # mon_configs = MonitoringConfig.objects.all()
-        # print(mon_configs)
-        # serializer = MonitoringConfigSerializer(mon_configs, many=True)
-        return JsonResponse('serializer.data', encoder=DefaultEncoder, safe=False)
+        mon_configs = MonitoringConfig.objects.all()
+        serializer = MonitoringConfigSerializer(mon_configs, many=True)
+        return JsonResponse(serializer.data, encoder=DefaultEncoder, safe=False)
 
     if request.method == 'POST':
         # parse request body
         body_unicode = request.body.decode('utf-8')
         body = json.loads(body_unicode)
-        print(body['configFileData']['file_name'])
-        # print('FILENAME\n\n\n')
-        # print(body['file_name'])
-        # print('ECORE DATA\n\n\n')
-        # print(body['ecore_data'])
-        # config_file_data = JSONParser().parse(request)
-        # print(config_file_data)
-        # print('########')
-        # print('########')
-        # # print(config_file_data)
-        # serializer = MonitoringConfigSerializer(data=config_file_data)
-        # print(serializer.is_valid())
-        # # check form of request data and save it
-        # if serializer.is_valid():
-        #     serializer.save()
-        #     return Response('', status=status.HTTP_201_CREATED)
-        return Response('serializer.errors', status=status.HTTP_400_BAD_REQUEST)
-        # return Response('', status=status.HTTP_201_CREATED)
+
+        # create new object and save it to DB
+
+        if body and body['configFileData'] and body['configFileData']['name'] and body['configFileData']['ecore_data'] and \
+                body['configFileData']['save_type'] and body['configFileData']['sum_type_id'] and body['configFileData'][
+            'frequencies']:
+            temp_obj = MonitoringConfig()
+            temp_obj.name = body['configFileData']['name']
+            temp_obj.save_type = body['configFileData']['save_type']
+            temp_obj.sum_type_id = body['configFileData']['sum_type_id']
+            temp_obj.frequencies = str(body['configFileData']['frequencies'])
+            temp_obj.ecore_data = str(body['configFileData']['ecore_data'])
+            temp_obj.save()
+
+            return Response(data='Successfully created new config!', status=status.HTTP_201_CREATED)
+    return Response('Invalid params!', status=status.HTTP_400_BAD_REQUEST)

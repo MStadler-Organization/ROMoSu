@@ -539,15 +539,11 @@ export class NewConfigWizardComponent implements OnInit {
             // created new SuM type, now create the config file
             if (configFileName.value && configSaveType.value) {
               const configDataToSave: ConfigFileData = {
-                // @ts-ignore
-                file_name: configFileName.value,
+                name: configFileName.value,
                 save_type: configSaveType.value,
                 sum_type_id: newSumType.id,
-                // property_tree: JSON.stringify(propertyTree),
-                // frequencies: JSON.stringify(frequencyArray),
-                property_tree: propertyTree,
                 frequencies: frequencyArray,
-                ecore_file: ''
+                ecore_data: propertyTree,
               }
               console.log(configDataToSave)
               this.newConfigWizardService.createNewConfigFile(configDataToSave).subscribe((response) => {
@@ -561,29 +557,20 @@ export class NewConfigWizardComponent implements OnInit {
       } else {
         // no new SuM type -> create config with other params
         const configDataToSave: ConfigFileData = {
-          // @ts-ignore
-          file_name: configFileName.value,
-          // save_type: configSaveType.value,
-          // sum_type_id: +sumTypeIdField.value,
-          // // property_tree: JSON.stringify(propertyTree),
-          // // frequencies: JSON.stringify(frequencyArray),
-          // property_tree: propertyTree,
-          // frequencies: frequencyArray,
-          // @ts-ignore
-          ecore_data: propertyTree
+          name: configFileName.value,
+          save_type: configSaveType.value,
+          sum_type_id: +sumTypeIdField.value,
+          frequencies: frequencyArray,
+          ecore_data: propertyTree,
         }
         console.log(configDataToSave)
         this.newConfigWizardService.createNewConfigFile(configDataToSave).subscribe((response) => {
           console.log(response)
         })
       }
-
-
     } else {
       console.error('At least one of the input params seems not to be filled out properly')
     }
-
-
   }
 
   /**
