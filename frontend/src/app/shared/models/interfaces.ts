@@ -19,6 +19,7 @@ export interface SumType {
   name: string;
 }
 
+
 export interface ConfigFileData {
   name: string;
   save_type: string;

@@ -483,6 +483,7 @@ export class NewConfigWizardComponent implements OnInit {
     this.createNewConfig()
 
     stepper.next()
+
   }
 
   /***
@@ -548,6 +549,7 @@ export class NewConfigWizardComponent implements OnInit {
               console.log(configDataToSave)
               this.newConfigWizardService.createNewConfigFile(configDataToSave).subscribe((response) => {
                 this.handleNewConfigResponse(response.status)
+
               })
             }
           })
@@ -598,6 +600,7 @@ export class NewConfigWizardComponent implements OnInit {
     return result
   }
 
+
   /**
    * Called after a new config was sent to the server. Shows a dialog depending on the status code
    * @param statusCode the status code of the response as integer
@@ -622,4 +625,5 @@ export class NewConfigWizardComponent implements OnInit {
       });
     }
   }
+
 }
