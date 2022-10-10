@@ -482,7 +482,7 @@ export class NewConfigWizardComponent implements OnInit {
 
     this.createNewConfig()
 
-    // stepper.next()
+    stepper.next()
   }
 
   /***
@@ -547,7 +547,7 @@ export class NewConfigWizardComponent implements OnInit {
               }
               console.log(configDataToSave)
               this.newConfigWizardService.createNewConfigFile(configDataToSave).subscribe((response) => {
-                console.log(response)
+                this.handleNewConfigResponse(response.status)
               })
             }
           })
@@ -565,7 +565,7 @@ export class NewConfigWizardComponent implements OnInit {
         }
         console.log(configDataToSave)
         this.newConfigWizardService.createNewConfigFile(configDataToSave).subscribe((response) => {
-          console.log(response)
+          this.handleNewConfigResponse(response.status)
         })
       }
     } else {
@@ -596,5 +596,30 @@ export class NewConfigWizardComponent implements OnInit {
       result.push(+fq.value)
     }
     return result
+  }
+
+  /**
+   * Called after a new config was sent to the server. Shows a dialog depending on the status code
+   * @param statusCode the status code of the response as integer
+   * @private
+   */
+  private handleNewConfigResponse(statusCode: number) {
+    if (statusCode === 201) {
+      this.dialog.open(CustomDialogComponent, {
+        data: {
+          type: 1, // create success
+          message: 'Successfully created new monitoring config!'
+        },
+        autoFocus: false // disable default focus on button
+      });
+    } else {
+      this.dialog.open(CustomDialogComponent, {
+        data: {
+          type: 2, // create success
+          message: 'Unable to create new monitoring config!'
+        },
+        autoFocus: false // disable default focus on button
+      });
+    }
   }
 }
