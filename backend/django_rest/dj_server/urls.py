@@ -29,4 +29,5 @@ urlpatterns = [
     path('props-for-sum/', views.properties_for_sum),
     path('sum-types/', views.sum_types),
     path('sum-types/<int:pk>', views.sum_types),
+    path('config-file/', views.save_config),
 ]

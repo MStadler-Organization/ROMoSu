@@ -86,3 +86,7 @@ $tree-margin: 5em;
     }
   }
 }
+
+::ng-deep .mat-horizontal-stepper-header {
+  pointer-events: none !important;
+}

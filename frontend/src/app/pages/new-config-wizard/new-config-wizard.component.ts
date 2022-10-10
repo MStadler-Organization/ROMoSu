@@ -5,29 +5,7 @@ import {NewConfigWizardService} from "./new-config-wizard.service";
 import {CustomDialogComponent} from "../../shared/components/custom-dialog/custom-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 import {MatCheckboxChange} from "@angular/material/checkbox";
-
-
-/////////// TS INTERFACES ///////////
-
-interface TreeNodeElement {
-  name: string;
-  dataType: string;
-  isExpandable: boolean;
-  isChecked: boolean;
-  children?: TreeNodeElement[];
-  index: number;
-}
-
-interface Field {
-  fieldName: string;
-  fieldDataType: string;
-}
-
-interface SumType {
-  id: number;
-  name: string;
-}
-
+import {ConfigFileData, Field, SumType, TreeNodeElement} from "../../shared/models/interfaces";
 
 @Component({
   selector: 'app-new-config-wizard',
@@ -62,7 +40,6 @@ export class NewConfigWizardComponent implements OnInit {
   PRIMITIVE_ROS_TYPES: string[] = ['bool', 'int8', 'uint8', 'int16', 'uint16', 'int32', 'uint32', 'int64', 'uint64', 'float32', 'float64', 'string'];
 
   frequencies: { value: number, isCorrect: boolean }[] = []
-  checkBoxes: any[] = []
 
   // step 3 vars
   saveTypes: string[] = ['Complete (but complex)', 'Simple (but flattened)']
@@ -136,7 +113,7 @@ export class NewConfigWizardComponent implements OnInit {
     this.treeData = treeDataArray
 
     // init Checkbox values
-    this.setCheckBoxesAndFQs()
+    this.setFQs()
   }
 
   /**
@@ -243,7 +220,6 @@ export class NewConfigWizardComponent implements OnInit {
       const checkedAction = $event.checked
       // set data for form
       searchNode['isChecked'] = $event.checked
-      this.checkBoxes[searchNode.index] = checkedAction
       // update the children with value
       this.updateChildrenCheckboxes(searchNode, checkedAction)
 
@@ -269,7 +245,6 @@ export class NewConfigWizardComponent implements OnInit {
     if (treeNodeElement.isExpandable && treeNodeElement.children) {
       for (const childNode of treeNodeElement.children) {
         childNode['isChecked'] = pChecked
-        this.checkBoxes[childNode.index] = pChecked
         this.updateChildrenCheckboxes(childNode, pChecked)
       }
     }
@@ -281,7 +256,7 @@ export class NewConfigWizardComponent implements OnInit {
    */
   goToStepThreeButtonClicked(stepper: MatStepper) {
     // validate checkbox selection
-    if (this.checkBoxes.filter(Boolean).length < 1) {
+    if (!this.isAtLeastOneCheckedInTree()) {
       // at least one topic must be selected to monitor
       this.dialog.open(CustomDialogComponent, {
         data: {
@@ -370,10 +345,7 @@ export class NewConfigWizardComponent implements OnInit {
    * Helper function which initiates the checkboxes class variable with the length of the treenodes and sets them all to false
    * @private
    */
-  private setCheckBoxesAndFQs() {
-    for (let i = 0; i < this.treeNodeIdx + 1; i++) {
-      this.checkBoxes[i] = false
-    }
+  private setFQs() {
     for (let j = 0; j < this.treeData.length; j++) {
       this.frequencies[j] = {value: -1, isCorrect: false}
     }
@@ -406,7 +378,6 @@ export class NewConfigWizardComponent implements OnInit {
     // set the checked attribute to false
     if (parentSearchNode) {
       parentSearchNode['isChecked'] = false
-      this.checkBoxes[parentNodeIdx] = false
       let parentCheckbox = document.getElementById(this.getCcheckBoxIdString(parentNodeIdx))
       if (parentCheckbox) {
         // @ts-ignore
@@ -442,7 +413,6 @@ export class NewConfigWizardComponent implements OnInit {
       // if all children are checked, check the parent
       if (allChildrenChecked) {
         parentSearchNode['isChecked'] = true
-        this.checkBoxes[parentNodeIdx] = true
         let parentCheckbox = document.getElementById(this.getCcheckBoxIdString(parentNodeIdx))
         if (parentCheckbox) {
           // @ts-ignore
@@ -510,7 +480,9 @@ export class NewConfigWizardComponent implements OnInit {
     // show progressbar for finishing
     this.showProgressBar = true
 
-    stepper.next()
+    this.createNewConfig()
+
+    // stepper.next()
   }
 
   /***
@@ -540,5 +512,89 @@ export class NewConfigWizardComponent implements OnInit {
       }
     }
     return false
+  }
+
+  /**
+   * Uses the input params to create a new configuration file
+   * @private
+   */
+  private createNewConfig() {
+    // get data from input fields
+    const configFileName = this.thirdFormGroup.get('configFileName')
+    const configSaveType = this.thirdFormGroup.get('configSaveType')
+    const sumTypeIdField = this.thirdFormGroup.get('sumType')
+    const propertyTree = this.treeData
+    const frequencyArray = this.getFrequencyArray()
+
+    // check if all data is present
+    if (configFileName && configSaveType && sumTypeIdField && propertyTree && frequencyArray &&
+      configFileName.value && configSaveType.value && sumTypeIdField.value) {
+
+      // if it is a new Sum Type, first create the new SuM type
+      if (+sumTypeIdField.value == -1) {
+        // get the name of the new SuM type
+        const newSumTypeInput = this.thirdFormGroup.get('newSumTypeInput')
+        if (newSumTypeInput && newSumTypeInput.value) {
+          this.newConfigWizardService.addSumType(newSumTypeInput.value).subscribe((newSumType) => {
+            // created new SuM type, now create the config file
+            if (configFileName.value && configSaveType.value) {
+              const configDataToSave: ConfigFileData = {
+                name: configFileName.value,
+                save_type: configSaveType.value,
+                sum_type_id: newSumType.id,
+                frequencies: frequencyArray,
+                ecore_data: propertyTree,
+              }
+              console.log(configDataToSave)
+              this.newConfigWizardService.createNewConfigFile(configDataToSave).subscribe((response) => {
+                console.log(response)
+              })
+            }
+          })
+        } else {
+          console.error(`Something went wrong while creating a new SuM Type!`)
+        }
+      } else {
+        // no new SuM type -> create config with other params
+        const configDataToSave: ConfigFileData = {
+          name: configFileName.value,
+          save_type: configSaveType.value,
+          sum_type_id: +sumTypeIdField.value,
+          frequencies: frequencyArray,
+          ecore_data: propertyTree,
+        }
+        console.log(configDataToSave)
+        this.newConfigWizardService.createNewConfigFile(configDataToSave).subscribe((response) => {
+          console.log(response)
+        })
+      }
+    } else {
+      console.error('At least one of the input params seems not to be filled out properly')
+    }
+  }
+
+  /**
+   * Check if at least one property is selected in the treeData data
+   * @private
+   */
+  private isAtLeastOneCheckedInTree() {
+    for (let i = 0; i < this.treeData.length; i++) {
+      if (this.isAtLeastOnePropertySelected(i)) {
+        return true
+      }
+    }
+    return false;
+  }
+
+  /**
+   * Helper function which returns the values of the frequencies in a simple 1D array
+   * @private
+   */
+  private getFrequencyArray() {
+    let result = []
+    for (const fq of this.frequencies) {
+      result.push(+fq.value)
+    }
+    return result
   }
 }

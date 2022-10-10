@@ -151,7 +151,7 @@
         <div>
           <button mat-raised-button matStepperPrevious onclick="this.blur()" class="prev-button">Previous Step</button>
           <button mat-raised-button onclick="this.blur()" (click)="goToStepFourButtonClicked(stepper)">
-            Next Step
+            Save Config
           </button>
         </div>
       </form>
@@ -162,8 +162,7 @@
       <ng-template matStepLabel>Done</ng-template>
       <p>You are now done.</p>
       <div>
-        <button mat-raised-button matStepperPrevious onclick="this.blur()" class="prev-button">Previous Step</button>
-        <button mat-raised-button (click)="stepper.reset()" onclick="this.blur()">Save Config</button>
+        <button mat-raised-button routerLink='/home' onclick="this.blur()">Back To Home</button>
       </div>
     </mat-step>
   </mat-stepper>
