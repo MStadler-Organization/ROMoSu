@@ -1,0 +1,46 @@
+<div class="outer-manager-container">
+  <div *ngIf="this.showProgressBar" class="progress-spinner-container">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </div>
+  <table [dataSource]="this.sumTypes" class="mat-elevation-z8" mat-table>
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <th *matHeaderCellDef mat-header-cell>ID</th>
+      <td *matCellDef="let element" mat-cell> {{element.id}} </td>
+    </ng-container>
+
+    <!-- SuM Type Name -->
+    <ng-container matColumnDef="name">
+      <th *matHeaderCellDef mat-header-cell>Name</th>
+      <td *matCellDef="let element" mat-cell> {{element.name}} </td>
+    </ng-container>
+
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="action">
+      <th *matHeaderCellDef mat-header-cell>Action</th>
+      <td *matCellDef="let element" mat-cell>
+        <button (click)="deleteButtonClicked(element.id)" class="delete-button" color="warn" mat-fab>
+          <i class="material-icons-outlined">backspace</i>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr *matHeaderRowDef="this.displayedCols" mat-header-row></tr>
+    <tr *matRowDef="let row; columns: this.displayedCols;" mat-row></tr>
+  </table>
+
+
+</div>
+<form [formGroup]="newSumFormGroup">
+  <div class="outer-add-btn-container">
+    <mat-form-field appearance="fill" class="text-input-field">
+      <mat-label>SuM Type Name</mat-label>
+      <input formControlName="newSumTypeInput" matInput placeholder="Insert new name">
+    </mat-form-field>
+    <button (click)="addButtonClicked()" class="add-button" color="warn" mat-fab>
+      <i class="material-icons-outlined">add_circle_outline</i>
+    </button>
+  </div>
+</form>

@@ -200,3 +200,5 @@ fabric.properties
 .idea
 *.sqlite3
 db.sqlite3
+
+backend/django_rest/dj_server/dj_ros_api_app/migrations/*

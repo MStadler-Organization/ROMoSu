@@ -1,0 +1,38 @@
+.outer-manager-container {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+
+  table {
+    min-width: 70vw;
+
+    .mat-cell, .mat-header-cell {
+      text-align: center;
+    }
+
+    .delete-button {
+      width: 45px;
+      height: 45px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0.5em auto;
+    }
+  }
+}
+
+.outer-add-btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2em;
+
+  .text-input-field {
+    padding-top: 1.3em;
+    margin-right: 1em;
+  }
+
+  .add-button {
+    background-color: seagreen;
+  }
+}
