@@ -1,12 +1,7 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {ConfigFileData} from "../../shared/models/interfaces";
-
-interface SumType {
-  id: number;
-  name: string;
-}
+import {ConfigFileData, SumType} from "../../shared/models/interfaces";
 
 @Injectable({
   providedIn: "root"
@@ -54,6 +49,6 @@ export class NewConfigWizardService {
    * @param configFileData The data for the new configuration file
    */
   createNewConfigFile(configFileData: ConfigFileData): Observable<any> {
-    return this.http.post<any>(this.baseApiURL + "config-file/", {configFileData});
+    return this.http.post<any>(this.baseApiURL + "config-file/", {configFileData}, {observe: 'response'});
   }
 }
