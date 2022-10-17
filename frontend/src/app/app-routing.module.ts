@@ -22,6 +22,10 @@ const routes: Routes = [{
   {
     path: 'manage-sum-types',
     loadChildren: () => import('./pages/manage-sum-types/manage-sum-types.module').then(m => m.ManageSumTypesModule)
+  },
+  {
+    path: 'runtime-monitoring-wizard',
+    loadChildren: () => import('./pages/runtime-monitoring-wizard/runtime-monitoring-wizard.module').then(m => m.RuntimeMonitoringWizardModule)
   }];
 
 @NgModule({
