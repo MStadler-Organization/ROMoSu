@@ -59,7 +59,7 @@
                         <mat-checkbox class="prop-checkbox"
                                       [checked]="leafProperty.isChecked"
                                       (change)="onCheckboxChange($event, leafProperty.index, leafProperty.index)"
-                                      [id]="getCcheckBoxIdString(leafProperty.index)"
+                                      [id]="getCheckBoxIdString(leafProperty.index)"
                         >
                           <span class="prop-name-container">{{leafProperty.name}}:</span>
                           <span class="prop-type-container">{{leafProperty.dataType}}</span>
@@ -76,8 +76,8 @@
                         <mat-checkbox class="prop-checkbox"
                                       [checked]="item.isChecked"
                                       (change)="onCheckboxChange($event, item.index, parentNode)"
-                                      [id]="getCcheckBoxIdString(item.index)"
-                                      [name]="getCcheckBoxIdString(parentNode)"
+                                      [id]="getCheckBoxIdString(item.index)"
+                                      [name]="getCheckBoxIdString(parentNode)"
                         >
                           <span class="prop-name-container">{{item.name}}:</span>
                           <span class="prop-type-container">{{item.dataType}}</span>

@@ -355,7 +355,7 @@ export class NewConfigWizardComponent implements OnInit {
    * Adds a 'checkbox-' as prefix to a number and returns it as a string
    * @param index the number to add as suffix
    */
-  getCcheckBoxIdString(index: number): string {
+  getCheckBoxIdString(index: number): string {
     return `checkbox-${index}`;
   }
 
@@ -378,7 +378,7 @@ export class NewConfigWizardComponent implements OnInit {
     // set the checked attribute to false
     if (parentSearchNode) {
       parentSearchNode['isChecked'] = false
-      let parentCheckbox = document.getElementById(this.getCcheckBoxIdString(parentNodeIdx))
+      let parentCheckbox = document.getElementById(this.getCheckBoxIdString(parentNodeIdx))
       if (parentCheckbox) {
         // @ts-ignore
         parentCheckbox.classList.remove('mat-checkbox-checked')
@@ -413,7 +413,7 @@ export class NewConfigWizardComponent implements OnInit {
       // if all children are checked, check the parent
       if (allChildrenChecked) {
         parentSearchNode['isChecked'] = true
-        let parentCheckbox = document.getElementById(this.getCcheckBoxIdString(parentNodeIdx))
+        let parentCheckbox = document.getElementById(this.getCheckBoxIdString(parentNodeIdx))
         if (parentCheckbox) {
           // @ts-ignore
           parentCheckbox.classList.add('mat-checkbox-checked')
@@ -624,6 +624,6 @@ export class NewConfigWizardComponent implements OnInit {
         autoFocus: false // disable default focus on button
       });
     }
+    this.showProgressBar = false
   }
-
 }

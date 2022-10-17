@@ -1,0 +1,64 @@
+<div *ngIf="this.showProgressBar" class="progress-spinner-container">
+  <!--    <mat-spinner></mat-spinner>-->
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+<mat-stepper #stepper linear>
+  <!-- ########## STEP 1 ########## -->
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup" class="form-container">
+      <ng-template matStepLabel>SuM Selection</ng-template>
+      <mat-selection-list #sums [multiple]="false" class="selection-container">
+        <mat-list-option *ngFor="let sum of this.possibleSums" [value]="sum">
+          {{sum}}
+        </mat-list-option>
+      </mat-selection-list>
+      <div>
+        <button (click)="goToStepTwoButtonClicked(sums, stepper)" mat-raised-button onclick="this.blur()">Next Step
+        </button>
+      </div>
+    </form>
+  </mat-step>
+
+  <!-- ########## STEP 2 ########## -->
+  <mat-step [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup" class="form-container">
+      <ng-template matStepLabel>SuM Type Selection</ng-template>
+      <mat-selection-list #sumts [multiple]="false" class="selection-container">
+        <mat-list-option *ngFor="let singleSumType of this.sumTypes" [value]="singleSumType.id">
+          {{singleSumType.name}}
+        </mat-list-option>
+      </mat-selection-list>
+      <div>
+        <button (click)="goToStepThreeButtonClicked(sumts, stepper)" mat-raised-button onclick="this.blur()">Next Step
+        </button>
+      </div>
+    </form>
+  </mat-step>
+
+
+  <!-- ########## STEP 3 ########## -->
+  <mat-step [stepControl]="thirdFormGroup">
+    <form [formGroup]="thirdFormGroup" class="form-container">
+      <ng-template matStepLabel>Config Selection</ng-template>
+      <mat-selection-list #configs [multiple]="false" class="selection-container">
+        <mat-list-option *ngFor="let singleConfig of this.possibleConfigs" [value]="singleConfig.id">
+          {{singleConfig.name}}
+        </mat-list-option>
+      </mat-selection-list>
+      <div>
+        <button (click)="goToStepFourButtonClicked(configs, stepper)" mat-raised-button onclick="this.blur()">Next Step
+        </button>
+      </div>
+    </form>
+  </mat-step>
+
+
+  <!-- ########## STEP 4 ########## -->
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-raised-button onclick="this.blur()" routerLink='/home'>Back To Home</button>
+    </div>
+  </mat-step>
+</mat-stepper>
