@@ -624,6 +624,6 @@ export class NewConfigWizardComponent implements OnInit {
         autoFocus: false // disable default focus on button
       });
     }
+    this.showProgressBar = false
   }
-
 }
