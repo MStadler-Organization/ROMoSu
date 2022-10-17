@@ -27,3 +27,9 @@ export interface ConfigFileData {
   frequencies: number[];
   ecore_data: TreeNodeElement[];
 }
+
+export interface RTConfig {
+  sum_prefix: string;
+  sum_type_id: number;
+  config_id: number;
+}
