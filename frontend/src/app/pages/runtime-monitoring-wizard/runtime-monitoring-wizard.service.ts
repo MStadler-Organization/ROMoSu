@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpResponse} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {ConfigFileData, RTConfig, SumType} from "../../shared/models/interfaces";
 
@@ -39,7 +39,7 @@ export class RuntimeMonitoringWizardService {
   /**
    * REST call to server to post the runtime config
    */
-  postRTStatus(pRTConfig: RTConfig): Observable<RTConfig> {
-    return this.http.post<RTConfig>(this.baseApiURL + "runtime-config/", {pRTConfig});
+  postRTStatus(pRTConfig: RTConfig): Observable<HttpResponse<RTConfig>> {
+    return this.http.post<RTConfig>(this.baseApiURL + "runtime-config/", {pRTConfig}, {observe: 'response'});
   }
 }

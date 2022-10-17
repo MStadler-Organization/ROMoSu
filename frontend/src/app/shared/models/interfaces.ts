@@ -21,10 +21,11 @@ export interface SumType {
 
 
 export interface ConfigFileData {
+  id?: number; // only when already saved
   name: string;
+  frequencies: number[];
   save_type: string;
   sum_type_id: number;
-  frequencies: number[];
   ecore_data: TreeNodeElement[];
 }
 

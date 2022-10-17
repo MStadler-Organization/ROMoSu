@@ -5,6 +5,7 @@ import {MatStepper} from "@angular/material/stepper";
 import {CustomDialogComponent} from "../../shared/components/custom-dialog/custom-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 import {ConfigFileData, RTConfig, SumType} from "../../shared/models/interfaces";
+import {HttpResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-runtime-monitoring-wizard',
@@ -17,6 +18,7 @@ export class RuntimeMonitoringWizardComponent implements OnInit {
 
   firstFormGroup = this._formBuilder.group({});
   secondFormGroup = this._formBuilder.group({});
+  thirdFormGroup = this._formBuilder.group({});
   runtimeConfigResult: RTConfig = {sum_prefix: '', sum_type_id: -1, config_id: -1}
   possibleSums: string[] = []
   showProgressBar: boolean = true
@@ -65,12 +67,12 @@ export class RuntimeMonitoringWizardComponent implements OnInit {
 
   /***
    * Called when step 2 next button is clicked
-   * @param sumsTypes the selection of the possible sum-list
+   * @param selectedSumType the selection of the possible sum-list
    * @param stepper the stepper mat component
    */
-  goToStepThreeButtonClicked(sumsTypes: { selectedOptions: { selected: { value: string; }[]; }; }, stepper: MatStepper) {
+  goToStepThreeButtonClicked(selectedSumType: { selectedOptions: { selected: { value: string; }[]; }; }, stepper: MatStepper) {
 
-    this.runtimeConfigResult.sum_type_id = +sumsTypes.selectedOptions.selected[0]?.value
+    this.runtimeConfigResult.sum_type_id = +selectedSumType.selectedOptions.selected[0]?.value
 
     if (!this.runtimeConfigResult.sum_type_id && this.runtimeConfigResult.sum_type_id != -1) {
       this.dialog.open(CustomDialogComponent, {
@@ -86,6 +88,50 @@ export class RuntimeMonitoringWizardComponent implements OnInit {
       this.runtimeMonitoringWizardService.getConfigsForSuMType(this.runtimeConfigResult.sum_type_id).subscribe((configList: ConfigFileData[]) => {
         for (const singleConfig of configList) {
           this.possibleConfigs.push(singleConfig)
+        }
+        this.showProgressBar = false
+      });
+    }
+  }
+
+
+  /***
+   * Called when step 3 next button is clicked
+   * @param selectedConfig the selection of the possible config-list
+   * @param stepper the stepper mat component
+   */
+  goToStepFourButtonClicked(selectedConfig: { selectedOptions: { selected: { value: string; }[]; }; }, stepper: MatStepper) {
+
+    this.runtimeConfigResult.config_id = +selectedConfig.selectedOptions.selected[0]?.value
+
+    if (!this.runtimeConfigResult.config_id && this.runtimeConfigResult.config_id != -1) {
+      this.dialog.open(CustomDialogComponent, {
+        data: {
+          type: 2, // create error
+          message: 'No config selected!'
+        },
+        autoFocus: false // disable default focus on button
+      });
+    } else {
+      stepper.next() // go to next step
+      this.showProgressBar = true
+      this.runtimeMonitoringWizardService.postRTStatus(this.runtimeConfigResult).subscribe((response: HttpResponse<RTConfig>) => {
+        if (response.ok) {
+          this.dialog.open(CustomDialogComponent, {
+            data: {
+              type: 1, // create success
+              message: 'Started Monitoring for selection!'
+            },
+            autoFocus: false // disable default focus on button
+          });
+        } else {
+          this.dialog.open(CustomDialogComponent, {
+            data: {
+              type: 1, // create error
+              message: 'Error while starting the monitoring...'
+            },
+            autoFocus: false // disable default focus on button
+          });
         }
         this.showProgressBar = false
       });

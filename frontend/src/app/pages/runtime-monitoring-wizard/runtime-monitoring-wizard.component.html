@@ -35,6 +35,24 @@
     </form>
   </mat-step>
 
+
+  <!-- ########## STEP 3 ########## -->
+  <mat-step [stepControl]="thirdFormGroup">
+    <form [formGroup]="thirdFormGroup" class="form-container">
+      <ng-template matStepLabel>Config Selection</ng-template>
+      <mat-selection-list #configs [multiple]="false" class="selection-container">
+        <mat-list-option *ngFor="let singleConfig of this.possibleConfigs" [value]="singleConfig.id">
+          {{singleConfig.name}}
+        </mat-list-option>
+      </mat-selection-list>
+      <div>
+        <button (click)="goToStepFourButtonClicked(configs, stepper)" mat-raised-button onclick="this.blur()">Next Step
+        </button>
+      </div>
+    </form>
+  </mat-step>
+
+
   <!-- ########## STEP 4 ########## -->
   <mat-step>
     <ng-template matStepLabel>Done</ng-template>
