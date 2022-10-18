@@ -30,5 +30,5 @@ urlpatterns = [
     path('sum-types/', views.sum_types),
     path('sum-types/<int:pk>', views.sum_types),
     path('config-file/', views.save_config),
-    # TODO: add the start monitoring call
+    path('runtime-config/', views.runtime_config),
 ]

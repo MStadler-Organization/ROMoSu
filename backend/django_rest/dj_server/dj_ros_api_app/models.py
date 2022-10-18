@@ -37,3 +37,11 @@ class MonitoringConfig(models.Model):
                           sort_keys=True, indent=4)
 
 
+class ActiveRuntimeConfig(models.Model):
+    """Stores the runtime configurations"""
+    prefix = models.CharField(max_length=200)
+    sum_type_id = models.IntegerField()
+    config_id = models.IntegerField()
+
+    def __str__(self):
+        return f'prefix={self.prefix}, sum_type_id={self.sum_type_id}, config_id={self.config_id}'
