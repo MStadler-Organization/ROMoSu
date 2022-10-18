@@ -30,7 +30,7 @@ export interface ConfigFileData {
 }
 
 export interface RTConfig {
-  sum_prefix: string;
+  prefix: string;
   sum_type_id: number;
   config_id: number;
 }

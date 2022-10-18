@@ -11,8 +11,9 @@ from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 
 from dj_server.dj_ros_api_app.apps import DjRosApiAppConfig
-from dj_server.dj_ros_api_app.models import SuMType, MonitoringConfig
-from dj_server.dj_ros_api_app.serializers import SuMTypeSerializer, MonitoringConfigSerializer
+from dj_server.dj_ros_api_app.models import SuMType, MonitoringConfig, ActiveRuntimeConfig
+from dj_server.dj_ros_api_app.serializers import SuMTypeSerializer, MonitoringConfigSerializer, \
+    ActiveRuntimeConfigSerializer
 from dj_server.dj_ros_api_app.utils import DefaultEncoder
 
 
@@ -82,13 +83,25 @@ def sum_types(request):
 
 @api_view(['GET', 'POST'])
 def save_config(request):
-    """Create new config files"""
-    global body
+    """Create and get new config files"""
     if request.method == 'GET':
-        # return all objects contained in db
-        mon_configs = MonitoringConfig.objects.all()
-        serializer = MonitoringConfigSerializer(mon_configs, many=True)
-        return JsonResponse(serializer.data, encoder=DefaultEncoder, safe=False)
+        if request.query_params.get('sum_type'):
+            # return only the one with the sum_type
+            #  check if object exists
+            try:
+                configs_to_return = MonitoringConfig.objects.filter(sum_type_id=request.query_params.get('sum_type'))
+                if not configs_to_return:
+                    raise NotFoundError
+            except (SuMType.DoesNotExist, NotFoundError):
+                return Response(status=status.HTTP_404_NOT_FOUND)
+            serializer = MonitoringConfigSerializer(configs_to_return, many=True)
+            return JsonResponse(serializer.data, encoder=DefaultEncoder, safe=False)
+
+        else:
+            # return all objects contained in db
+            mon_configs = MonitoringConfig.objects.all()
+            serializer = MonitoringConfigSerializer(mon_configs, many=True)
+            return JsonResponse(serializer.data, encoder=DefaultEncoder, safe=False)
 
     if request.method == 'POST':
         # parse request body
@@ -97,9 +110,11 @@ def save_config(request):
 
         # create new object and save it to DB
 
-        if body and body['configFileData'] and body['configFileData']['name'] and body['configFileData']['ecore_data'] and \
-                body['configFileData']['save_type'] and body['configFileData']['sum_type_id'] and body['configFileData'][
-            'frequencies']:
+        if body and body['configFileData'] and body['configFileData']['name'] and body['configFileData'][
+            'ecore_data'] and \
+                body['configFileData']['save_type'] and body['configFileData']['sum_type_id'] and \
+                body['configFileData'][
+                    'frequencies']:
             temp_obj = MonitoringConfig()
             temp_obj.name = body['configFileData']['name']
             temp_obj.save_type = body['configFileData']['save_type']
@@ -110,3 +125,27 @@ def save_config(request):
 
             return Response(data='Successfully created new config!', status=status.HTTP_201_CREATED)
     return Response('Invalid params!', status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET', 'POST'])
+def runtime_config(request):
+    if request.method == 'GET':
+        # return all objects contained in db
+        runtime_configs = ActiveRuntimeConfig.objects.all()
+        serializer = ActiveRuntimeConfigSerializer(runtime_configs, many=True)
+        return JsonResponse(serializer.data, encoder=DefaultEncoder, safe=False)
+
+    if request.method == 'POST':
+        # parse request body
+        request_config_data = JSONParser().parse(request)
+        serializer = ActiveRuntimeConfigSerializer(data=request_config_data['pRTConfig'])
+        # check form of request data and save it
+        if serializer.is_valid():
+            serializer.save()
+            # TODO: trigger actual monitoring here
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class NotFoundError(Exception):
+    pass

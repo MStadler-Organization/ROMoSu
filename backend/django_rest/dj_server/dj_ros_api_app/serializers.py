@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from dj_server.dj_ros_api_app.models import TopicList, SuMType, MonitoringConfig
+from dj_server.dj_ros_api_app.models import TopicList, SuMType, MonitoringConfig, ActiveRuntimeConfig
 
 
 class TopicListSerializer(serializers.HyperlinkedModelSerializer):
@@ -24,3 +24,12 @@ class MonitoringConfigSerializer(serializers.HyperlinkedModelSerializer):
                   'save_type',
                   'sum_type_id',
                   'ecore_data')
+
+
+class ActiveRuntimeConfigSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = ActiveRuntimeConfig
+        fields = ('id',
+                  'prefix',
+                  'sum_type_id',
+                  'config_id')
