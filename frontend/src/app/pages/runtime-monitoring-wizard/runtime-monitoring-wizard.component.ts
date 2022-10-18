@@ -19,7 +19,7 @@ export class RuntimeMonitoringWizardComponent implements OnInit {
   firstFormGroup = this._formBuilder.group({});
   secondFormGroup = this._formBuilder.group({});
   thirdFormGroup = this._formBuilder.group({});
-  runtimeConfigResult: RTConfig = {sum_prefix: '', sum_type_id: -1, config_id: -1}
+  runtimeConfigResult: RTConfig = {prefix: '', sum_type_id: -1, config_id: -1}
   possibleSums: string[] = []
   showProgressBar: boolean = true
   sumTypes: SumType[] = []
@@ -43,9 +43,9 @@ export class RuntimeMonitoringWizardComponent implements OnInit {
    */
   goToStepTwoButtonClicked(sums: { selectedOptions: { selected: { value: string; }[]; }; }, stepper: MatStepper) {
 
-    this.runtimeConfigResult.sum_prefix = sums.selectedOptions.selected[0]?.value
+    this.runtimeConfigResult.prefix = sums.selectedOptions.selected[0]?.value
 
-    if (!this.runtimeConfigResult.sum_prefix && this.runtimeConfigResult.sum_prefix != '') {
+    if (!this.runtimeConfigResult.prefix && this.runtimeConfigResult.prefix != '') {
       this.dialog.open(CustomDialogComponent, {
         data: {
           type: 2, // create error
