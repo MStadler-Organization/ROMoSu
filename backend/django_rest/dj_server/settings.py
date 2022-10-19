@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'rest_framework',
-    'dj_server.quickstart',  # TODO: remove this in future version, remains here for easy reference for now
     'dj_server.dj_ros_api_app'
 ]
 
