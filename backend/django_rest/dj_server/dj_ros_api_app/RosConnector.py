@@ -2,7 +2,9 @@ import logging
 
 import roslibpy
 
+from dj_server.dj_ros_api_app.models import MonitoringConfig
 from dj_server.dj_ros_api_app.utils import get_base_topic_string, get_sub_topic_string
+from dj_server.dj_ros_api_app.views import NotFoundError
 
 
 class TopicInfo():
@@ -10,6 +12,15 @@ class TopicInfo():
         self.in_topic = in_topic
         self.type = type
         self.type_info = type_info
+
+
+def get_config_for_id(id):
+    """ returns the config from the database for a given id """
+
+    result = MonitoringConfig.objects.filter(id=id)
+    if not result:
+        raise NotFoundError
+    return result
 
 
 class RosConnector:
@@ -75,6 +86,14 @@ class RosConnector:
         else:
             self.ROS_CLIENT.terminate()
         logging.info('Disconnected from ROS bridge')
+
+    def start_monitoring(self, runtime_config):
+        # get saved monitoring config from runtime config id
+        mon_config = get_config_for_id(runtime_config.id)
+        print(mon_config)
+        # TODO: create required listeners on monitoring topic paths
+        self.get_sums()
+        # TODO: forward messages in specified frequency and with required simplified or complex path (as it is or truncated to base topic)
 
     def __init__(self) -> None:
         super().__init__()

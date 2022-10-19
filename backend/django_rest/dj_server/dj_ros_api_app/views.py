@@ -141,8 +141,8 @@ def runtime_config(request):
         serializer = ActiveRuntimeConfigSerializer(data=request_config_data['pRTConfig'])
         # check form of request data and save it
         if serializer.is_valid():
-            serializer.save()
-            # TODO: trigger actual monitoring here
+            # serializer.save() # TODO: comment this back in
+            DjRosApiAppConfig.RC.start_monitoring(serializer.data)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
