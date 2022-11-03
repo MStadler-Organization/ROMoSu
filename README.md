@@ -6,6 +6,8 @@ Setup PC and ROS Noetic Ninjemys according to ROBOTIS eManual: https://emanual.r
 
 Setup Gazebo Simulation for ROS Noetic Ninjemys according to ROBOTIS eManual: https://emanual.robotis.com/docs/en/platform/turtlebot3/simulation/#gazebo-simulation
 
+NodeJS Version with AngularCLI support is required (e.g., 16.10)
+
 Run npm install in Frontend.
 
 Install prerequisites for backend specified in [Backend Readme](https://github.com/MStadler-Organization/ros-mon-ma/tree/main/backend)
