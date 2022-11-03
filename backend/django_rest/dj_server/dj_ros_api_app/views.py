@@ -10,11 +10,12 @@ from rest_framework.decorators import api_view
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 
+from dj_server.dj_ros_api_app.RuntimeMonitoringStarter import RuntimeMonitoringStarter
 from dj_server.dj_ros_api_app.apps import DjRosApiAppConfig
 from dj_server.dj_ros_api_app.models import SuMType, MonitoringConfig, ActiveRuntimeConfig
 from dj_server.dj_ros_api_app.serializers import SuMTypeSerializer, MonitoringConfigSerializer, \
     ActiveRuntimeConfigSerializer
-from dj_server.dj_ros_api_app.utils import DefaultEncoder
+from dj_server.dj_ros_api_app.utils import DefaultEncoder, NotFoundError
 
 
 @csrf_exempt
@@ -142,10 +143,7 @@ def runtime_config(request):
         # check form of request data and save it
         if serializer.is_valid():
             # serializer.save() # TODO: comment this back in
-            DjRosApiAppConfig.RC.start_monitoring(serializer.data)
+            rt_starter = RuntimeMonitoringStarter()
+            rt_starter.start_monitoring(serializer.data)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-class NotFoundError(Exception):
-    pass

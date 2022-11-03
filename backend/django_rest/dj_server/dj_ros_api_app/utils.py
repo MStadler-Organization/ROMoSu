@@ -2,6 +2,24 @@ import logging
 from json import JSONEncoder
 
 
+class NotFoundError(Exception):
+    """A custom error if nothing is found in the DB"""
+    pass
+
+
+def singleton(class_):
+    """Introduces a singleton decorator"""
+
+    instances = {}
+
+    def getinstance(*args, **kwargs):
+        if class_ not in instances:
+            instances[class_] = class_(*args, **kwargs)
+        return instances[class_]
+
+    return getinstance
+
+
 class DefaultEncoder(JSONEncoder):
     """Helps to serialize complex object dictionaries to json"""
 
