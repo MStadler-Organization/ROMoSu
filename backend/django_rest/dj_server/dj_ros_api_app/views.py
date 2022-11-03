@@ -144,6 +144,6 @@ def runtime_config(request):
         if serializer.is_valid():
             # serializer.save() # TODO: comment this back in
             rt_starter = RuntimeMonitoringStarter()
-            rt_starter.start_monitoring(serializer.data)
+            rt_starter.init_monitoring(serializer.data)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

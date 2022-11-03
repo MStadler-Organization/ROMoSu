@@ -1,5 +1,13 @@
+from django.db.models import QuerySet
+
 from dj_server.dj_ros_api_app.models import MonitoringConfig
 from dj_server.dj_ros_api_app.utils import NotFoundError
+
+
+def is_valid_single_queryset(queryset_to_test: QuerySet):
+    """Checks if the queryset contains only a single result"""
+    if queryset_to_test.count() != 1: return False
+    return True
 
 
 class InternalDBConnector:
@@ -11,6 +19,6 @@ class InternalDBConnector:
         """
 
         result = MonitoringConfig.objects.filter(id=id_to_find)
-        if not result:
+        if not result or not is_valid_single_queryset(result):
             raise NotFoundError
         return result
