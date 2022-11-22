@@ -2,7 +2,7 @@ import logging
 
 import roslibpy
 
-from dj_server.dj_ros_api_app.utils import get_base_topic_string, get_sub_topic_string, singleton
+from dj_server.dj_ros_api_app.helpers.utils import get_base_topic_string, get_sub_topic_string, singleton
 
 
 class TopicInfo():

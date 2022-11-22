@@ -1,7 +1,7 @@
 from django.db.models import QuerySet
 
+from dj_server.dj_ros_api_app.helpers.utils import NotFoundError
 from dj_server.dj_ros_api_app.models import MonitoringConfig
-from dj_server.dj_ros_api_app.utils import NotFoundError
 
 
 def is_valid_single_queryset(queryset_to_test: QuerySet):

@@ -1,13 +1,15 @@
 import threading
 
-from dj_server.dj_ros_api_app.InternalDBConnector import InternalDBConnector
+from dj_server.dj_ros_api_app.helpers.InternalDBConnector import InternalDBConnector
+from dj_server.dj_ros_api_app.helpers.utils import singleton
 from dj_server.dj_ros_api_app.models import MonitoringConfig
-from dj_server.dj_ros_api_app.utils import singleton
+from dj_server.dj_ros_api_app.ros.RosConnector import RosConnector
 
 
 def start_rt_monitoring(mon_config: MonitoringConfig):
-    mon_config.sum_type_id
-    pass
+    print(mon_config)
+    rc = RosConnector()
+    print(rc.get_sums())
 
 
 @singleton

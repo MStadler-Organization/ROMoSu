@@ -10,12 +10,12 @@ from rest_framework.decorators import api_view
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 
-from dj_server.dj_ros_api_app.RuntimeMonitoringStarter import RuntimeMonitoringStarter
-from dj_server.dj_ros_api_app.apps import DjRosApiAppConfig
+from dj_server.dj_ros_api_app.helpers.utils import DefaultEncoder, NotFoundError
 from dj_server.dj_ros_api_app.models import SuMType, MonitoringConfig, ActiveRuntimeConfig
+from dj_server.dj_ros_api_app.ros.RosConnector import RosConnector
+from dj_server.dj_ros_api_app.ros.RuntimeMonitoringStarter import RuntimeMonitoringStarter
 from dj_server.dj_ros_api_app.serializers import SuMTypeSerializer, MonitoringConfigSerializer, \
     ActiveRuntimeConfigSerializer
-from dj_server.dj_ros_api_app.utils import DefaultEncoder, NotFoundError
 
 
 @csrf_exempt
@@ -25,7 +25,8 @@ def possible_sums(request):
     """
     if request.method == 'GET':
         # get all possible SuMs
-        sums = DjRosApiAppConfig.RC.get_sums()
+        rc = RosConnector()
+        sums = rc.get_sums()
         return JsonResponse(sums, encoder=DefaultEncoder, safe=False)
 
 
@@ -43,7 +44,8 @@ def properties_for_sum(request):
             return Response('Invalid params, check documentation!', status=status.HTTP_400_BAD_REQUEST)
 
         # get properties for given SuM
-        props = DjRosApiAppConfig.RC.get_properties_for_sum(p_sum)
+        rc = RosConnector()
+        props = rc.get_properties_for_sum(p_sum)
 
         return JsonResponse(props, encoder=DefaultEncoder, safe=False)
 
