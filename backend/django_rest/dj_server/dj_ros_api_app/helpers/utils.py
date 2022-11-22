@@ -1,5 +1,7 @@
+import json
 import logging
 from json import JSONEncoder
+from types import SimpleNamespace
 
 
 class NotFoundError(Exception):
@@ -50,3 +52,36 @@ def get_sub_topic_string(p_topic_string):
 
     # substring from second
     return p_topic_string[p_topic_string[1:].index('/') + 2:]
+
+
+def setup():
+    """Basic configs for the application """
+    logging.basicConfig(
+        format='%(asctime)s %(levelname)-8s %(message)s',
+        level=logging.INFO,
+        datefmt='%Y-%m-%d %H:%M:%S %Z'
+    )
+
+
+def convert_boolean_str(object_with_string_booleans):
+    # convert to boolean
+    object_with_string_booleans.isExpandable = object_with_string_booleans.isExpandable == 'True'
+    object_with_string_booleans.isChecked = object_with_string_booleans.isChecked == 'True'
+
+    # call recursive for children if there are any
+    if hasattr(object_with_string_booleans, 'children') and len(object_with_string_booleans.children) > 0:
+        for child in object_with_string_booleans.children:
+            convert_boolean_str(child)
+
+
+def convert_to_json(config: str):
+    """Converts a js-config object to a valid json and returns a dictionary"""
+
+    config = config.replace('True', '"True"')
+    config = config.replace('False', '"False"')
+    config = config.replace("'", '"')
+    config = json.loads(config, object_hook=lambda d: SimpleNamespace(**d))
+    for entry in config:
+        convert_boolean_str(entry)
+
+    return config
