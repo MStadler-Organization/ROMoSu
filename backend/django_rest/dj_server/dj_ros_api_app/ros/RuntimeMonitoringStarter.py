@@ -124,8 +124,8 @@ def forward_message(topic: TopicInfo, seconds_to_wait: float, save_type: str):
 
     mqtt_topic = get_mqtt_topic(topic.in_topic, save_type)
 
-    while (True):
-        # TODO: repalce the True here with the event that kills this thread later on when monitoring is stopped
+    while True:
+        # TODO: replace the True here with the event that kills this thread later on when monitoring is stopped
         data_to_publish = get_current_ros_data(topic)
         mqtt_forwarder.publish(mqtt_topic, ros_msg2json(data_to_publish))
         time.sleep(seconds_to_wait)
