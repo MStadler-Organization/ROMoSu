@@ -13,6 +13,8 @@ from dj_server.dj_ros_api_app.models import MonitoringConfig
 from dj_server.dj_ros_api_app.ros.RosConnector import RosConnector
 
 global ros_mon_data
+COMPLETE_SAVE_TYPE = 'Complete (but complex)'
+SIMPLE_SAVE_TYPE = 'Simple (but flattened)'
 
 
 def get_list_of_checked_topics(topic_config_obj: RosTopicConfigObj, name_prefix: str):
@@ -93,15 +95,39 @@ def get_current_ros_data(topic: TopicInfo):
     return curr_tree_node
 
 
-def forward_message(topic: TopicInfo, seconds_to_wait: float):
+def get_mqtt_topic(topic: str, save_type: str):
+    """Returns the mqtt topic based on the save type"""
+
+    if save_type == COMPLETE_SAVE_TYPE:
+        # use the complete topic hierarchy
+        return topic
+    elif save_type == SIMPLE_SAVE_TYPE:
+        # use the flattened topic name
+        # remove preceding slash
+        hierarchy_list = topic.split('/')
+        simple_topic = f'{hierarchy_list[0]}/{hierarchy_list[1]}/'
+        if len(hierarchy_list) > 2:
+            # more subtopics to come, use '#' as delimiter
+            for idx in range(2, len(hierarchy_list)):
+                simple_topic = f'{simple_topic}${hierarchy_list[idx]}'
+
+        # remove first occurrence of $ as it would else be "/$"
+        simple_topic = simple_topic.replace('$', '', 1)
+
+        return '/' + simple_topic
+
+
+def forward_message(topic: TopicInfo, seconds_to_wait: float, save_type: str):
     """Forwards the topic via mqtt in a given frequency"""
 
     mqtt_forwarder: MQTTForwarder = MQTTForwarder()
+
+    mqtt_topic = get_mqtt_topic(topic.in_topic, save_type)
+
     while (True):
         # TODO: repalce the True here with the event that kills this thread later on when monitoring is stopped
-        # TODO: hier entweder subtopics oder dann als flache Hierarchie indem man die slashes ab dem base-topic durch ein anderes symbol ersetzt
         data_to_publish = get_current_ros_data(topic)
-        mqtt_forwarder.publish(topic.in_topic, ros_msg2json(data_to_publish))
+        mqtt_forwarder.publish(mqtt_topic, ros_msg2json(data_to_publish))
         time.sleep(seconds_to_wait)
 
 
@@ -176,7 +202,7 @@ def start_rt_monitoring(mon_config: MonitoringConfig, rt_starter: RuntimeStarter
     # start a new thread for the every topic to forward them accordingly
     for topic in topic_list:
         fq = get_frequency_for_topic(topic, frequency_list, sec_lvl_topics_of_config)
-        threading.Timer(1, forward_message, [topic, fq]).start()
+        threading.Timer(1, forward_message, [topic, fq, mon_config.save_type]).start()
 
 
 @singleton
