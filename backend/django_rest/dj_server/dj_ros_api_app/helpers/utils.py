@@ -3,6 +3,8 @@ import logging
 from json import JSONEncoder
 from types import SimpleNamespace
 
+import yaml
+
 
 class NotFoundError(Exception):
     """A custom error if nothing is found in the DB"""
@@ -85,3 +87,9 @@ def convert_to_json(config: str):
         convert_boolean_str(entry)
 
     return config
+
+
+def ros_msg2json(msg):
+    """Convert a ROS message to JSON format"""
+    y = yaml.safe_load(str(msg))
+    return json.dumps(y, indent=4)

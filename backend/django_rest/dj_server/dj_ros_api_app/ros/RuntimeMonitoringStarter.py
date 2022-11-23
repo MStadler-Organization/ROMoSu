@@ -1,5 +1,6 @@
 import logging
 import threading
+import time
 from typing import List
 
 import roslibpy
@@ -7,7 +8,7 @@ import roslibpy
 from dj_server.dj_ros_api_app.helpers.InternalDBConnector import InternalDBConnector
 from dj_server.dj_ros_api_app.helpers.mqtt_forwarder import MQTTForwarder
 from dj_server.dj_ros_api_app.helpers.object_classes import RuntimeStarterRESTObject, RosTopicConfigObj, TopicInfo
-from dj_server.dj_ros_api_app.helpers.utils import singleton, convert_to_json
+from dj_server.dj_ros_api_app.helpers.utils import singleton, convert_to_json, ros_msg2json
 from dj_server.dj_ros_api_app.models import MonitoringConfig
 from dj_server.dj_ros_api_app.ros.RosConnector import RosConnector
 
@@ -35,6 +36,7 @@ def get_list_of_checked_topics(topic_config_obj: RosTopicConfigObj, name_prefix:
 
 
 def get_selected_topic_strings(conf_data: str, initial_prefix: str):
+    """Parses a monitoring configuration for selected topics"""
     # convert string to dictionary
     config_as_dict: List[RosTopicConfigObj] = convert_to_json(conf_data)
 
@@ -47,22 +49,22 @@ def get_selected_topic_strings(conf_data: str, initial_prefix: str):
 
 
 def update_ros_data(message, base_topic: str, sub_topic: TopicInfo):
+    """The callback function of the ros listener, updates the global ros_mon_data variable"""
+
     global ros_mon_data
-    base_topic_data = getattr(ros_mon_data, base_topic)
-
-    setattr(getattr(getattr(ros_mon_data, base_topic), sub_topic.in_topic[:-1]), )
-    # TODO: update the data in ros_mon_data in the correct location in tree
+    ros_mon_data[base_topic][sub_topic.in_topic] = message
 
 
-def monitor_topic(base_topic: str, sub_topic_list: [TopicInfo]):
+def monitor_topic(base_topic: str, sub_topic: TopicInfo):
+    """Starts a ROS topic subscription on a given topic"""
     ros_connector: RosConnector = RosConnector()
 
-    for sub_topic in sub_topic_list:
-        # create entry in global var for subtopic
-        setattr(getattr(ros_mon_data, base_topic), sub_topic.in_topic[:-1], [])
-        # create listener and callback if new data is received
-        listener = roslibpy.Topic(ros_connector.ROS_CLIENT, sub_topic_list.in_topic, sub_topic_list.type)
-        listener.subscribe(lambda message: update_ros_data(message['data'], base_topic, sub_topic))
+    # create entry in global var for subtopic
+    ros_mon_data[base_topic][sub_topic.in_topic] = {}
+    # create listener and callback if new data is received
+    listener = roslibpy.Topic(ros_connector.ROS_CLIENT, base_topic + '/' + sub_topic.in_topic, sub_topic.type)
+    listener.subscribe(lambda message: update_ros_data(message, base_topic, sub_topic))
+    logging.info(f'Created subscriber on {sub_topic.in_topic}')
 
     while True:
         # loop for the listener
@@ -70,7 +72,80 @@ def monitor_topic(base_topic: str, sub_topic_list: [TopicInfo]):
         pass
 
 
+def get_current_ros_data(topic: TopicInfo):
+    """Gets the data of the global cached ros_mon_data var for a given (sub-)topic"""
+    global ros_mon_data
+
+    hierarchy = topic.in_topic.split('/')
+    curr_tree_node = ros_mon_data
+    for step in hierarchy:
+        is_successful_flag = False
+        while not is_successful_flag:
+            try:
+                curr_tree_node = curr_tree_node[step]
+                is_successful_flag = True
+            except KeyError:
+                time.sleep(3)
+                logging.warning(f'Could not access topic: {topic.in_topic}')
+                print(ros_mon_data)
+                print('\n\n\n')
+
+    return curr_tree_node
+
+
+def forward_message(topic: TopicInfo, seconds_to_wait):
+    """Forwards the topic via mqtt in a given frequency"""
+
+    mqtt_forwarder: MQTTForwarder = MQTTForwarder()
+    while (True):
+        # TODO: repalce the True here with the event that kills this thread later on when monitoring is stopped
+        # TODO: hier entweder subtopics oder dann als flache Hierarchie indem man die slashes ab dem base-topic durch ein anderes symbol ersetzt
+        data_to_publish = get_current_ros_data(topic)
+        mqtt_forwarder.publish(topic.in_topic, ros_msg2json(data_to_publish))
+        time.sleep(seconds_to_wait)
+
+
+def get_frequencies(frequencies: str):
+    """Converts the string of frequencies to an integer list"""
+    im_result = frequencies.replace('[', '')
+    im_result = im_result.replace(']', '')
+    im_result = im_result.replace(' ', '')
+    im_result = im_result.split(',')
+    result = []
+
+    for entry in im_result:
+        result.append(int(entry))
+
+    return result
+
+
+def get_sec_lvl_topics(config: str):
+    """Extracts the second level topics from a string monitoring config"""
+
+    conf_as_dict = convert_to_json(config)
+    result = []
+    for sec_lvl_topic in conf_as_dict:
+        result.append(sec_lvl_topic)
+    return result
+
+
+def get_frequency_for_topic(topic: TopicInfo, frequency_list, sec_lvl_topics_of_config):
+    """Returns the specified frequency for a topic, frequency array of ints and a sec-level monitoring config list"""
+    curr_idx = 0
+    topic_hierarchy = topic.in_topic.split('/')
+    for sec_lvl_topic in sec_lvl_topics_of_config:
+        if sec_lvl_topic.name == topic_hierarchy[1]:
+            # found the right topic in the config, this is the index in the frequency list
+            return frequency_list[curr_idx]
+        else:
+            curr_idx = curr_idx + 1
+    logging.error(f'Found no frequency for topic={topic.in_topic}')
+    return -1
+
+
 def start_rt_monitoring(mon_config: MonitoringConfig, rt_starter: RuntimeStarterRESTObject):
+    """Starts the monitoring for a given monitoring config"""
+
     global ros_mon_data
     rc = RosConnector()
 
@@ -84,24 +159,25 @@ def start_rt_monitoring(mon_config: MonitoringConfig, rt_starter: RuntimeStarter
     topic_list = get_selected_topic_strings(mon_config.ecore_data, rt_starter.prefix)
 
     # start monitoring of the base topic if it is not already monitored
-    simple_base_topic_name = rt_starter.prefix[:-1]
-    if not hasattr(ros_mon_data, simple_base_topic_name):
+    simple_base_topic_name = rt_starter.prefix
+    if simple_base_topic_name not in ros_mon_data:
         # create new placeholder attribute in global var
-        setattr(ros_mon_data, simple_base_topic_name, [])
+        ros_mon_data[simple_base_topic_name] = {}
         # get the subtopics
         sub_topics = rc.get_properties_for_sum(simple_base_topic_name)
         # monitor the topics
-        threading.Timer(1, monitor_topic, [simple_base_topic_name, sub_topics]).start()
+        for topic in sub_topics:
+            threading.Timer(1, monitor_topic, [simple_base_topic_name, topic]).start()
 
+    # transform frequencies
+    frequency_list = get_frequencies(mon_config.frequencies)
+    # get the second level topics from the config to match the frequencies
+    sec_lvl_topics_of_config = get_sec_lvl_topics(mon_config.ecore_data)
     # start a new thread for the every topic to forward them accordingly
-    for idx, topic in enumerate(topic_list):
-        # TODO change the method call here to a mqtt publish loop
-        # threading.Timer(1, monitor_topic, [idx, topic, mon_config]).start()
-        pass
-
-    mqtt_forwarder: MQTTForwarder = MQTTForwarder()
-    mqtt_forwarder.publish('a_simple_topic', 'testmessage')
-    # TODO: forward messages in specified frequency and with required simplified or complex path (as it is or truncated to base topic)
+    print(frequency_list)
+    for topic in topic_list:
+        fq = get_frequency_for_topic(topic, frequency_list, sec_lvl_topics_of_config)
+        threading.Timer(1, forward_message, [topic, fq]).start()
 
 
 @singleton
@@ -119,5 +195,9 @@ class RuntimeMonitoringStarter:
         threading.Timer(1, start_rt_monitoring, [mon_config_qs[0], rt_starter_obj]).start()
 
     def __init__(self):
+        # instantiate global var
+        global ros_mon_data
+        ros_mon_data = {}
+
         self.active_rt_list = []
         self.db_connector = InternalDBConnector()

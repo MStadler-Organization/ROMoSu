@@ -5,7 +5,7 @@ class TopicInfo:
         self.type_info = type_info
 
     def __str__(self) -> str:
-        return f'Name={self.in_topic}, Type={self.type}, DataTypeInfo={self.type_info}'
+        return f'Name={self.in_topic}, Type={self.type}'
 
 
 class RuntimeStarterRESTObject:
