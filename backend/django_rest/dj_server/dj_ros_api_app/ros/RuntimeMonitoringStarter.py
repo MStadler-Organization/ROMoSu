@@ -93,7 +93,7 @@ def get_current_ros_data(topic: TopicInfo):
     return curr_tree_node
 
 
-def forward_message(topic: TopicInfo, seconds_to_wait):
+def forward_message(topic: TopicInfo, seconds_to_wait: float):
     """Forwards the topic via mqtt in a given frequency"""
 
     mqtt_forwarder: MQTTForwarder = MQTTForwarder()
@@ -114,7 +114,7 @@ def get_frequencies(frequencies: str):
     result = []
 
     for entry in im_result:
-        result.append(int(entry))
+        result.append(float(entry))
 
     return result
 
@@ -174,7 +174,6 @@ def start_rt_monitoring(mon_config: MonitoringConfig, rt_starter: RuntimeStarter
     # get the second level topics from the config to match the frequencies
     sec_lvl_topics_of_config = get_sec_lvl_topics(mon_config.ecore_data)
     # start a new thread for the every topic to forward them accordingly
-    print(frequency_list)
     for topic in topic_list:
         fq = get_frequency_for_topic(topic, frequency_list, sec_lvl_topics_of_config)
         threading.Timer(1, forward_message, [topic, fq]).start()
