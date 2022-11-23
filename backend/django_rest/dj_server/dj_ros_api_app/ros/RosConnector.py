@@ -2,16 +2,11 @@ import logging
 
 import roslibpy
 
-from dj_server.dj_ros_api_app.utils import get_base_topic_string, get_sub_topic_string
+from dj_server.dj_ros_api_app.helpers.object_classes import TopicInfo
+from dj_server.dj_ros_api_app.helpers.utils import get_base_topic_string, get_sub_topic_string, singleton
 
 
-class TopicInfo():
-    def __init__(self, in_topic, type, type_info):
-        self.in_topic = in_topic
-        self.type = type
-        self.type_info = type_info
-
-
+@singleton
 class RosConnector:
     """Central ROS connector class, connects to the ROS-bridge"""
 

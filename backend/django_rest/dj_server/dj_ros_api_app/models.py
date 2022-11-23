@@ -30,7 +30,7 @@ class MonitoringConfig(models.Model):
     ecore_data = models.TextField()
 
     def __str__(self):
-        return self.name
+        return f'name={self.name}, save_type={self.save_type}, sum_type_id={self.sum_type_id}, frequencies={self.frequencies}, ecore_data=...'
 
     def toJSON(self):
         return json.dumps(self, default=lambda o: o.__dict__,

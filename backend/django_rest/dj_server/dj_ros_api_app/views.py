@@ -10,11 +10,12 @@ from rest_framework.decorators import api_view
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 
-from dj_server.dj_ros_api_app.apps import DjRosApiAppConfig
+from dj_server.dj_ros_api_app.helpers.utils import DefaultEncoder, NotFoundError
 from dj_server.dj_ros_api_app.models import SuMType, MonitoringConfig, ActiveRuntimeConfig
+from dj_server.dj_ros_api_app.ros.RosConnector import RosConnector
+from dj_server.dj_ros_api_app.ros.RuntimeMonitoringStarter import RuntimeMonitoringStarter
 from dj_server.dj_ros_api_app.serializers import SuMTypeSerializer, MonitoringConfigSerializer, \
     ActiveRuntimeConfigSerializer
-from dj_server.dj_ros_api_app.utils import DefaultEncoder
 
 
 @csrf_exempt
@@ -24,7 +25,8 @@ def possible_sums(request):
     """
     if request.method == 'GET':
         # get all possible SuMs
-        sums = DjRosApiAppConfig.RC.get_sums()
+        rc = RosConnector()
+        sums = rc.get_sums()
         return JsonResponse(sums, encoder=DefaultEncoder, safe=False)
 
 
@@ -42,7 +44,8 @@ def properties_for_sum(request):
             return Response('Invalid params, check documentation!', status=status.HTTP_400_BAD_REQUEST)
 
         # get properties for given SuM
-        props = DjRosApiAppConfig.RC.get_properties_for_sum(p_sum)
+        rc = RosConnector()
+        props = rc.get_properties_for_sum(p_sum)
 
         return JsonResponse(props, encoder=DefaultEncoder, safe=False)
 
@@ -141,11 +144,8 @@ def runtime_config(request):
         serializer = ActiveRuntimeConfigSerializer(data=request_config_data['pRTConfig'])
         # check form of request data and save it
         if serializer.is_valid():
-            serializer.save()
-            # TODO: trigger actual monitoring here
+            # serializer.save() # TODO: comment this back in
+            rt_starter = RuntimeMonitoringStarter()
+            rt_starter.init_monitoring(serializer.data)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-class NotFoundError(Exception):
-    pass
