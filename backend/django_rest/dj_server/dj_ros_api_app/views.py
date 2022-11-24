@@ -84,7 +84,7 @@ def sum_types(request):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-@api_view(['GET', 'POST', 'DELETE', 'UPDATE'])
+@api_view(['GET', 'POST', 'DELETE', 'PATCH'])
 def mon_config(request):
     """Create and get new config files"""
     if request.method == 'GET':
@@ -139,6 +139,18 @@ def mon_config(request):
         serializer = MonitoringConfigSerializer(config_to_delete, many=False)
         config_to_delete.delete()
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+    if request.method == 'PATCH':
+        config_to_patch = MonitoringConfig.objects.get(id=request.query_params.get('id'))
+
+        body_unicode = request.body.decode('utf-8')
+        body = json.loads(body_unicode)
+        serializer = MonitoringConfigSerializer(config_to_patch, data=body,
+                                                partial=True)  # set partial=True to update a data partially
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
 
     return Response('Invalid params!', status=status.HTTP_400_BAD_REQUEST)
 

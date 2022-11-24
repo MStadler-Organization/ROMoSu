@@ -71,7 +71,11 @@ export class ConfigEditorComponent implements OnInit {
   onSubmit() {
     if (this.selectedActionType === 0) {
       // save
-      // todo: call update service
+      this.showProgressBar = true
+      this.configEditorService.patchConfig(this.editConfigFormGroup.getRawValue()).subscribe((response) => {
+        this.handleSaveConfigResponse(response.status)
+        this.refreshTable()
+      })
     } else if (this.selectedActionType === 1) {
       // discard
       // do nothing, just reset vars
@@ -80,6 +84,7 @@ export class ConfigEditorComponent implements OnInit {
       this.showProgressBar = true
       this.configEditorService.deleteConfig(this.editConfigFormGroup.getRawValue().id).subscribe((response) => {
         this.handleDelConfigResponse(response.status)
+        this.refreshTable()
       })
     } else {
       // error
@@ -100,7 +105,7 @@ export class ConfigEditorComponent implements OnInit {
   }
 
   /**
-   * Called after a config delete REST response from server. Shows a dialog depending on the status code
+   * Called after a config delete REST response from server. Shows a dialog depending on the status code.
    * @param statusCode the status code of the response as integer
    * @private
    */
@@ -123,5 +128,43 @@ export class ConfigEditorComponent implements OnInit {
       });
     }
     this.showProgressBar = false
+  }
+
+  /**
+   * Called after a config save REST response from server. Shows a dialog depending on the status code.
+   * @param statuscode the status code of the response as integer
+   * @private
+   */
+  private handleSaveConfigResponse(statuscode: number) {
+    if (statuscode === 201) {
+      this.dialog.open(CustomDialogComponent, {
+        data: {
+          type: 1, // create success
+          message: 'Successfully saved monitoring config!'
+        },
+        autoFocus: false // disable default focus on button
+      });
+    } else {
+      this.dialog.open(CustomDialogComponent, {
+        data: {
+          type: 2, // create success
+          message: 'Unable to save monitoring config!'
+        },
+        autoFocus: false // disable default focus on button
+      });
+    }
+    this.showProgressBar = false
+  }
+
+  /**
+   * Refreshes the table
+   * @private
+   */
+  private refreshTable() {
+    this.showProgressBar = true
+    this.configEditorService.getAllConfigs().subscribe((configs: ConfigFileData[]) => {
+      this.dataSource = configs
+      this.showProgressBar = false
+    })
   }
 }

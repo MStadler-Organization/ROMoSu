@@ -29,4 +29,10 @@ export class ConfigEditorService {
   }
 
 
+  /**
+   * REST call to server to patch a config
+   */
+  patchConfig(configObj: any): Observable<HttpResponse<ConfigFileData>> {
+    return this.http.patch<ConfigFileData>(this.baseApiURL + `config-file/?id=${configObj.id}`, configObj, {observe: 'response'});
+  }
 }
