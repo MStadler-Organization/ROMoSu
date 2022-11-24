@@ -30,6 +30,7 @@ export interface ConfigFileData {
 }
 
 export interface RTConfig {
+  id?: number; // only when already saved
   prefix: string;
   sum_type_id: number;
   config_id: number;

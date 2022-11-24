@@ -168,7 +168,7 @@ def runtime_config(request):
         serializer = ActiveRuntimeConfigSerializer(data=request_config_data['pRTConfig'])
         # check form of request data and save it
         if serializer.is_valid():
-            # serializer.save() # TODO: comment this back in
+            serializer.save()
             rt_starter = RuntimeMonitoringStarter()
             rt_starter.init_monitoring(serializer.data)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
