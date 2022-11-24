@@ -28,7 +28,10 @@ def get_list_of_checked_topics(topic_config_obj: RosTopicConfigObj, name_prefix:
     if topic_config_obj.isChecked:
         # topic is selected -> add it to the list (subtopics will be covered automatically)
         result_topic_list.append(TopicInfo(complete_name, topic_config_obj.dataType, None))
-
+        # check subtopics for selection
+        if hasattr(topic_config_obj, 'children') and len(topic_config_obj.children) > 0:
+            for child_topic in topic_config_obj.children:
+                result_topic_list.extend(get_list_of_checked_topics(child_topic, complete_name))
     else:
         # topic is not selected, check if it has children and if any of the children are selected
         if hasattr(topic_config_obj, 'children') and len(topic_config_obj.children) > 0:
@@ -104,7 +107,6 @@ def get_mqtt_topic(topic: str, save_type: str):
         return topic
     elif save_type == SIMPLE_SAVE_TYPE:
         # use the flattened topic name
-        # remove preceding slash
         hierarchy_list = topic.split('/')
         simple_topic = f'{hierarchy_list[0]}/{hierarchy_list[1]}/'
         if len(hierarchy_list) > 2:
@@ -115,7 +117,7 @@ def get_mqtt_topic(topic: str, save_type: str):
         # remove first occurrence of $ as it would else be "/$"
         simple_topic = simple_topic.replace('$', '', 1)
 
-        return '/' + simple_topic
+        return simple_topic
 
 
 def forward_message(topic: TopicInfo, seconds_to_wait: float, save_type: str):

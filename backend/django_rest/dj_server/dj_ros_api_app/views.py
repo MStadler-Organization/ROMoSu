@@ -151,7 +151,6 @@ def mon_config(request):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-
     return Response('Invalid params!', status=status.HTTP_400_BAD_REQUEST)
 
 
