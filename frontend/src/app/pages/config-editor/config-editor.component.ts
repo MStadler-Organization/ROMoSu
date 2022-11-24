@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {ConfigEditorService} from "./config-editor.service";
 import {ConfigFileData} from "../../shared/models/interfaces";
 import {FormControl, FormGroup} from "@angular/forms";
+import {CustomDialogComponent} from "../../shared/components/custom-dialog/custom-dialog.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-config-editor',
@@ -25,7 +27,7 @@ export class ConfigEditorComponent implements OnInit {
   selectedActionType: number = -1
 
 
-  constructor(public configEditorService: ConfigEditorService) {
+  constructor(public configEditorService: ConfigEditorService, public dialog: MatDialog) {
   }
 
   /**
@@ -67,7 +69,6 @@ export class ConfigEditorComponent implements OnInit {
    * If form is submitted
    */
   onSubmit() {
-    console.log(this.editConfigFormGroup.value);
     if (this.selectedActionType === 0) {
       // save
       // todo: call update service
@@ -76,7 +77,10 @@ export class ConfigEditorComponent implements OnInit {
       // do nothing, just reset vars
     } else if (this.selectedActionType === 2) {
       // delete
-      // todo: call delete servcie
+      this.showProgressBar = true
+      this.configEditorService.deleteConfig(this.editConfigFormGroup.getRawValue().id).subscribe((response) => {
+        this.handleDelConfigResponse(response.status)
+      })
     } else {
       // error
       console.error(`Invalid action type: ${this.selectedActionType}`)
@@ -93,5 +97,31 @@ export class ConfigEditorComponent implements OnInit {
    */
   onActionBtnClicked(actionType: number) {
     this.selectedActionType = actionType
+  }
+
+  /**
+   * Called after a config delete REST response from server. Shows a dialog depending on the status code
+   * @param statusCode the status code of the response as integer
+   * @private
+   */
+  private handleDelConfigResponse(statusCode: number) {
+    if (statusCode === 200) {
+      this.dialog.open(CustomDialogComponent, {
+        data: {
+          type: 1, // create success
+          message: 'Successfully deleted monitoring config!'
+        },
+        autoFocus: false // disable default focus on button
+      });
+    } else {
+      this.dialog.open(CustomDialogComponent, {
+        data: {
+          type: 2, // create success
+          message: 'Unable to delete monitoring config!'
+        },
+        autoFocus: false // disable default focus on button
+      });
+    }
+    this.showProgressBar = false
   }
 }

@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpResponse} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {ConfigFileData} from "../../shared/models/interfaces";
 
@@ -19,6 +19,13 @@ export class ConfigEditorService {
    */
   getAllConfigs(): Observable<ConfigFileData[]> {
     return this.http.get<ConfigFileData[]>(this.baseApiURL + "config-file/");
+  }
+
+  /**
+   * REST call to server to delete a config
+   */
+  deleteConfig(pId: number): Observable<HttpResponse<ConfigFileData>> {
+    return this.http.delete<ConfigFileData>(this.baseApiURL + `config-file/?id=${pId}`, {observe: 'response'});
   }
 
 

@@ -84,8 +84,8 @@ def sum_types(request):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-@api_view(['GET', 'POST'])
-def save_config(request):
+@api_view(['GET', 'POST', 'DELETE', 'UPDATE'])
+def mon_config(request):
     """Create and get new config files"""
     if request.method == 'GET':
         if request.query_params.get('sum_type'):
@@ -127,6 +127,19 @@ def save_config(request):
             temp_obj.save()
 
             return Response(data='Successfully created new config!', status=status.HTTP_201_CREATED)
+
+    if request.method == 'DELETE':
+        # delete the config
+        # check if object exists
+        try:
+            config_to_delete = MonitoringConfig.objects.get(id=request.query_params.get('id'))
+        except MonitoringConfig.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        # delete it
+        serializer = MonitoringConfigSerializer(config_to_delete, many=False)
+        config_to_delete.delete()
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
     return Response('Invalid params!', status=status.HTTP_400_BAD_REQUEST)
 
 
