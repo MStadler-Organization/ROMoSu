@@ -88,9 +88,19 @@
         <textarea cdkAutosizeMaxRows="30" cdkTextareaAutosize class="topic-selection-textarea"
                   formControlName="ecore_data" matInput placeholder="Topic Selection"></textarea>
       </mat-form-field>
-      <button [disabled]="!editConfigFormGroup.valid" class="add-button" mat-raised-button type="submit">
-        <i class="material-icons-outlined">save</i><span class="save-button-label">Save</span>
-      </button>
+      <div class="action-btn-bar">
+        <button (click)="onActionBtnClicked(0)" [disabled]="!editConfigFormGroup.valid" class="action-button add-btn"
+                mat-raised-button
+                type="submit">
+          <i class="material-icons-outlined">save</i><span class="button-label">Save</span>
+        </button>
+        <button (click)="onActionBtnClicked(1)" class="action-button disc-btn" mat-raised-button type="submit">
+          <i class="material-icons-outlined">undo</i><span class="button-label">Discard</span>
+        </button>
+        <button (click)="onActionBtnClicked(2)" class="action-button" color="warn" mat-raised-button type="submit">
+          <i class="material-icons-outlined">delete</i><span class="button-label">Delete</span>
+        </button>
+      </div>
     </form>
   </div>
 </ng-template>

@@ -22,6 +22,7 @@ export class ConfigEditorComponent implements OnInit {
     sum_type_id: new FormControl(''),
     ecore_data: new FormControl(''),
   })
+  selectedActionType: number = -1
 
 
   constructor(public configEditorService: ConfigEditorService) {
@@ -60,7 +61,6 @@ export class ConfigEditorComponent implements OnInit {
    */
   isNoConfigSelected() {
     return Object.keys(this.selectedConfig).length === 0
-    //  TODO: reset this
   }
 
   /**
@@ -68,5 +68,30 @@ export class ConfigEditorComponent implements OnInit {
    */
   onSubmit() {
     console.log(this.editConfigFormGroup.value);
+    if (this.selectedActionType === 0) {
+      // save
+      // todo: call update service
+    } else if (this.selectedActionType === 1) {
+      // discard
+      // do nothing, just reset vars
+    } else if (this.selectedActionType === 2) {
+      // delete
+      // todo: call delete servcie
+    } else {
+      // error
+      console.error(`Invalid action type: ${this.selectedActionType}`)
+    }
+
+    // reset vars
+    this.selectedActionType = -1
+    this.selectedConfig = <ConfigFileData>{}
+  }
+
+  /**
+   * Caleld when an action button is clicked
+   * @param actionType The action type as integer 0=save, 1=discard, 2=delete
+   */
+  onActionBtnClicked(actionType: number) {
+    this.selectedActionType = actionType
   }
 }
