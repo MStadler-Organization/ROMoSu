@@ -10,7 +10,7 @@ from rest_framework.decorators import api_view
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 
-from dj_server.dj_ros_api_app.helpers.utils import DefaultEncoder, NotFoundError
+from dj_server.dj_ros_api_app.helpers.utils import DefaultEncoder, NotFoundError, convert_to_json
 from dj_server.dj_ros_api_app.models import SuMType, MonitoringConfig, ActiveRuntimeConfig
 from dj_server.dj_ros_api_app.ros.RosConnector import RosConnector
 from dj_server.dj_ros_api_app.ros.RuntimeMonitoringStarter import RuntimeMonitoringStarter
@@ -123,7 +123,7 @@ def save_config(request):
             temp_obj.save_type = body['configFileData']['save_type']
             temp_obj.sum_type_id = body['configFileData']['sum_type_id']
             temp_obj.frequencies = str(body['configFileData']['frequencies'])
-            temp_obj.ecore_data = str(body['configFileData']['ecore_data'])
+            temp_obj.ecore_data = convert_to_json(str(body['configFileData']['ecore_data']))
             temp_obj.save()
 
             return Response(data='Successfully created new config!', status=status.HTTP_201_CREATED)
