@@ -2,47 +2,95 @@
   <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </div>
 
-<div class="heading-container">
-  <h2>Select configuration to edit!</h2>
+<div *ngIf="isNoConfigSelected(); else elseBlock">
+
+  <div class="heading-container">
+    <h2>Select configuration to edit!</h2>
+  </div>
+
+  <table [dataSource]="dataSource" class="mat-elevation-z8 config-table" mat-table>
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <th *matHeaderCellDef mat-header-cell>ID</th>
+      <td *matCellDef="let element" mat-cell>{{element.id}}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th *matHeaderCellDef mat-header-cell>Name</th>
+      <td *matCellDef="let element" mat-cell>{{element.name}}</td>
+    </ng-container>
+
+    <!-- Frequencies Column -->
+    <ng-container matColumnDef="frequencies">
+      <th *matHeaderCellDef mat-header-cell>Frequencies</th>
+      <td *matCellDef="let element" mat-cell>{{element.frequencies}}</td>
+    </ng-container>
+
+    <!-- Save Type Column -->
+    <ng-container matColumnDef="save-type">
+      <th *matHeaderCellDef mat-header-cell>Save Type</th>
+      <td *matCellDef="let element" mat-cell>{{element.save_type}}</td>
+    </ng-container>
+
+    <!-- SuM Type Column -->
+    <ng-container matColumnDef="sum-type">
+      <th *matHeaderCellDef mat-header-cell>SuM Type</th>
+      <td *matCellDef="let element" mat-cell>{{element.sum_type_id}}</td>
+    </ng-container>
+
+
+    <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+
+    <tr
+      (click)="onRowClick(row)"
+      *matRowDef="let row; columns: displayedColumns;"
+      mat-row
+    ></tr>
+  </table>
 </div>
-
-<table [dataSource]="dataSource" class="mat-elevation-z8 config-table" mat-table>
-  <!-- ID Column -->
-  <ng-container matColumnDef="id">
-    <th *matHeaderCellDef mat-header-cell>ID</th>
-    <td *matCellDef="let element" mat-cell>{{element.id}}</td>
-  </ng-container>
-
-  <!-- Name Column -->
-  <ng-container matColumnDef="name">
-    <th *matHeaderCellDef mat-header-cell>Name</th>
-    <td *matCellDef="let element" mat-cell>{{element.name}}</td>
-  </ng-container>
-
-  <!-- Frequencies Column -->
-  <ng-container matColumnDef="frequencies">
-    <th *matHeaderCellDef mat-header-cell>Frequencies</th>
-    <td *matCellDef="let element" mat-cell>{{element.frequencies}}</td>
-  </ng-container>
-
-  <!-- Save Type Column -->
-  <ng-container matColumnDef="save-type">
-    <th *matHeaderCellDef mat-header-cell>Save Type</th>
-    <td *matCellDef="let element" mat-cell>{{element.save_type}}</td>
-  </ng-container>
-
-  <!-- SuM Type Column -->
-  <ng-container matColumnDef="sum-type">
-    <th *matHeaderCellDef mat-header-cell>SuM Type</th>
-    <td *matCellDef="let element" mat-cell>{{element.sum_type_id}}</td>
-  </ng-container>
-
-
-  <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
-
-  <tr
-    (click)="onRowClick(row)"
-    *matRowDef="let row; columns: displayedColumns;"
-    mat-row
-  ></tr>
-</table>
+<!-- Displayed when selected config -->
+<ng-template #elseBlock>
+  <div class="config-editor-container">
+    <form (ngSubmit)="onSubmit()" [formGroup]="editConfigFormGroup" class="edit-config-form">
+      <div>
+        <mat-form-field class="config-form-field">
+          <mat-label>ID</mat-label>
+          <input formControlName="id" matInput placeholder="ID">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field class="config-form-field">
+          <mat-label>Name</mat-label>
+          <input formControlName="name" matInput placeholder="Name">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field class="config-form-field">
+          <mat-label>Frequencies</mat-label>
+          <input formControlName="frequencies" matInput placeholder="Frequencies">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field class="config-form-field">
+          <mat-label>Save Type</mat-label>
+          <input formControlName="save_type" matInput placeholder="Save Type">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field class="config-form-field">
+          <mat-label>SuM Type ID</mat-label>
+          <input formControlName="sum_type_id" matInput placeholder="SuM Type ID">
+        </mat-form-field>
+      </div>
+      <mat-form-field class="config-form-field">
+        <mat-label>Topic Selection</mat-label>
+        <textarea cdkAutosizeMaxRows="30" cdkTextareaAutosize class="topic-selection-textarea"
+                  formControlName="ecore_data" matInput placeholder="Topic Selection"></textarea>
+      </mat-form-field>
+      <button [disabled]="!editConfigFormGroup.valid" class="add-button" mat-raised-button type="submit">
+        <i class="material-icons-outlined">save</i><span class="save-button-label">Save</span>
+      </button>
+    </form>
+  </div>
+</ng-template>

@@ -5,6 +5,10 @@ import {ConfigEditorRoutingModule} from './config-editor-routing.module';
 import {ConfigEditorComponent} from './config-editor.component';
 import {MatTableModule} from "@angular/material/table";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {ReactiveFormsModule} from "@angular/forms";
+import {MatButtonModule} from "@angular/material/button";
 
 
 @NgModule({
@@ -15,7 +19,11 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
     CommonModule,
     ConfigEditorRoutingModule,
     MatTableModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatButtonModule
   ]
 })
 export class ConfigEditorModule { }

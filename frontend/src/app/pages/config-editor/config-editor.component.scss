@@ -23,3 +23,33 @@
   border-top: 1px solid transparent;
   cursor: pointer;
 }
+
+.config-editor-container {
+  .edit-config-form {
+    .config-form-field {
+      width: 100%;
+      margin: 1.5em 0;
+
+      .topic-selection-textarea {
+        font-family: monospace;
+      }
+    }
+  }
+}
+
+
+.add-button {
+  background-color: seagreen;
+  color: white;
+  text-shadow: 1px 1px 1px black;
+  font-size: 1.5em;
+  padding: 0.25em 0.75em;
+
+  i {
+    font-size: 1.25em;
+  }
+
+  .save-button-label {
+    margin-left: 0.5em;
+  }
+}
