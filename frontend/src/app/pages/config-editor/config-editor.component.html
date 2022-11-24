@@ -1,1 +1,48 @@
-<p>config-editor works!</p>
+<div *ngIf="this.showProgressBar" class="progress-spinner-container">
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+
+<div class="heading-container">
+  <h2>Select configuration to edit!</h2>
+</div>
+
+<table [dataSource]="dataSource" class="mat-elevation-z8 config-table" mat-table>
+  <!-- ID Column -->
+  <ng-container matColumnDef="id">
+    <th *matHeaderCellDef mat-header-cell>ID</th>
+    <td *matCellDef="let element" mat-cell>{{element.id}}</td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th *matHeaderCellDef mat-header-cell>Name</th>
+    <td *matCellDef="let element" mat-cell>{{element.name}}</td>
+  </ng-container>
+
+  <!-- Frequencies Column -->
+  <ng-container matColumnDef="frequencies">
+    <th *matHeaderCellDef mat-header-cell>Frequencies</th>
+    <td *matCellDef="let element" mat-cell>{{element.frequencies}}</td>
+  </ng-container>
+
+  <!-- Save Type Column -->
+  <ng-container matColumnDef="save-type">
+    <th *matHeaderCellDef mat-header-cell>Save Type</th>
+    <td *matCellDef="let element" mat-cell>{{element.save_type}}</td>
+  </ng-container>
+
+  <!-- SuM Type Column -->
+  <ng-container matColumnDef="sum-type">
+    <th *matHeaderCellDef mat-header-cell>SuM Type</th>
+    <td *matCellDef="let element" mat-cell>{{element.sum_type_id}}</td>
+  </ng-container>
+
+
+  <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+
+  <tr
+    (click)="onRowClick(row)"
+    *matRowDef="let row; columns: displayedColumns;"
+    mat-row
+  ></tr>
+</table>

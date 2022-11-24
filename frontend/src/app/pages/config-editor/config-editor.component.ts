@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ConfigEditorService} from "./config-editor.service";
+import {ConfigFileData} from "../../shared/models/interfaces";
 
 @Component({
   selector: 'app-config-editor',
@@ -7,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConfigEditorComponent implements OnInit {
 
-  constructor() { }
+  showProgressBar: boolean = true
+  displayedColumns: string[] = ['id', 'name', 'frequencies', 'save-type', 'sum-type'];
+  dataSource: ConfigFileData[] = [];
 
-  ngOnInit(): void {
+
+  constructor(public configEditorService: ConfigEditorService) {
   }
 
+  ngOnInit(): void {
+    this.configEditorService.getAllConfigs().subscribe((configs: ConfigFileData[]) => {
+      this.dataSource = configs
+      this.showProgressBar = false
+    })
+  }
+
+  onRowClick(row: any) {
+    console.log(row)
+  }
 }
