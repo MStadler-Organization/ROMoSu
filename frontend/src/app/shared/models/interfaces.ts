@@ -26,7 +26,7 @@ export interface ConfigFileData {
   frequencies: number[];
   save_type: string;
   sum_type_id: number;
-  ecore_data: TreeNodeElement[];
+  ecore_data: TreeNodeElement[] | string;
 }
 
 export interface RTConfig {

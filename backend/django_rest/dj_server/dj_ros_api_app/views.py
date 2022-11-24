@@ -10,7 +10,7 @@ from rest_framework.decorators import api_view
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 
-from dj_server.dj_ros_api_app.helpers.utils import DefaultEncoder, NotFoundError
+from dj_server.dj_ros_api_app.helpers.utils import DefaultEncoder, NotFoundError, convert_to_json
 from dj_server.dj_ros_api_app.models import SuMType, MonitoringConfig, ActiveRuntimeConfig
 from dj_server.dj_ros_api_app.ros.RosConnector import RosConnector
 from dj_server.dj_ros_api_app.ros.RuntimeMonitoringStarter import RuntimeMonitoringStarter
@@ -84,8 +84,8 @@ def sum_types(request):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-@api_view(['GET', 'POST'])
-def save_config(request):
+@api_view(['GET', 'POST', 'DELETE', 'PATCH'])
+def mon_config(request):
     """Create and get new config files"""
     if request.method == 'GET':
         if request.query_params.get('sum_type'):
@@ -123,10 +123,35 @@ def save_config(request):
             temp_obj.save_type = body['configFileData']['save_type']
             temp_obj.sum_type_id = body['configFileData']['sum_type_id']
             temp_obj.frequencies = str(body['configFileData']['frequencies'])
-            temp_obj.ecore_data = str(body['configFileData']['ecore_data'])
+            temp_obj.ecore_data = convert_to_json(str(body['configFileData']['ecore_data']))
             temp_obj.save()
 
             return Response(data='Successfully created new config!', status=status.HTTP_201_CREATED)
+
+    if request.method == 'DELETE':
+        # delete the config
+        # check if object exists
+        try:
+            config_to_delete = MonitoringConfig.objects.get(id=request.query_params.get('id'))
+        except MonitoringConfig.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        # delete it
+        serializer = MonitoringConfigSerializer(config_to_delete, many=False)
+        config_to_delete.delete()
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    if request.method == 'PATCH':
+        config_to_patch = MonitoringConfig.objects.get(id=request.query_params.get('id'))
+
+        body_unicode = request.body.decode('utf-8')
+        body = json.loads(body_unicode)
+        serializer = MonitoringConfigSerializer(config_to_patch, data=body,
+                                                partial=True)  # set partial=True to update a data partially
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
     return Response('Invalid params!', status=status.HTTP_400_BAD_REQUEST)
 
 

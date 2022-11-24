@@ -77,16 +77,18 @@ def convert_boolean_str(object_with_string_booleans):
 
 
 def convert_to_json(config: str):
-    """Converts a js-config object to a valid json and returns a dictionary"""
+    """Converts a js-config object to a valid json"""
 
-    config = config.replace('True', '"True"')
-    config = config.replace('False', '"False"')
+    config = config.replace('True', 'true')
+    config = config.replace('False', 'false')
     config = config.replace("'", '"')
-    config = json.loads(config, object_hook=lambda d: SimpleNamespace(**d))
-    for entry in config:
-        convert_boolean_str(entry)
-
     return config
+
+
+def convert_json_to_conf_obj(json_conf: str):
+    """Converts a json-string config to a dict"""
+    json_conf = json.loads(json_conf, object_hook=lambda d: SimpleNamespace(**d))
+    return json_conf
 
 
 def ros_msg2json(msg):

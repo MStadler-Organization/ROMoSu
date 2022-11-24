@@ -26,6 +26,10 @@ const routes: Routes = [{
   {
     path: 'runtime-monitoring-wizard',
     loadChildren: () => import('./pages/runtime-monitoring-wizard/runtime-monitoring-wizard.module').then(m => m.RuntimeMonitoringWizardModule)
+  },
+  {
+    path: 'config-editor',
+    loadChildren: () => import('./pages/config-editor/config-editor.module').then(m => m.ConfigEditorModule)
   }];
 
 @NgModule({

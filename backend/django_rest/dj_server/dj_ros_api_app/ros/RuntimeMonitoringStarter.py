@@ -8,7 +8,7 @@ import roslibpy
 from dj_server.dj_ros_api_app.helpers.InternalDBConnector import InternalDBConnector
 from dj_server.dj_ros_api_app.helpers.mqtt_forwarder import MQTTForwarder
 from dj_server.dj_ros_api_app.helpers.object_classes import RuntimeStarterRESTObject, RosTopicConfigObj, TopicInfo
-from dj_server.dj_ros_api_app.helpers.utils import singleton, convert_to_json, ros_msg2json
+from dj_server.dj_ros_api_app.helpers.utils import singleton, convert_to_json, ros_msg2json, convert_json_to_conf_obj
 from dj_server.dj_ros_api_app.models import MonitoringConfig
 from dj_server.dj_ros_api_app.ros.RosConnector import RosConnector
 
@@ -40,7 +40,8 @@ def get_list_of_checked_topics(topic_config_obj: RosTopicConfigObj, name_prefix:
 def get_selected_topic_strings(conf_data: str, initial_prefix: str):
     """Parses a monitoring configuration for selected topics"""
     # convert string to dictionary
-    config_as_dict: List[RosTopicConfigObj] = convert_to_json(conf_data)
+    config_as_json: str = convert_to_json(conf_data)
+    config_as_dict: List[RosTopicConfigObj] = convert_json_to_conf_obj(config_as_json)
 
     # gather the selected topics to monitor
     list_of_topic_obj: [TopicInfo] = []
@@ -148,7 +149,7 @@ def get_frequencies(frequencies: str):
 def get_sec_lvl_topics(config: str):
     """Extracts the second level topics from a string monitoring config"""
 
-    conf_as_dict = convert_to_json(config)
+    conf_as_dict = convert_json_to_conf_obj(config)
     result = []
     for sec_lvl_topic in conf_as_dict:
         result.append(sec_lvl_topic)
