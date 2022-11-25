@@ -30,9 +30,10 @@ export interface ConfigFileData {
 }
 
 export interface RTConfig {
-  id?: number; // only when already saved
+  id?: string; // only when already saved
   prefix: string;
   sum_type_id: number;
   config_id: number;
   config_file_data?: ConfigFileData;
+  start_time: string;
 }

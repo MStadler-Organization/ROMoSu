@@ -9,6 +9,14 @@
     </mat-card-header>
     <img alt="Monitoring Gif" mat-card-image src="assets/img/mon-gif.gif">
     <mat-card-content>
+      <div *ngIf="this.activeConfigs.length > 0" class="description-row">
+        <span class="desc-label">Start Date</span><span
+        class="desc-text">{{getDate(singleConf.start_time)}}</span>
+      </div>
+      <div *ngIf="this.activeConfigs.length > 0" class="description-row">
+        <span class="desc-label">Start Time</span><span
+        class="desc-text">{{getTime(singleConf.start_time)}}</span>
+      </div>
       <div *ngIf="sumTypes.length > 0 &&this.allMonConfigs.length > 0" class="description-row">
         <span class="desc-label">SuM</span><span
         class="desc-text">{{getSumTypeNameForId(singleConf.config_file_data?.sum_type_id)}}</span>

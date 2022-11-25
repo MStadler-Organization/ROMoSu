@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ConfigFileData, RTConfig, SumType} from "../../shared/models/interfaces";
 import {DashboardService} from "./dashboard.service";
+import {MatDialog} from "@angular/material/dialog";
+import {CustomDialogComponent} from "../../shared/components/custom-dialog/custom-dialog.component";
 
 @Component({
   selector: 'app-dashboard',
@@ -14,12 +16,19 @@ export class DashboardComponent implements OnInit {
   sumTypes: SumType[] = <SumType[]>[]
   allMonConfigs: ConfigFileData[] = <ConfigFileData[]>[]
 
-  constructor(public dashboardService: DashboardService) {
+  constructor(public dashboardService: DashboardService, public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
     // get all the data from server
     this.dashboardService.getActiveRTConfigs().subscribe((activeConfigs: RTConfig[]) => {
+      // check if there are any active monitors going on
+      if (activeConfigs.length === 0) {
+        this.showNothingToShowDialog()
+        this.showProgressBar = false
+        return
+      }
+
       this.activeConfigs = activeConfigs
       this.dashboardService.getAllConfigs().subscribe((allMonConfigs: ConfigFileData[]) => {
         // map the FK to the actual configs
@@ -79,6 +88,54 @@ export class DashboardComponent implements OnInit {
    * @param clickedConfig The config on which the button is clicked on.
    */
   onStopMonitoringBtnClicked(clickedConfig: RTConfig) {
-    console.log(clickedConfig)
+    if (clickedConfig.id) {
+      this.dashboardService.stopMonitoring(clickedConfig.id).subscribe((deletedConfig) => {
+        // delete from view as well
+        let removeIdx = -1
+        this.activeConfigs.forEach((singleRTConfig, idx) => {
+          if (singleRTConfig.id === deletedConfig.id) {
+            removeIdx = idx
+          }
+        })
+        if (removeIdx > -1) {
+          this.activeConfigs.splice(removeIdx, 1)
+        }
+        if (this.activeConfigs.length === 0) {
+          this.showNothingToShowDialog()
+        }
+      })
+    } else {
+      console.error('Runtime config does not yield ID')
+    }
+  }
+
+  /**
+   * Returns the date from a given time string
+   * @param start_time
+   */
+  getDate(start_time: string) {
+    return start_time.substring(0, start_time.indexOf('T'))
+  }
+
+  /**
+   * Returns the time from a given time string
+   * @param start_time
+   */
+  getTime(start_time: string) {
+    return start_time.substring(start_time.indexOf('T') + 1, start_time.indexOf('.'))
+  }
+
+  /**
+   * Displays a dialog to notify the user that nothing can be displayed.
+   * @private
+   */
+  private showNothingToShowDialog() {
+    this.dialog.open(CustomDialogComponent, {
+      data: {
+        type: 0, // create info
+        message: 'No active runtime monitoring is currently going on to show here!'
+      },
+      autoFocus: false // disable default focus on button
+    });
   }
 }

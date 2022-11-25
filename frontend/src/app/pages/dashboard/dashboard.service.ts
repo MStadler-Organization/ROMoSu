@@ -37,4 +37,7 @@ export class DashboardService {
     return this.http.get<SumType[]>(this.baseApiURL + "sum-types/");
   }
 
+  stopMonitoring(id: string): Observable<RTConfig> {
+    return this.http.delete<RTConfig>(this.baseApiURL + `runtime-config/?id=${id}`);
+  }
 }
