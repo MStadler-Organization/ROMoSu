@@ -1,8 +1,11 @@
+import datetime
 import json
 import logging
+import uuid
 from json import JSONEncoder
 from types import SimpleNamespace
 
+import pytz
 import yaml
 
 
@@ -29,6 +32,17 @@ class DefaultEncoder(JSONEncoder):
 
     def default(self, o):
         return o.__dict__
+
+
+def generate_unique_id():
+    """Returns a unique id"""
+    return uuid.uuid4().__str__()
+
+
+def get_current_time():
+    """Returns the current time"""
+    tz = pytz.timezone('Europe/Vienna')
+    return datetime.datetime.now(tz).__str__()
 
 
 def get_base_topic_string(p_topic_string):

@@ -30,7 +30,8 @@ const routes: Routes = [{
   {
     path: 'config-editor',
     loadChildren: () => import('./pages/config-editor/config-editor.module').then(m => m.ConfigEditorModule)
-  }];
+  },
+  {path: 'dashboard', loadChildren: () => import('./pages/dashboard/dashboard.module').then(m => m.DashboardModule)}];
 
 @NgModule({
   declarations: [],

@@ -19,7 +19,7 @@ export class RuntimeMonitoringWizardComponent implements OnInit {
   firstFormGroup = this._formBuilder.group({});
   secondFormGroup = this._formBuilder.group({});
   thirdFormGroup = this._formBuilder.group({});
-  runtimeConfigResult: RTConfig = {prefix: '', sum_type_id: -1, config_id: -1}
+  runtimeConfigResult: RTConfig = {prefix: '', sum_type_id: -1, config_id: -1, start_time: ''}
   possibleSums: string[] = []
   showProgressBar: boolean = true
   sumTypes: SumType[] = []

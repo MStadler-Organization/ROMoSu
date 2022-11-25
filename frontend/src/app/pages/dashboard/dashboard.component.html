@@ -1,0 +1,38 @@
+<div *ngIf="this.showProgressBar" class="progress-spinner-container">
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+<div class="card-container">
+  <mat-card *ngFor="let singleConf of this.activeConfigs" class="rt-card">
+    <mat-card-header>
+      <mat-card-title>{{singleConf.config_file_data?.name}}</mat-card-title>
+      <mat-card-subtitle>{{singleConf.prefix}}</mat-card-subtitle>
+    </mat-card-header>
+    <img alt="Monitoring Gif" mat-card-image src="assets/img/mon-gif.gif">
+    <mat-card-content>
+      <div *ngIf="this.activeConfigs.length > 0" class="description-row">
+        <span class="desc-label">Start Date</span><span
+        class="desc-text">{{getDate(singleConf.start_time)}}</span>
+      </div>
+      <div *ngIf="this.activeConfigs.length > 0" class="description-row">
+        <span class="desc-label">Start Time</span><span
+        class="desc-text">{{getTime(singleConf.start_time)}}</span>
+      </div>
+      <div *ngIf="sumTypes.length > 0 &&this.allMonConfigs.length > 0" class="description-row">
+        <span class="desc-label">SuM</span><span
+        class="desc-text">{{getSumTypeNameForId(singleConf.config_file_data?.sum_type_id)}}</span>
+      </div>
+      <div *ngIf="this.allMonConfigs.length > 0" class="description-row">
+        <span class="desc-label">Frequencies</span><span
+        class="desc-text">{{singleConf.config_file_data?.frequencies}}</span>
+      </div>
+      <div *ngIf="this.allMonConfigs.length > 0" class="description-row">
+        <span class="desc-label">Save Type</span><span
+        class="desc-text">{{singleConf.config_file_data?.save_type}}</span>
+      </div>
+    </mat-card-content>
+    <mat-card-actions *ngIf="this.isFinished()" class="action-btn-container">
+      <button (click)="onShowDataBtnClicked(singleConf)" color="primary" mat-raised-button>Show Data</button>
+      <button (click)="onStopMonitoringBtnClicked(singleConf)" color="warn" mat-raised-button>Stop Monitoring</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
