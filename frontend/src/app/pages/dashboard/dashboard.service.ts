@@ -1,6 +1,7 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {RTConfig} from "../../shared/models/interfaces";
 
 @Injectable({
   providedIn: "root"
@@ -16,7 +17,7 @@ export class DashboardService {
   /**
    * REST call to server to get possible SuMs
    */
-  getActiveRTConfigs(): Observable<string[]> {
-    return this.http.get<string[]>(this.baseApiURL + "possible-sums/");
+  getActiveRTConfigs(): Observable<RTConfig[]> {
+    return this.http.get<RTConfig[]>(this.baseApiURL + "runtime-config/");
   }
 }
