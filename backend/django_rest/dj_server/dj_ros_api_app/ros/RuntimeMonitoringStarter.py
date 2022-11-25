@@ -13,6 +13,7 @@ from dj_server.dj_ros_api_app.helpers.utils import singleton, convert_to_json, r
     NotFoundError, generate_unique_id, get_current_time
 from dj_server.dj_ros_api_app.models import MonitoringConfig
 from dj_server.dj_ros_api_app.ros.RosConnector import RosConnector
+from dj_server.dj_ros_api_app.ros.RosListener import RosListener
 
 global ros_mon_data
 COMPLETE_SAVE_TYPE = 'Complete (but complex)'
@@ -65,7 +66,7 @@ def update_ros_data(message, base_topic: str, sub_topic: TopicInfo):
 
 def monitor_topic(base_topic: str, sub_topic: TopicInfo):
     """Starts a ROS topic subscription on a given topic"""
-    ros_connector: RosConnector = RosConnector()
+    ros_connector: RosListener = RosListener()
 
     # create entry in global var for subtopic
     ros_mon_data[base_topic][sub_topic.in_topic] = {}
@@ -95,8 +96,6 @@ def get_current_ros_data(topic: TopicInfo):
             except KeyError:
                 time.sleep(3)
                 logging.warning(f'Could not access topic: {topic.in_topic}')
-                print(ros_mon_data)
-                print('\n\n\n')
 
     return curr_tree_node
 
