@@ -1,6 +1,7 @@
 import logging
 import threading
 import time
+from copy import copy
 from typing import List
 
 import roslibpy
@@ -121,18 +122,16 @@ def get_mqtt_topic(topic: str, save_type: str):
         return simple_topic
 
 
-def forward_message(topic: TopicInfo, seconds_to_wait: float, save_type: str):
+def forward_message(topic: TopicInfo, seconds_to_wait: float, save_type: str, thread_event: threading.Event):
     """Forwards the topic via mqtt in a given frequency"""
-
     mqtt_forwarder: MQTTForwarder = MQTTForwarder()
 
     mqtt_topic = get_mqtt_topic(topic.in_topic, save_type)
 
-    while True:
-        # TODO: replace the True here with the event that kills this thread later on when monitoring is stopped
+    while not thread_event.is_set():
         data_to_publish = get_current_ros_data(topic)
         mqtt_forwarder.publish(mqtt_topic, ros_msg2json(data_to_publish))
-        time.sleep(seconds_to_wait)
+        thread_event.wait(seconds_to_wait)
 
 
 def get_frequencies(frequencies: str):
@@ -177,22 +176,33 @@ def get_frequency_for_topic(topic: TopicInfo, frequency_list, sec_lvl_topics_of_
 class RuntimeMonitoringStarter:
     """Handles the active RT Monitoring instances"""
 
+    def get_json_serializable_list(self):
+        jsonable_list = []
+        for conf in self.active_rt_list:
+            jsonable_list.append(
+                {'id': conf['id'],
+                 'prefix': conf['prefix'],
+                 'sum_type_id': conf['sum_type_id'],
+                 'config_id': conf['config_id'],
+                 'start_time': conf['start_time']}
+            )
+        return jsonable_list
+
     def delete_active_config(self, id_to_delete: int):
         for active_config in self.active_rt_list:
             if active_config['id'] == id_to_delete:
                 self.stop_monitoring(active_config)
                 self.active_rt_list.remove(active_config)
+                del active_config['thread_event']
                 return active_config
         raise NotFoundError
 
-    def stop_monitoring(self, rt_id):
-        # todo: end the event
-        pass
+    def stop_monitoring(self, rt_config_to_stop):
+        # find the event to stop
+        rt_config_to_stop['thread_event'].set()
 
     def start_rt_monitoring(self, mon_config: MonitoringConfig, rt_starter: RuntimeStarterRESTObject):
         """Starts the monitoring for a given monitoring config"""
-
-        # todo: add an event to the rt config
 
         global ros_mon_data
         rc = RosConnector()
@@ -221,25 +231,32 @@ class RuntimeMonitoringStarter:
         frequency_list = get_frequencies(mon_config.frequencies)
         # get the second level topics from the config to match the frequencies
         sec_lvl_topics_of_config = get_sec_lvl_topics(mon_config.ecore_data)
-        # start a new thread for the every topic to forward them accordingly
+        # start a new thread for every topic to forward them accordingly
         for topic in topic_list:
             fq = get_frequency_for_topic(topic, frequency_list, sec_lvl_topics_of_config)
-            threading.Timer(1, forward_message, [topic, fq, mon_config.save_type]).start()
+            threading.Timer(1, forward_message, [topic, fq, mon_config.save_type, rt_starter.thread_event]).start()
 
     def init_monitoring(self, runtime_config):
-        # map into obj
-        rt_starter_obj = RuntimeStarterRESTObject(runtime_config)
+
+        # add additional data
         runtime_config['id'] = generate_unique_id()
         runtime_config['start_time'] = get_current_time()
+        runtime_config['thread_event'] = threading.Event()
         self.active_rt_list.append(runtime_config)
+
+        # map into obj
+        rt_starter_obj = RuntimeStarterRESTObject(runtime_config)
 
         # get saved monitoring config from runtime config id
         mon_config_qs = self.db_connector.get_rt_config_for_id(rt_starter_obj.config_id)
 
         # create new thread for
-        # TODO comment back in only temporary!
-        # threading.Timer(1, self.start_rt_monitoring, [mon_config_qs[0], rt_starter_obj]).start()
-        return runtime_config
+        threading.Timer(1, self.start_rt_monitoring, [mon_config_qs[0], rt_starter_obj]).start()
+
+        # create json-serializable obj
+        jsonable_obj = copy(rt_starter_obj)
+        del jsonable_obj.thread_event
+        return jsonable_obj
 
     def __init__(self):
         # instantiate global var

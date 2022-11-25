@@ -160,7 +160,8 @@ def runtime_config(request):
 
     if request.method == 'GET':
         # return all objects contained in db
-        return Response(rt_starter.active_rt_list, status=status.HTTP_200_OK)
+        return JsonResponse(encoder=DefaultEncoder, data=rt_starter.get_json_serializable_list(),
+                            status=status.HTTP_200_OK, safe=False)
 
     if request.method == 'POST':
         # parse request body
@@ -169,7 +170,7 @@ def runtime_config(request):
         # check form of request data and save it
         if serializer.is_valid():
             rt_data = rt_starter.init_monitoring(serializer.data)
-            return Response(rt_data, status=status.HTTP_201_CREATED)
+            return JsonResponse(encoder=DefaultEncoder, data=rt_data, status=status.HTTP_201_CREATED, safe=False)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     if request.method == 'DELETE':

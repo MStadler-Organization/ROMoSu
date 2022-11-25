@@ -42,7 +42,7 @@ def generate_unique_id():
 def get_current_time():
     """Returns the current time"""
     tz = pytz.timezone('Europe/Vienna')
-    return datetime.datetime.now(tz)
+    return datetime.datetime.now(tz).__str__()
 
 
 def get_base_topic_string(p_topic_string):

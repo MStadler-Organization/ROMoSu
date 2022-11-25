@@ -12,9 +12,15 @@ class RuntimeStarterRESTObject:
     """Class for better accessing the REST object of RT starter"""
 
     def __init__(self, rest_obj):
+        self.id: str = rest_obj['id']
         self.prefix: str = rest_obj['prefix']
         self.sum_type_id: int = rest_obj['sum_type_id']
         self.config_id: int = rest_obj['config_id']
+        self.start_time: str = rest_obj['start_time']
+        self.thread_event: str = rest_obj['thread_event']
+
+    def __str__(self):
+        return f'id={self.id}; prefix={self.prefix}; sum_type_id={self.sum_type_id}; config_id={self.config_id}; start_time={self.start_time}; thread_event={self.thread_event};'
 
 
 class RosTopicConfigObj:
