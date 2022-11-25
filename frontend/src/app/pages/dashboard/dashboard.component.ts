@@ -114,7 +114,7 @@ export class DashboardComponent implements OnInit {
    * @param start_time
    */
   getDate(start_time: string) {
-    return start_time.substring(0, start_time.indexOf('T'))
+    return start_time.substring(0, start_time.indexOf(' '))
   }
 
   /**
@@ -122,7 +122,7 @@ export class DashboardComponent implements OnInit {
    * @param start_time
    */
   getTime(start_time: string) {
-    return start_time.substring(start_time.indexOf('T') + 1, start_time.indexOf('.'))
+    return start_time.substring(start_time.indexOf(' ') + 1, start_time.indexOf('.'))
   }
 
   /**
