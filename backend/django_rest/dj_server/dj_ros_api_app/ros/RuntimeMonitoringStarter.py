@@ -8,7 +8,8 @@ import roslibpy
 from dj_server.dj_ros_api_app.helpers.InternalDBConnector import InternalDBConnector
 from dj_server.dj_ros_api_app.helpers.mqtt_forwarder import MQTTForwarder
 from dj_server.dj_ros_api_app.helpers.object_classes import RuntimeStarterRESTObject, RosTopicConfigObj, TopicInfo
-from dj_server.dj_ros_api_app.helpers.utils import singleton, convert_to_json, ros_msg2json, convert_json_to_conf_obj
+from dj_server.dj_ros_api_app.helpers.utils import singleton, convert_to_json, ros_msg2json, convert_json_to_conf_obj, \
+    NotFoundError, generate_unique_id, get_current_time
 from dj_server.dj_ros_api_app.models import MonitoringConfig
 from dj_server.dj_ros_api_app.ros.RosConnector import RosConnector
 
@@ -172,55 +173,73 @@ def get_frequency_for_topic(topic: TopicInfo, frequency_list, sec_lvl_topics_of_
     return -1
 
 
-def start_rt_monitoring(mon_config: MonitoringConfig, rt_starter: RuntimeStarterRESTObject):
-    """Starts the monitoring for a given monitoring config"""
-
-    global ros_mon_data
-    rc = RosConnector()
-
-    # check if root topic still exists
-    curr_root_topic_list = rc.get_sums()
-    if rt_starter.prefix not in curr_root_topic_list:
-        logging.error(f'Target root-topic >{rt_starter.prefix}< is not available, aborting monitoring!')
-        return
-
-    # get wanted sub-topic-strings
-    topic_list = get_selected_topic_strings(mon_config.ecore_data, rt_starter.prefix)
-
-    # start monitoring of the base topic if it is not already monitored
-    simple_base_topic_name = rt_starter.prefix
-    if simple_base_topic_name not in ros_mon_data:
-        # create new placeholder attribute in global var
-        ros_mon_data[simple_base_topic_name] = {}
-        # get the subtopics
-        sub_topics = rc.get_properties_for_sum(simple_base_topic_name)
-        # monitor the topics
-        for topic in sub_topics:
-            threading.Timer(1, monitor_topic, [simple_base_topic_name, topic]).start()
-
-    # transform frequencies
-    frequency_list = get_frequencies(mon_config.frequencies)
-    # get the second level topics from the config to match the frequencies
-    sec_lvl_topics_of_config = get_sec_lvl_topics(mon_config.ecore_data)
-    # start a new thread for the every topic to forward them accordingly
-    for topic in topic_list:
-        fq = get_frequency_for_topic(topic, frequency_list, sec_lvl_topics_of_config)
-        threading.Timer(1, forward_message, [topic, fq, mon_config.save_type]).start()
-
-
 @singleton
 class RuntimeMonitoringStarter:
     """Handles the active RT Monitoring instances"""
 
+    def delete_active_config(self, id_to_delete: int):
+        for active_config in self.active_rt_list:
+            if active_config['id'] == id_to_delete:
+                self.stop_monitoring(active_config)
+                self.active_rt_list.remove(active_config)
+                return active_config
+        raise NotFoundError
+
+    def stop_monitoring(self, rt_id):
+        # todo: end the event
+        pass
+
+    def start_rt_monitoring(self, mon_config: MonitoringConfig, rt_starter: RuntimeStarterRESTObject):
+        """Starts the monitoring for a given monitoring config"""
+
+        # todo: add an event to the rt config
+
+        global ros_mon_data
+        rc = RosConnector()
+
+        # check if root topic still exists
+        curr_root_topic_list = rc.get_sums()
+        if rt_starter.prefix not in curr_root_topic_list:
+            logging.error(f'Target root-topic >{rt_starter.prefix}< is not available, aborting monitoring!')
+            return
+
+        # get wanted sub-topic-strings
+        topic_list = get_selected_topic_strings(mon_config.ecore_data, rt_starter.prefix)
+
+        # start monitoring of the base topic if it is not already monitored
+        simple_base_topic_name = rt_starter.prefix
+        if simple_base_topic_name not in ros_mon_data:
+            # create new placeholder attribute in global var
+            ros_mon_data[simple_base_topic_name] = {}
+            # get the subtopics
+            sub_topics = rc.get_properties_for_sum(simple_base_topic_name)
+            # monitor the topics
+            for topic in sub_topics:
+                threading.Timer(1, monitor_topic, [simple_base_topic_name, topic]).start()
+
+        # transform frequencies
+        frequency_list = get_frequencies(mon_config.frequencies)
+        # get the second level topics from the config to match the frequencies
+        sec_lvl_topics_of_config = get_sec_lvl_topics(mon_config.ecore_data)
+        # start a new thread for the every topic to forward them accordingly
+        for topic in topic_list:
+            fq = get_frequency_for_topic(topic, frequency_list, sec_lvl_topics_of_config)
+            threading.Timer(1, forward_message, [topic, fq, mon_config.save_type]).start()
+
     def init_monitoring(self, runtime_config):
         # map into obj
         rt_starter_obj = RuntimeStarterRESTObject(runtime_config)
+        runtime_config['id'] = generate_unique_id()
+        runtime_config['start_time'] = get_current_time()
+        self.active_rt_list.append(runtime_config)
 
         # get saved monitoring config from runtime config id
         mon_config_qs = self.db_connector.get_rt_config_for_id(rt_starter_obj.config_id)
 
         # create new thread for
-        threading.Timer(1, start_rt_monitoring, [mon_config_qs[0], rt_starter_obj]).start()
+        # TODO comment back in only temporary!
+        # threading.Timer(1, self.start_rt_monitoring, [mon_config_qs[0], rt_starter_obj]).start()
+        return runtime_config
 
     def __init__(self):
         # instantiate global var

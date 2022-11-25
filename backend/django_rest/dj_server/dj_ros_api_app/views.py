@@ -11,7 +11,7 @@ from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 
 from dj_server.dj_ros_api_app.helpers.utils import DefaultEncoder, NotFoundError, convert_to_json
-from dj_server.dj_ros_api_app.models import SuMType, MonitoringConfig, ActiveRuntimeConfig
+from dj_server.dj_ros_api_app.models import SuMType, MonitoringConfig
 from dj_server.dj_ros_api_app.ros.RosConnector import RosConnector
 from dj_server.dj_ros_api_app.ros.RuntimeMonitoringStarter import RuntimeMonitoringStarter
 from dj_server.dj_ros_api_app.serializers import SuMTypeSerializer, MonitoringConfigSerializer, \
@@ -154,13 +154,13 @@ def mon_config(request):
     return Response('Invalid params!', status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['GET', 'POST'])
+@api_view(['GET', 'POST', 'DELETE'])
 def runtime_config(request):
+    rt_starter: RuntimeMonitoringStarter = RuntimeMonitoringStarter()
+
     if request.method == 'GET':
         # return all objects contained in db
-        runtime_configs = ActiveRuntimeConfig.objects.all()
-        serializer = ActiveRuntimeConfigSerializer(runtime_configs, many=True)
-        return JsonResponse(serializer.data, encoder=DefaultEncoder, safe=False)
+        return Response(rt_starter.active_rt_list, status=status.HTTP_200_OK)
 
     if request.method == 'POST':
         # parse request body
@@ -168,8 +168,17 @@ def runtime_config(request):
         serializer = ActiveRuntimeConfigSerializer(data=request_config_data['pRTConfig'])
         # check form of request data and save it
         if serializer.is_valid():
-            serializer.save()
-            rt_starter = RuntimeMonitoringStarter()
-            rt_starter.init_monitoring(serializer.data)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            rt_data = rt_starter.init_monitoring(serializer.data)
+            return Response(rt_data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    if request.method == 'DELETE':
+        # delete the config and stop the monitoring
+        # check if object exists
+        try:
+            # check if exists and deletes it
+            id_to_delete = request.query_params.get('id')
+            deleted_config = rt_starter.delete_active_config(id_to_delete)
+        except NotFoundError:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        return Response(deleted_config, status=status.HTTP_200_OK)
