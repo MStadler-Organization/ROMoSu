@@ -1,4 +1,33 @@
-.rt-card {
-  max-width: 20em;
-  padding: 3em;
+
+.card-container {
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+
+  .rt-card {
+    width: 25%;
+    box-sizing: border-box;
+    padding: 3em;
+
+    .description-row {
+      margin-bottom: 1em;
+      display: flex;
+      justify-content: space-between;
+
+      .desc-label {
+        font-weight: 500;
+        margin-right: 1em;
+      }
+
+      .desc-text {
+        font-weight: 100;
+      }
+    }
+  }
+
+  .action-btn-container {
+    display: flex;
+    justify-content: space-between;
+  }
 }

@@ -34,4 +34,5 @@ export interface RTConfig {
   prefix: string;
   sum_type_id: number;
   config_id: number;
+  config_file_data?: ConfigFileData;
 }

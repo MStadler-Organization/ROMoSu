@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {RTConfig} from "../../shared/models/interfaces";
+import {ConfigFileData, RTConfig, SumType} from "../../shared/models/interfaces";
 
 @Injectable({
   providedIn: "root"
@@ -20,4 +20,21 @@ export class DashboardService {
   getActiveRTConfigs(): Observable<RTConfig[]> {
     return this.http.get<RTConfig[]>(this.baseApiURL + "runtime-config/");
   }
+
+
+  /**
+   * REST call to server to get all configs
+   */
+  getAllConfigs(): Observable<ConfigFileData[]> {
+    return this.http.get<ConfigFileData[]>(this.baseApiURL + "config-file/");
+  }
+
+
+  /**
+   * REST call to server to get the Sum types
+   */
+  getSumTypes(): Observable<SumType[]> {
+    return this.http.get<SumType[]>(this.baseApiURL + "sum-types/");
+  }
+
 }
