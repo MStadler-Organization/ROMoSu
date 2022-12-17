@@ -36,4 +36,7 @@ export interface RTConfig {
   config_id: number;
   config_file_data?: ConfigFileData;
   start_time: string;
+  selected_topics?: { name: string, last_data: string }[];
+  query_time?: string;
+
 }

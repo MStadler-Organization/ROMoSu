@@ -11,12 +11,15 @@ import {CustomDialogComponent} from './components/custom-dialog/custom-dialog.co
 import {MatDialogModule} from "@angular/material/dialog";
 import {LoadingDialogComponent} from './components/loading-dialog/loading-dialog.component';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {RtDataDialogComponent} from './components/rt-data-dialog/rt-data-dialog.component';
+import {MatExpansionModule} from "@angular/material/expansion";
 
 @NgModule({
   declarations: [
     FooterComponent,
     CustomDialogComponent,
-    LoadingDialogComponent
+    LoadingDialogComponent,
+    RtDataDialogComponent
   ],
   exports: [
     FooterComponent
@@ -30,7 +33,8 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
     MatSidenavModule,
     MatListModule,
     MatDialogModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatExpansionModule
   ]
 })
 export class SharedModule {

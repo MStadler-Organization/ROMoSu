@@ -4,6 +4,7 @@ import {DashboardService} from "./dashboard.service";
 import {MatDialog} from "@angular/material/dialog";
 import {CustomDialogComponent} from "../../shared/components/custom-dialog/custom-dialog.component";
 import {LoadingDialogComponent} from "../../shared/components/loading-dialog/loading-dialog.component";
+import {RtDataDialogComponent} from "../../shared/components/rt-data-dialog/rt-data-dialog.component";
 
 @Component({
   selector: 'app-dashboard',
@@ -81,8 +82,17 @@ export class DashboardComponent implements OnInit {
    * @param clickedConfig The config on which the button is clicked on.
    */
   onShowDataBtnClicked(clickedConfig: RTConfig) {
-    console.log(clickedConfig)
-    // TODO: Implement this
+    let qTime = ''
+    let qDate = ''
+    if (clickedConfig.query_time) {
+      qTime = this.getTime(clickedConfig.query_time)
+      qDate = this.getDate(clickedConfig.query_time)
+    }
+
+    this.dialog.open(RtDataDialogComponent, {
+      data: {conf: clickedConfig, queryTime: qTime, queryDate: qDate},
+      autoFocus: false // disable default focus on button
+    });
   }
 
   /**
@@ -124,10 +134,10 @@ export class DashboardComponent implements OnInit {
 
   /**
    * Returns the time from a given time string
-   * @param start_time
+   * @param timeString
    */
-  getTime(start_time: string) {
-    return start_time.substring(start_time.indexOf(' ') + 1, start_time.indexOf('.'))
+  getTime(timeString: string) {
+    return timeString.substring(timeString.indexOf(' ') + 1, timeString.indexOf('.'))
   }
 
   /**
