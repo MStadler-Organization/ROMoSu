@@ -57,7 +57,7 @@ class RosConnector:
         client = roslibpy.Ros(host='localhost', port=9090)  # TODO: change this here later with config
         client.run()
         if client.is_connected:
-            logging.info('Successfully connected to ROS bridge')
+            logging.info('Successfully connected to ROS bridge from Ros Connector')
             return client
         # something went wrong
         logging.warning('Could not connect to roscore with the rosbridge!')
