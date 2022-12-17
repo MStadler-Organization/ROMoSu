@@ -7,13 +7,16 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatListModule} from "@angular/material/list";
-import { CustomDialogComponent } from './components/custom-dialog/custom-dialog.component';
+import {CustomDialogComponent} from './components/custom-dialog/custom-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
+import {LoadingDialogComponent} from './components/loading-dialog/loading-dialog.component';
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 @NgModule({
   declarations: [
     FooterComponent,
-    CustomDialogComponent
+    CustomDialogComponent,
+    LoadingDialogComponent
   ],
   exports: [
     FooterComponent
@@ -26,7 +29,8 @@ import {MatDialogModule} from "@angular/material/dialog";
     MatButtonModule,
     MatSidenavModule,
     MatListModule,
-    MatDialogModule
+    MatDialogModule,
+    MatProgressSpinnerModule
   ]
 })
 export class SharedModule {

@@ -13,7 +13,7 @@
             {{sum}}
           </mat-list-option>
         </mat-selection-list>
-        <div>
+        <div *ngIf="!this.showProgressBar">
           <button mat-raised-button (click)="goToStepTwoButtonClicked(sums, stepper)" onclick="this.blur()">Next Step
           </button>
         </div>
@@ -95,7 +95,7 @@
             </mat-expansion-panel>
           </div>
         </div>
-        <div>
+        <div *ngIf="!this.showProgressBar">
           <!-- TODO: Add refresh buttons -->
           <!-- TODO: refresh vars in onClick function for previous button -->
           <button mat-raised-button matStepperPrevious onclick="this.blur()" class="prev-button">Previous Step</button>
@@ -148,7 +148,7 @@
             </mat-radio-group>
           </div>
         </div>
-        <div>
+        <div *ngIf="!this.showProgressBar">
           <button mat-raised-button matStepperPrevious onclick="this.blur()" class="prev-button">Previous Step</button>
           <button mat-raised-button onclick="this.blur()" (click)="goToStepFourButtonClicked(stepper)">
             Save Config
@@ -161,7 +161,7 @@
     <mat-step>
       <ng-template matStepLabel>Done</ng-template>
       <p>You are now done.</p>
-      <div>
+      <div *ngIf="!this.showProgressBar">
         <button mat-raised-button routerLink='/home' onclick="this.blur()">Back To Home</button>
       </div>
     </mat-step>

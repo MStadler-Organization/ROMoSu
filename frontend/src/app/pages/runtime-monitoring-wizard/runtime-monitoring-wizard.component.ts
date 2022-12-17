@@ -6,6 +6,7 @@ import {CustomDialogComponent} from "../../shared/components/custom-dialog/custo
 import {MatDialog} from "@angular/material/dialog";
 import {ConfigFileData, RTConfig, SumType} from "../../shared/models/interfaces";
 import {HttpResponse} from "@angular/common/http";
+import {LoadingDialogComponent} from "../../shared/components/loading-dialog/loading-dialog.component";
 
 @Component({
   selector: 'app-runtime-monitoring-wizard',
@@ -115,6 +116,9 @@ export class RuntimeMonitoringWizardComponent implements OnInit {
     } else {
       stepper.next() // go to next step
       this.showProgressBar = true
+
+      const spinnerDialog = this.dialog.open(LoadingDialogComponent, {disableClose: true});
+
       this.runtimeMonitoringWizardService.postRTStatus(this.runtimeConfigResult).subscribe((response: HttpResponse<RTConfig>) => {
         if (response.ok) {
           this.dialog.open(CustomDialogComponent, {
@@ -134,6 +138,7 @@ export class RuntimeMonitoringWizardComponent implements OnInit {
           });
         }
         this.showProgressBar = false
+        spinnerDialog.close()
       });
     }
   }
