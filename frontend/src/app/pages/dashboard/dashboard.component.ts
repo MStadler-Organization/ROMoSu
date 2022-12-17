@@ -82,8 +82,15 @@ export class DashboardComponent implements OnInit {
    * @param clickedConfig The config on which the button is clicked on.
    */
   onShowDataBtnClicked(clickedConfig: RTConfig) {
+    let qTime = ''
+    let qDate = ''
+    if (clickedConfig.query_time) {
+      qTime = this.getTime(clickedConfig.query_time)
+      qDate = this.getDate(clickedConfig.query_time)
+    }
+
     this.dialog.open(RtDataDialogComponent, {
-      data: clickedConfig,
+      data: {conf: clickedConfig, queryTime: qTime, queryDate: qDate},
       autoFocus: false // disable default focus on button
     });
   }
@@ -127,10 +134,10 @@ export class DashboardComponent implements OnInit {
 
   /**
    * Returns the time from a given time string
-   * @param start_time
+   * @param timeString
    */
-  getTime(start_time: string) {
-    return start_time.substring(start_time.indexOf(' ') + 1, start_time.indexOf('.'))
+  getTime(timeString: string) {
+    return timeString.substring(timeString.indexOf(' ') + 1, timeString.indexOf('.'))
   }
 
   /**

@@ -11,14 +11,18 @@ import {RTConfig} from "../../models/interfaces";
 export class RtDataDialogComponent {
 
   rt_data: RTConfig;
+  queryTime: string;
+  queryDate: string;
 
   /***
    * Creates a parameterized dialog
    * @param dialogRef the CustomDialogComponent
    * @param data the rt data params
    */
-  constructor(public dialogRef: MatDialogRef<RtDataDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: RTConfig) {
-    this.rt_data = data
+  constructor(public dialogRef: MatDialogRef<RtDataDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: { conf: RTConfig, queryTime: string, queryDate: string }) {
+    this.rt_data = data.conf
+    this.queryTime = data.queryTime
+    this.queryDate = data.queryDate
   }
 
   /**

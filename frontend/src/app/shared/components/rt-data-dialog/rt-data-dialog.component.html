@@ -1,19 +1,28 @@
 <div class="outer-dialog-container">
-  <mat-accordion>
-    <div *ngFor="let topic of rt_data.selected_topics" class="panel-container">
-      <mat-expansion-panel hideToggle>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            {{topic.name}}
-          </mat-panel-title>
-          <mat-panel-description>
-            {{this.getPreviewData(topic.last_data)}}
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-        {{topic.last_data}}
-      </mat-expansion-panel>
-    </div>
-  </mat-accordion>
+  <h1 class="heading">Date:
+    <span class="span-str">{{this.queryDate}}</span>
+  </h1>
+  <h1 class="heading">Time:
+    <span class="span-str">{{this.queryTime}}</span>
+  </h1>
+
+  <div class="accordion-container">
+    <mat-accordion>
+      <div *ngFor="let topic of rt_data.selected_topics" class="panel-container">
+        <mat-expansion-panel hideToggle>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <span class="topic-name">{{topic.name}}</span>
+            </mat-panel-title>
+            <mat-panel-description>
+              {{this.getPreviewData(topic.last_data)}}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <span class="topic-data">{{topic.last_data}}</span>
+        </mat-expansion-panel>
+      </div>
+    </mat-accordion>
+  </div>
   <div class="btn-container">
     <button (click)="this.onClickOk()" color="primary" mat-raised-button>OK</button>
   </div>
