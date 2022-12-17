@@ -221,6 +221,7 @@ class RuntimeMonitoringStarter:
         return True
 
     def update_data_on_active_rt_list(self):
+        """Updates the data in the active RT"""
         for conf in self.active_rt_list:
             for topic in conf['selected_topics']:
                 topic['last_data'] = str(get_current_ros_data(topic['name']))
