@@ -1,3 +1,4 @@
+import collections
 import datetime
 import json
 import logging
@@ -25,6 +26,55 @@ def singleton(class_):
         return instances[class_]
 
     return getinstance
+
+
+def unflatten(dictionary, delimiter='$'):
+    """Un-flattens a dictionary"""
+
+    result_dict = dict()
+    for key, value in dictionary.items():
+        parts = key.split(delimiter)
+        d = result_dict
+        for part in parts[:-1]:
+            if part not in d:
+                d[part] = dict()
+            d = d[part]
+        d[parts[-1]] = value
+    return result_dict
+
+
+def get_query_prefix(topic_name: str):
+    """Replaces '/' with '$' in a string"""
+    return topic_name.replace('/', '$')
+
+
+def flatten_dict(d, parent_key='', sep='$'):
+    """Flattens a dictionary with $ as separator"""
+
+    items = []
+    for k, v in d.items():
+        new_key = parent_key + sep + k if parent_key else k
+        if isinstance(v, collections.MutableMapping):
+            items.extend(flatten_dict(v, new_key, sep=sep).items())
+        else:
+            items.append((new_key, v))
+    return dict(items)
+
+
+def add_prefix_to_dict(dictionary, prefix):
+    """Adds a prefix to all keys in a dictionary"""
+
+    return {prefix + k: v for k, v in dictionary.items()}
+
+
+class Singleton(type):
+    """Impl. of a singleton design pattern"""
+    _instances = {}
+
+    def __call__(cls, *args, **kwargs):
+        if cls not in cls._instances:
+            cls._instances[cls] = super(Singleton, cls).__call__(*args, **kwargs)
+        return cls._instances[cls]
 
 
 class DefaultEncoder(JSONEncoder):

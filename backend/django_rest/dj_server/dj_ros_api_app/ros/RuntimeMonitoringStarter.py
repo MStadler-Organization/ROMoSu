@@ -1,6 +1,5 @@
 import logging
 import threading
-import time
 from copy import copy
 from typing import List
 
@@ -10,12 +9,16 @@ from dj_server.dj_ros_api_app.helpers.InternalDBConnector import InternalDBConne
 from dj_server.dj_ros_api_app.helpers.mqtt_forwarder import MQTTForwarder
 from dj_server.dj_ros_api_app.helpers.object_classes import RuntimeStarterRESTObject, RosTopicConfigObj, TopicInfo
 from dj_server.dj_ros_api_app.helpers.utils import singleton, convert_to_json, ros_msg2json, convert_json_to_conf_obj, \
-    NotFoundError, generate_unique_id, get_current_time
+    NotFoundError, generate_unique_id, get_current_time, flatten_dict, add_prefix_to_dict, get_query_prefix, unflatten
 from dj_server.dj_ros_api_app.models import MonitoringConfig
 from dj_server.dj_ros_api_app.ros.RosConnector import RosConnector
 from dj_server.dj_ros_api_app.ros.RosListener import RosListener
 
-global ros_mon_data
+ros_mon_data = {}
+ros_listener = RosListener()
+rc = RosConnector()
+mqtt_forwarder = MQTTForwarder()
+is_ros_data_initalized = False
 COMPLETE_SAVE_TYPE = 'Complete (but complex)'
 SIMPLE_SAVE_TYPE = 'Simple (but flattened)'
 
@@ -59,19 +62,24 @@ def get_selected_topic_strings(conf_data: str, initial_prefix: str):
 
 def update_ros_data(message, base_topic: str, sub_topic: TopicInfo):
     """The callback function of the ros listener, updates the global ros_mon_data variable"""
-
     global ros_mon_data
-    ros_mon_data[base_topic][sub_topic.in_topic] = message
+    # flatten dictionary
+    flattened_dict = flatten_dict(message)
+    # add base topic as prefix
+    flattened_dict = add_prefix_to_dict(flattened_dict, f'{base_topic}${sub_topic.in_topic}$')
+    # update values in ros_mon_data
+    for key, value in flattened_dict.items():
+        ros_mon_data[key] = value
 
 
 def monitor_topic(base_topic: str, sub_topic: TopicInfo):
     """Starts a ROS topic subscription on a given topic"""
-    ros_connector: RosListener = RosListener()
 
-    # create entry in global var for subtopic
-    ros_mon_data[base_topic][sub_topic.in_topic] = {}
+    if not ros_listener:
+        logging.error(f'Got no ROS-Listener instance!')
+
     # create listener and callback if new data is received
-    listener = roslibpy.Topic(ros_connector.ROS_CLIENT, base_topic + '/' + sub_topic.in_topic, sub_topic.type)
+    listener = roslibpy.Topic(ros_listener.ROS_CLIENT, base_topic + '/' + sub_topic.in_topic, sub_topic.type)
     listener.subscribe(lambda message: update_ros_data(message, base_topic, sub_topic))
     logging.info(f'Created subscriber on {sub_topic.in_topic}')
 
@@ -83,21 +91,28 @@ def monitor_topic(base_topic: str, sub_topic: TopicInfo):
 
 def get_current_ros_data(topic: TopicInfo):
     """Gets the data of the global cached ros_mon_data var for a given (sub-)topic"""
-    global ros_mon_data
 
-    hierarchy = topic.in_topic.split('/')
-    curr_tree_node = ros_mon_data
-    for step in hierarchy:
-        is_successful_flag = False
-        while not is_successful_flag:
-            try:
-                curr_tree_node = curr_tree_node[step]
-                is_successful_flag = True
-            except KeyError:
-                time.sleep(3)
-                logging.warning(f'Could not access topic: {topic.in_topic}')
+    # transform topic name to name query prefix
+    query_prefix_key = get_query_prefix(topic.in_topic)
+    # local copy of global var
+    local_ros_mon_data = ros_mon_data.copy()
 
-    return curr_tree_node
+    if query_prefix_key in local_ros_mon_data:
+        # no nested element, return the value directly
+        return local_ros_mon_data[query_prefix_key]
+
+    # nested topic is wanted, get the subtopics
+    result_dict = dict()
+    # query all wanted data
+    for key, value in local_ros_mon_data.items():
+        if key.startswith(query_prefix_key):
+            # this data is part of the result
+            # remove unwanted prefixes to flatten the data correctly afterwards
+            shortened_key = key[len(query_prefix_key) + 1:]
+            result_dict[shortened_key] = value
+
+    # unflatten dict for correct json serialization
+    return unflatten(result_dict)
 
 
 def get_mqtt_topic(topic: str, save_type: str):
@@ -123,8 +138,6 @@ def get_mqtt_topic(topic: str, save_type: str):
 
 def forward_message(topic: TopicInfo, seconds_to_wait: float, save_type: str, thread_event: threading.Event):
     """Forwards the topic via mqtt in a given frequency"""
-    mqtt_forwarder: MQTTForwarder = MQTTForwarder()
-
     mqtt_topic = get_mqtt_topic(topic.in_topic, save_type)
 
     while not thread_event.is_set():
@@ -203,9 +216,6 @@ class RuntimeMonitoringStarter:
     def start_rt_monitoring(self, mon_config: MonitoringConfig, rt_starter: RuntimeStarterRESTObject):
         """Starts the monitoring for a given monitoring config"""
 
-        global ros_mon_data
-        rc = RosConnector()
-
         # check if root topic still exists
         curr_root_topic_list = rc.get_sums()
         if rt_starter.prefix not in curr_root_topic_list:
@@ -218,8 +228,6 @@ class RuntimeMonitoringStarter:
         # start monitoring of the base topic if it is not already monitored
         simple_base_topic_name = rt_starter.prefix
         if simple_base_topic_name not in ros_mon_data:
-            # create new placeholder attribute in global var
-            ros_mon_data[simple_base_topic_name] = {}
             # get the subtopics
             sub_topics = rc.get_properties_for_sum(simple_base_topic_name)
             # monitor the topics
@@ -230,10 +238,12 @@ class RuntimeMonitoringStarter:
         frequency_list = get_frequencies(mon_config.frequencies)
         # get the second level topics from the config to match the frequencies
         sec_lvl_topics_of_config = get_sec_lvl_topics(mon_config.ecore_data)
+
         # start a new thread for every topic to forward them accordingly
         for topic in topic_list:
             fq = get_frequency_for_topic(topic, frequency_list, sec_lvl_topics_of_config)
-            threading.Timer(1, forward_message, [topic, fq, mon_config.save_type, rt_starter.thread_event]).start()
+            threading.Timer(1, forward_message,
+                            [topic, fq, mon_config.save_type, rt_starter.thread_event]).start()
 
     def init_monitoring(self, runtime_config):
 
@@ -258,9 +268,5 @@ class RuntimeMonitoringStarter:
         return jsonable_obj
 
     def __init__(self):
-        # instantiate global var
-        global ros_mon_data
-        ros_mon_data = {}
-
         self.active_rt_list = []
         self.db_connector = InternalDBConnector()
