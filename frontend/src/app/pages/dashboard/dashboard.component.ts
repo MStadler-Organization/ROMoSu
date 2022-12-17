@@ -81,8 +81,7 @@ export class DashboardComponent implements OnInit {
    * @param clickedConfig The config on which the button is clicked on.
    */
   onShowDataBtnClicked(clickedConfig: RTConfig) {
-    console.log(clickedConfig)
-    // TODO: Implement this
+
   }
 
   /**
