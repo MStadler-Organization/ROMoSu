@@ -10,6 +10,7 @@ import {MatListModule} from "@angular/material/list";
 import {CustomDialogComponent} from './components/custom-dialog/custom-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {LoadingDialogComponent} from './components/loading-dialog/loading-dialog.component';
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import {LoadingDialogComponent} from './components/loading-dialog/loading-dialog
     MatButtonModule,
     MatSidenavModule,
     MatListModule,
-    MatDialogModule
+    MatDialogModule,
+    MatProgressSpinnerModule
   ]
 })
 export class SharedModule {

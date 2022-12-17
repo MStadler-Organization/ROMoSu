@@ -3,6 +3,7 @@ import {ConfigFileData, RTConfig, SumType} from "../../shared/models/interfaces"
 import {DashboardService} from "./dashboard.service";
 import {MatDialog} from "@angular/material/dialog";
 import {CustomDialogComponent} from "../../shared/components/custom-dialog/custom-dialog.component";
+import {LoadingDialogComponent} from "../../shared/components/loading-dialog/loading-dialog.component";
 
 @Component({
   selector: 'app-dashboard',
@@ -90,6 +91,8 @@ export class DashboardComponent implements OnInit {
    */
   onStopMonitoringBtnClicked(clickedConfig: RTConfig) {
     if (clickedConfig.id) {
+      const spinnerDialog = this.dialog.open(LoadingDialogComponent, {disableClose: true});
+
       this.dashboardService.stopMonitoring(clickedConfig.id).subscribe((deletedConfig) => {
         // delete from view as well
         let removeIdx = -1
@@ -104,6 +107,7 @@ export class DashboardComponent implements OnInit {
         if (this.activeConfigs.length === 0) {
           this.showNothingToShowDialog()
         }
+        spinnerDialog.close()
       })
     } else {
       console.error('Runtime config does not yield ID')

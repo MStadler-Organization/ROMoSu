@@ -12,7 +12,7 @@
           {{sum}}
         </mat-list-option>
       </mat-selection-list>
-      <div>
+      <div *ngIf="!this.showProgressBar">
         <button (click)="goToStepTwoButtonClicked(sums, stepper)" mat-raised-button onclick="this.blur()">Next Step
         </button>
       </div>
@@ -28,7 +28,7 @@
           {{singleSumType.name}}
         </mat-list-option>
       </mat-selection-list>
-      <div>
+      <div *ngIf="!this.showProgressBar">
         <button (click)="goToStepThreeButtonClicked(sumts, stepper)" mat-raised-button onclick="this.blur()">Next Step
         </button>
       </div>
@@ -45,7 +45,7 @@
           {{singleConfig.name}}
         </mat-list-option>
       </mat-selection-list>
-      <div>
+      <div *ngIf="!this.showProgressBar">
         <button (click)="goToStepFourButtonClicked(configs, stepper)" mat-raised-button onclick="this.blur()">Next Step
         </button>
       </div>
@@ -57,7 +57,7 @@
   <mat-step>
     <ng-template matStepLabel>Done</ng-template>
     <p>You are now done.</p>
-    <div>
+    <div *ngIf="!this.showProgressBar">
       <button mat-raised-button onclick="this.blur()" routerLink='/home'>Back To Home</button>
     </div>
   </mat-step>
