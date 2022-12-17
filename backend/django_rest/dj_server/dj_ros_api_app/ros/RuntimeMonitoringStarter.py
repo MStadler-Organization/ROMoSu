@@ -72,7 +72,7 @@ def update_ros_data(message, base_topic: str, sub_topic: TopicInfo):
         ros_mon_data[key] = value
 
 
-def monitor_topic(base_topic: str, sub_topic: TopicInfo):
+def monitor_topic(base_topic: str, sub_topic: TopicInfo, thread_event: threading.Event):
     """Starts a ROS topic subscription on a given topic"""
 
     if not ros_listener:
@@ -83,9 +83,8 @@ def monitor_topic(base_topic: str, sub_topic: TopicInfo):
     listener.subscribe(lambda message: update_ros_data(message, base_topic, sub_topic))
     logging.info(f'Created subscriber on {sub_topic.in_topic}')
 
-    while True:
+    while not thread_event.is_set():
         # loop for the listener
-        # TODO: change this to an event which is canceled once the RT is done for the base topic
         pass
 
 
@@ -188,6 +187,23 @@ def get_frequency_for_topic(topic: TopicInfo, frequency_list, sec_lvl_topics_of_
 class RuntimeMonitoringStarter:
     """Handles the active RT Monitoring instances"""
 
+    def increase_base_topic_counter(self, prefix):
+        """Increases the counter for the base_topic"""
+        if not self.is_not_monitored(prefix):
+            for conf in self.active_base_topic_list:
+                if conf['base_topic'] == prefix:
+                    conf['counter'] = conf['counter'] + 1
+
+    def is_not_monitored(self, prefix):
+        """
+        Checks if another active monitoring config is already monitoring the base topic; :returns True,
+        if it is not monitoring the prefix
+        """
+        for conf in self.active_base_topic_list:
+            if conf['base_topic'] == prefix:
+                return False
+        return True
+
     def get_json_serializable_list(self):
         jsonable_list = []
         for conf in self.active_rt_list:
@@ -210,8 +226,16 @@ class RuntimeMonitoringStarter:
         raise NotFoundError
 
     def stop_monitoring(self, rt_config_to_stop):
-        # find the event to stop
+        # stop the event to kill all the forwarding threads
         rt_config_to_stop['thread_event'].set()
+
+        # check if this was also the last config for the base_topic
+        for bt_obj in self.active_base_topic_list:
+            if bt_obj['base_topic'] == rt_config_to_stop['prefix']:
+                bt_obj['counter'] = bt_obj['counter'] - 1
+                if bt_obj['counter'] <= 0:
+                    bt_obj['thread_event'].set()
+                    self.active_base_topic_list.remove(bt_obj)
 
     def start_rt_monitoring(self, mon_config: MonitoringConfig, rt_starter: RuntimeStarterRESTObject):
         """Starts the monitoring for a given monitoring config"""
@@ -226,19 +250,28 @@ class RuntimeMonitoringStarter:
         topic_list = get_selected_topic_strings(mon_config.ecore_data, rt_starter.prefix)
 
         # start monitoring of the base topic if it is not already monitored
-        simple_base_topic_name = rt_starter.prefix
-        if simple_base_topic_name not in ros_mon_data:
+        if self.is_not_monitored(rt_starter.prefix):
+            simple_base_topic_name = rt_starter.prefix
+
+            thread_event = threading.Event()
+
+            # add the base topic
+            self.active_base_topic_list.append(
+                {'base_topic': rt_starter.prefix, 'counter': 1, 'thread_event': thread_event})
+
             # get the subtopics
             sub_topics = rc.get_properties_for_sum(simple_base_topic_name)
             # monitor the topics
             for topic in sub_topics:
-                threading.Timer(1, monitor_topic, [simple_base_topic_name, topic]).start()
+                threading.Timer(1, monitor_topic, [simple_base_topic_name, topic, thread_event]).start()
+        else:
+            self.increase_base_topic_counter(rt_starter.prefix)
 
         # transform frequencies
+
         frequency_list = get_frequencies(mon_config.frequencies)
         # get the second level topics from the config to match the frequencies
         sec_lvl_topics_of_config = get_sec_lvl_topics(mon_config.ecore_data)
-
         # start a new thread for every topic to forward them accordingly
         for topic in topic_list:
             fq = get_frequency_for_topic(topic, frequency_list, sec_lvl_topics_of_config)
@@ -246,7 +279,6 @@ class RuntimeMonitoringStarter:
                             [topic, fq, mon_config.save_type, rt_starter.thread_event]).start()
 
     def init_monitoring(self, runtime_config):
-
         # add additional data
         runtime_config['id'] = generate_unique_id()
         runtime_config['start_time'] = get_current_time()
@@ -259,8 +291,7 @@ class RuntimeMonitoringStarter:
         # get saved monitoring config from runtime config id
         mon_config_qs = self.db_connector.get_rt_config_for_id(rt_starter_obj.config_id)
 
-        # create new thread for
-        threading.Timer(1, self.start_rt_monitoring, [mon_config_qs[0], rt_starter_obj]).start()
+        self.start_rt_monitoring(mon_config_qs[0], rt_starter_obj)
 
         # create json-serializable obj
         jsonable_obj = copy(rt_starter_obj)
@@ -269,4 +300,5 @@ class RuntimeMonitoringStarter:
 
     def __init__(self):
         self.active_rt_list = []
+        self.active_base_topic_list = []
         self.db_connector = InternalDBConnector()
