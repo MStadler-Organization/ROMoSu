@@ -24,7 +24,7 @@ SIMPLE_SAVE_TYPE = 'Simple (but flattened)'
 
 
 def get_list_of_checked_topics(topic_config_obj: RosTopicConfigObj, name_prefix: str):
-    """Recursively parses the config for checked topics and retruns the topic info as a list"""
+    """Recursively parses the config for checked topics and returns the topic info as a list"""
 
     result_topic_list: [TopicInfo] = []
 
