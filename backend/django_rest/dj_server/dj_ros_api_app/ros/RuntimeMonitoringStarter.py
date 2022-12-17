@@ -205,6 +205,7 @@ class RuntimeMonitoringStarter:
         return True
 
     def get_json_serializable_list(self):
+        """Returns a list of all active rt-configs as a json-able object"""
         jsonable_list = []
         for conf in self.active_rt_list:
             jsonable_list.append(
@@ -212,11 +213,13 @@ class RuntimeMonitoringStarter:
                  'prefix': conf['prefix'],
                  'sum_type_id': conf['sum_type_id'],
                  'config_id': conf['config_id'],
-                 'start_time': conf['start_time']}
+                 'start_time': conf['start_time'],
+                 'selected_topics': conf['selected_topics']}
             )
         return jsonable_list
 
     def delete_active_config(self, id_to_delete: int):
+        """Deletes a runtime monitoring instance"""
         for active_config in self.active_rt_list:
             if active_config['id'] == id_to_delete:
                 self.stop_monitoring(active_config)
@@ -226,6 +229,7 @@ class RuntimeMonitoringStarter:
         raise NotFoundError
 
     def stop_monitoring(self, rt_config_to_stop):
+        """Stops the monitoring for a given rt-config"""
         # stop the event to kill all the forwarding threads
         rt_config_to_stop['thread_event'].set()
 
@@ -237,7 +241,14 @@ class RuntimeMonitoringStarter:
                     bt_obj['thread_event'].set()
                     self.active_base_topic_list.remove(bt_obj)
 
-    def start_rt_monitoring(self, mon_config: MonitoringConfig, rt_starter: RuntimeStarterRESTObject):
+    def add_topic_list_to_rt_data(self, topic_list, id):
+        """adds the selected topics to the active runtime data object"""
+        # search correct configurations
+        for conf in self.active_rt_list:
+            if conf['id'] == id:
+                conf['selected_topics'] = topic_list
+
+    def start_rt_monitoring(self, mon_config: MonitoringConfig, rt_starter: RuntimeStarterRESTObject, rc_id):
         """Starts the monitoring for a given monitoring config"""
 
         # check if root topic still exists
@@ -248,6 +259,7 @@ class RuntimeMonitoringStarter:
 
         # get wanted sub-topic-strings
         topic_list = get_selected_topic_strings(mon_config.ecore_data, rt_starter.prefix)
+        self.add_topic_list_to_rt_data(topic_list, rc_id)
 
         # start monitoring of the base topic if it is not already monitored
         if self.is_not_monitored(rt_starter.prefix):
@@ -291,7 +303,7 @@ class RuntimeMonitoringStarter:
         # get saved monitoring config from runtime config id
         mon_config_qs = self.db_connector.get_rt_config_for_id(rt_starter_obj.config_id)
 
-        self.start_rt_monitoring(mon_config_qs[0], rt_starter_obj)
+        self.start_rt_monitoring(mon_config_qs[0], rt_starter_obj, runtime_config['id'])
 
         # create json-serializable obj
         jsonable_obj = copy(rt_starter_obj)
