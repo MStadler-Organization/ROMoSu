@@ -1,1 +1,21 @@
-<p>rt-data-dialog works!</p>
+<div class="outer-dialog-container">
+  <mat-accordion>
+    <div *ngFor="let topic of rt_data.selected_topics" class="panel-container">
+      <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{topic.name}}
+          </mat-panel-title>
+          <mat-panel-description>
+            {{this.getPreviewData(topic.last_data)}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        {{topic.last_data}}
+      </mat-expansion-panel>
+    </div>
+  </mat-accordion>
+  <div class="btn-container">
+    <button (click)="this.onClickOk()" color="primary" mat-raised-button>OK</button>
+  </div>
+
+</div>

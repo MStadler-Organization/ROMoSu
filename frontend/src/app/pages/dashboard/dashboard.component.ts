@@ -4,6 +4,7 @@ import {DashboardService} from "./dashboard.service";
 import {MatDialog} from "@angular/material/dialog";
 import {CustomDialogComponent} from "../../shared/components/custom-dialog/custom-dialog.component";
 import {LoadingDialogComponent} from "../../shared/components/loading-dialog/loading-dialog.component";
+import {RtDataDialogComponent} from "../../shared/components/rt-data-dialog/rt-data-dialog.component";
 
 @Component({
   selector: 'app-dashboard',
@@ -81,7 +82,10 @@ export class DashboardComponent implements OnInit {
    * @param clickedConfig The config on which the button is clicked on.
    */
   onShowDataBtnClicked(clickedConfig: RTConfig) {
-
+    this.dialog.open(RtDataDialogComponent, {
+      data: clickedConfig,
+      autoFocus: false // disable default focus on button
+    });
   }
 
   /**
