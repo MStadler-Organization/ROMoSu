@@ -11,6 +11,8 @@ let jsonConfig = JSON.parse(rawData.toString());
 
 config.nodejs_hostname = jsonConfig.nodejs_hostname
 config.nodejs_port = jsonConfig.nodejs_port
+config.mqtt_ip = jsonConfig.mqtt_ip
+config.mqtt_port = jsonConfig.mqtt_port
 
 console.log('Successfully laoded config file!')
 

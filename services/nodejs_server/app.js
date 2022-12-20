@@ -2,10 +2,10 @@ const http = require('http');
 const Influx = require('influx');
 
 
-const config = require('./getConfig');
+const CONFIG = require('./utils/getConfig');
 
-const hostname = config.nodejs_hostname;
-const port = config.nodejs_port;
+const hostname = CONFIG.nodejs_hostname;
+const port = CONFIG.nodejs_port;
 
 const server = http.createServer((req, res) => {
     res.statusCode = 200;
@@ -17,3 +17,4 @@ server.listen(port, hostname, () => {
     console.log(`Server running at http://${hostname}:${port}/`);
 });
 
+console.log(CONFIG.mqtt_ip);
