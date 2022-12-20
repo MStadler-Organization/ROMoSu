@@ -6,13 +6,12 @@ import time
 
 from paho.mqtt import client as mqtt_client
 
-from dj_server.dj_ros_api_app.helpers.utils import singleton
+from dj_server.dj_ros_api_app.helpers.utils import singleton, get_config
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(dir_path)
 
-# settings
-LOCAL_MQTT_IP = 'localhost'
+CONFIG = get_config()
 
 global local_mqtt_client_id
 
@@ -44,7 +43,7 @@ class _MQTTForwarderLocal:
         # Set Connecting Client ID
         client = mqtt_client.Client(local_mqtt_client_id)
         client.on_connect = _on_connect
-        client.connect(LOCAL_MQTT_IP, 1883)
+        client.connect(CONFIG['mqtt_ip'], CONFIG['mqtt_port'])
         self.client = client
         logging.info('local mqtt is set up')
 

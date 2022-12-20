@@ -1,3 +1,6 @@
 {
-  "hostname": "127.0.0.1"
+  "nodejs_hostname": "127.0.0.1",
+  "nodejs_port": 3000,
+  "mqtt_ip": "127.0.0.1",
+  "mqtt_port": 1883
 }

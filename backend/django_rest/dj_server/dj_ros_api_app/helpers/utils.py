@@ -1,4 +1,6 @@
+import os
 import sys
+from pathlib import Path
 
 # for different python versions
 if sys.version_info.major == 3 and sys.version_info.minor >= 10:
@@ -16,6 +18,8 @@ from types import SimpleNamespace
 
 import pytz
 import yaml
+
+PROJ_ROOT = proj_root = Path(__file__).parent.parent
 
 
 class NotFoundError(Exception):
@@ -167,3 +171,11 @@ def ros_msg2json(msg):
     """Convert a ROS message to JSON format"""
     y = yaml.safe_load(str(msg))
     return json.dumps(y, indent=4)
+
+
+def get_config() -> dict:
+    """Returns the serialized config"""
+    f = open(os.path.join(PROJ_ROOT, '..', '..', '..', '..', 'config', 'config.json'), 'r')
+    data = json.loads(f.read())
+    f.close()
+    return data
