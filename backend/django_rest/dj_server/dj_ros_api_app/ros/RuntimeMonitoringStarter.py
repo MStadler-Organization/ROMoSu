@@ -1,4 +1,4 @@
-import logging
+import json
 import logging
 import threading
 from copy import copy
@@ -330,10 +330,21 @@ class RuntimeMonitoringStarter:
         # get saved monitoring config from runtime config id
         mon_config_qs = self.db_connector.get_rt_config_for_id(rt_starter_obj.config_id)
 
-        self.start_rt_monitoring(mon_config_qs[0], rt_starter_obj, runtime_config['id'])
-
         # create json-serializable obj
         jsonable_obj = copy(rt_starter_obj)
+
+        # publish metadata
+        jsonable_obj.thread_event = ''
+        mqtt_forwarder.publish(f'{rt_starter_obj.prefix}/meta', json.dumps(
+            {
+                'prefix': jsonable_obj.prefix,
+                'sum_type_id': jsonable_obj.sum_type_id,
+            }
+        ))
+
+        # start monitoring
+        self.start_rt_monitoring(mon_config_qs[0], rt_starter_obj, runtime_config['id'])
+
         del jsonable_obj.thread_event
         return jsonable_obj
 
