@@ -1,8 +1,6 @@
-const http = require('http');
-const Influx = require('influx');
-
-
 const CONFIG = require('./utils/getConfig');
+const http = require('http');
+const run_mqtt = require('./api_connector/mqtt');
 
 const hostname = CONFIG.nodejs_hostname;
 const port = CONFIG.nodejs_port;
@@ -17,4 +15,5 @@ server.listen(port, hostname, () => {
     console.log(`Server running at http://${hostname}:${port}/`);
 });
 
-console.log(CONFIG.mqtt_ip);
+// connect to mqtt
+run_mqtt()
