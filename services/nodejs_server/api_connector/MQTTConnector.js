@@ -1,15 +1,16 @@
 const MQTTConnector = require('mqtt')
 const CONSTANTS = require('./../utils/constants')
-
 const CONFIG = require('./../utils/getConfig')
-const influxDBConnector = require("../influxDBConnector");
-
 const DECODER = new TextDecoder("utf-8");
+
+let influxDBConnector
+import('./../influxDBConnector.mjs').then(pkg => {
+    influxDBConnector = pkg
+})
 
 function connectToMQTT() {
     // connect to MQTTConnector
     const client = MQTTConnector.connect(`mqtt://${CONFIG.mqtt_ip}`)
-
 
     client.on('connect', function () {
         // successful connection
