@@ -1,9 +1,9 @@
-const CONFIG = require('./utils/getConfig');
 const http = require('http');
-const run_mqtt = require('./api_connector/mqtt');
+const connectToMQTT = require("./api_connector/MQTTConnector");
+const config = require("./utils/getConfig");
 
-const hostname = CONFIG.nodejs_hostname;
-const port = CONFIG.nodejs_port;
+const hostname = config.nodejs_hostname;
+const port = config.nodejs_port;
 
 const server = http.createServer((req, res) => {
     res.statusCode = 200;
@@ -16,4 +16,4 @@ server.listen(port, hostname, () => {
 });
 
 // connect to mqtt
-run_mqtt()
+connectToMQTT()
