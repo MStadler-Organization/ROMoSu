@@ -2,5 +2,7 @@
   "nodejs_hostname": "127.0.0.1",
   "nodejs_port": 3000,
   "mqtt_ip": "127.0.0.1",
-  "mqtt_port": 1883
+  "mqtt_port": 1883,
+  "influx_db_url": "http://localhost:8086/",
+  "influx_db_api_token": "?????"
 }
