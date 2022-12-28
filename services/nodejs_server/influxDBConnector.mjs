@@ -16,16 +16,12 @@ const writeApi = influxDB.getWriteApi(organization, bucket)
  * @param data the received data via mqtt
  */
 export const insertTBData = (topic, data) => {
-    console.log(topic)
-    console.log(data)
 
+    // get field name
+    const fieldName = topic.replaceAll('/', '$')
 
     const pointToSave = new Point('mqtt-tb')
-        .stringField('data', data.toString())
+        .stringField(fieldName, JSON.stringify(data))
 
     writeApi.writePoint(pointToSave)
-
-    writeApi.close().then(() => {
-        console.log('WRITE FINISHED')
-    })
 }
