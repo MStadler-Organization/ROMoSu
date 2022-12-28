@@ -1,0 +1,10 @@
+{
+  "nodejs_hostname": "127.0.0.1",
+  "nodejs_port": 3000,
+  "mqtt_ip": "127.0.0.1",
+  "mqtt_port": 1883,
+  "influx_db_url": "http://0.0.0.0:8086",
+  "influx_db_api_token": "dlFepSUTe868Q_dqCqLhZxPtgwYpKBObAWrfXYjJ89BsXKIpFCC71jIe1crZSbo-nMR-XEXPsq7677dfb8C7YA==",
+  "influx_db_organisation": "26e6c00ed028781d",
+  "influx_db_bucket": "ros-mon-ma"
+}

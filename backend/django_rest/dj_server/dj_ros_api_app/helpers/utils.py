@@ -1,4 +1,14 @@
-import collections
+import os
+import sys
+from pathlib import Path
+
+# for different python versions
+if sys.version_info.major == 3 and sys.version_info.minor >= 10:
+
+    from collections.abc import MutableMapping
+else:
+    from collections import MutableMapping
+
 import datetime
 import json
 import logging
@@ -8,6 +18,8 @@ from types import SimpleNamespace
 
 import pytz
 import yaml
+
+PROJ_ROOT = proj_root = Path(__file__).parent.parent
 
 
 class NotFoundError(Exception):
@@ -54,7 +66,7 @@ def flatten_dict(d, parent_key='', sep='$'):
     items = []
     for k, v in d.items():
         new_key = parent_key + sep + k if parent_key else k
-        if isinstance(v, collections.MutableMapping):
+        if isinstance(v, MutableMapping):
             items.extend(flatten_dict(v, new_key, sep=sep).items())
         else:
             items.append((new_key, v))
@@ -159,3 +171,11 @@ def ros_msg2json(msg):
     """Convert a ROS message to JSON format"""
     y = yaml.safe_load(str(msg))
     return json.dumps(y, indent=4)
+
+
+def get_config() -> dict:
+    """Returns the serialized config"""
+    f = open(os.path.join(PROJ_ROOT, '..', '..', '..', '..', 'config', 'config.json'), 'r')
+    data = json.loads(f.read())
+    f.close()
+    return data
