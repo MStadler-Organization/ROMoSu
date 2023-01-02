@@ -1,9 +1,12 @@
 package at.jku.lit.edgemode.esper;
 
+import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
+
 import at.jku.lit.edgemode.esper.eventtypes.HeartBeatEvent;
 import at.jku.lit.edgemode.esper.validation.ValidationManager;
 import net.mv.tools.logging.ILogger;
 import net.mv.tools.logging.LoggerProvider;
+import util.MQTTConnector;
 
 /**
  * 
@@ -24,19 +27,12 @@ public class ConstraintRunner {
 		ValidationManager.getInstance().init();
 
 		ValidationManager.getInstance().registerEventListener(event -> {
-
 			updateStateEvent(event);
 		});
 
-		while (true) {
-			try {
-				Thread.sleep(10000);
-				updateStateEvent(new HeartBeatEvent()); // sends a heart beat event to trigger the heartbeat constraint
-														// vioaltion for testing
-			} catch (InterruptedException e) {
-				LOGGER.error(e);
-			}
-		}
+		// subscribe to MQTT broker
+		MQTTConnector mqttConnector = new MQTTConnector();
+		mqttConnector.connect();
 
 	}
 
