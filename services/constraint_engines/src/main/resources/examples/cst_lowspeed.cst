@@ -1,0 +1,6 @@
+NAME=UnsafeGPS
+CONSTRAINT=
+select * from pattern
+[ every a=BatteryStatus(percentage <  25)  -> b=Velocity -> c=Velocity -> d=Velocity -> e=Velocity -> f=Velocity 
+ while  ((b.speed+c.speed+d.speed+e.speed+f.speed)/5 > .10)]
+;

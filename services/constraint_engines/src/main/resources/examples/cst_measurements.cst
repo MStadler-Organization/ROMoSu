@@ -1,0 +1,6 @@
+NAME=InvalidMeasurement
+CONSTRAINT=
+select * from  pattern 
+[ every a=Velocity(speed > 0.05f) ->  SensorMeasurement(id=a.id)  where timer:within(3 sec)             ]
+
+;

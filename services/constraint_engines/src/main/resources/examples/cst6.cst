@@ -1,0 +1,5 @@
+NAME=StateEventTooLate
+CONSTRAINT=
+select * from  pattern 
+[ every a=Dronestate -> (timer:interval(6 sec) and not b=Dronestate(groundspeed > a.groundspeed))   ]
+;

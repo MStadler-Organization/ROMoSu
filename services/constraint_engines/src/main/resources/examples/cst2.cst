@@ -1,0 +1,9 @@
+NAME=StrongAccelerate
+
+CONSTRAINT=select * from DroneState match_recognize (
+measures A as s1, B as s2
+pattern (A B)
+define
+A as A.speed > 5, 
+B as (A.speed < B.speed) and B.speed > (A.speed * 71.2) )
+;

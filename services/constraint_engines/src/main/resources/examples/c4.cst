@@ -1,0 +1,7 @@
+NAME=t1
+CONSTRAINT=
+select * from pattern 
+  [every timer:interval(60 sec) -> (timer:interval(65 sec) and not DroneState(id = 'T1'))]
+output first every 999992 minutes
+;
+

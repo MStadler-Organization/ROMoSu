@@ -1,0 +1,4 @@
+NAME=stabil
+CONSTRAINT=
+select * from  Dronestate having cast(mode, string) != 'STABIsLIZE'
+;

@@ -1,0 +1,11 @@
+NAME=NoHeartbeat
+CONSTRAINT=select * from pattern [every A=DroneState or every B=HeartBeat or every C=Beat]
+match_recognize (
+measures tick as MissionStart, trade as Waypoint, C as  MisisonFinish
+pattern (A B+ C)
+define
+A as A.id = "UAV1",
+B as B.id = "UAV2",
+C as C.id="UAV1"
+)
+;
