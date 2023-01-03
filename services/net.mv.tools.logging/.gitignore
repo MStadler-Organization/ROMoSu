@@ -1,0 +1,6 @@
+/bin/
+/.pmd
+/.DS_Store
+/target/
+/.settings/
+.classpath

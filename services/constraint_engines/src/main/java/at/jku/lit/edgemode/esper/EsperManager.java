@@ -16,6 +16,7 @@ import com.espertech.esper.client.EPStatement;
 
 import at.jku.lit.edgemode.esper.eventtypes.DummyEvent;
 import at.jku.lit.edgemode.esper.eventtypes.HeartBeatEvent;
+import at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent;
 import at.jku.lit.edgemode.esper.validation.ValidationFactory;
 import at.jku.lit.edgemode.esper.validation.api.IConstraint;
 import net.mv.tools.logging.ILogger;
@@ -69,7 +70,7 @@ public class EsperManager {
 	private void registerEventTypes(Configuration cepConfig) {
 		cepConfig.addEventType("DummyEvent", DummyEvent.class);
 		cepConfig.addEventType(HeartBeatEvent.class);
-
+		cepConfig.addEventType(LinearVelocityEvent.class);
 	}
 
 	private void readConstraints() throws IOException {
