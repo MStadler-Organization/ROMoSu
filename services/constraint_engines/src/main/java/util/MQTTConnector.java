@@ -10,6 +10,8 @@ import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.MqttSecurityException;
 
+import at.jku.lit.edgemode.esper.EsperManager;
+import at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent;
 import net.mv.tools.logging.ILogger;
 import net.mv.tools.logging.LoggerProvider;
 
@@ -19,12 +21,15 @@ public class MQTTConnector {
 	private String publisherId;
 	private MqttClient mqttClient;
 	private MqttConnectOptions options;
+	private EsperManager esperManager;
 
 	/**
 	 * Creates a mqtt connector instance
 	 */
-	public MQTTConnector() {
+	public MQTTConnector(EsperManager esperManager) {
 		try {
+			// set the manager
+			this.esperManager = esperManager;
 			// general connection settings
 			this.publisherId = UUID.randomUUID().toString();
 			// TODO: replace this here with the config details
@@ -42,7 +47,22 @@ public class MQTTConnector {
 					System.out.println("topic: " + topic);
 					System.out.println("Qos: " + message.getQos());
 					System.out.println("message content: " + new String(message.getPayload()));
-					// TODO: handle the new message
+					handleMessage(topic, message.toString());
+				}
+
+				/**
+				 * Handles a topic with its data by firing the correct event based on the topic.
+				 * 
+				 * @param topic The topic of the mqtt broker.
+				 * @param data  The data received.
+				 */
+				private void handleMessage(String topic, String data) {
+					if (topic.contains("cmd_vel/linear/x") || topic.contains("cmd_vel/linear$x")) {
+						LinearVelocityEvent le = new LinearVelocityEvent();
+						le.setLinearVelocity(Double.parseDouble(data));
+						esperManager.update(le);
+					}
+
 				}
 
 				@Override

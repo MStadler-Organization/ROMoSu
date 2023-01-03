@@ -32,7 +32,7 @@ public class ValidationManager {
 	}
 
 	public void sendViolation(IViolation violation) {
-		LOGGER.info("New violation occured: " + violation);
+		System.out.println("New violation occured: " + violation);
 
 	}
 
