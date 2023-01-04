@@ -64,8 +64,25 @@ public class MQTTConnector {
 					} else if (topic.contains("scan/ranges")) {
 						CollisionEvent ce = new CollisionEvent();
 						ce.setDistanceNearestObstacle(getClosestDistance(data));
+						ce.setAmountOfInfiniteRangeUnits(getAmountOfInfiniteUnits(data));
 						esperManager.update(ce);
 					}
+				}
+
+				/**
+				 * Counts the amount of infinite range unit values.
+				 * 
+				 * @param data The string array.
+				 * @return
+				 */
+				private int getAmountOfInfiniteUnits(String data) {
+					String mySubstring = "None";
+					int count = 0, index = 0;
+					while ((index = data.indexOf(mySubstring, index)) != -1) {
+						count++;
+						index++;
+					}
+					return count;
 				}
 
 				/**

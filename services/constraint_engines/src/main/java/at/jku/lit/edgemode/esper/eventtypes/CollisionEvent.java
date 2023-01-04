@@ -7,6 +7,8 @@ public class CollisionEvent implements IdableEvent {
 	// closest is 0.11999999731779099
 	private double distanceNearestObstacle;
 
+	private int amountOfInfiniteRangeUnits;
+
 	@Override
 	public String getId() {
 		// TODO Auto-generated method stub
@@ -17,6 +19,14 @@ public class CollisionEvent implements IdableEvent {
 	public void setId(String value) {
 		// TODO Auto-generated method stub
 
+	}
+
+	public int getAmountOfInfiniteRangeUnits() {
+		return amountOfInfiniteRangeUnits;
+	}
+
+	public void setAmountOfInfiniteRangeUnits(int amountOfInfiniteRangeUnits) {
+		this.amountOfInfiniteRangeUnits = amountOfInfiniteRangeUnits;
 	}
 
 	public double getDistanceNearestObstacle() {
