@@ -1,5 +1,0 @@
-NAME=HeartBeatTooLate
-CONSTRAINT=
-select * from  pattern 
-[every (    timer:interval(7 sec) and not a=HeartBeatEvent -> b=HeartBeatEvent       )   ]
-;

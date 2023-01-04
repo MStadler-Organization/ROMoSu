@@ -1,5 +1,7 @@
 package util;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
@@ -11,6 +13,7 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.MqttSecurityException;
 
 import at.jku.lit.edgemode.esper.EsperManager;
+import at.jku.lit.edgemode.esper.eventtypes.CollisionEvent;
 import at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent;
 import net.mv.tools.logging.ILogger;
 import net.mv.tools.logging.LoggerProvider;
@@ -44,9 +47,6 @@ public class MQTTConnector {
 
 				@Override
 				public void messageArrived(String topic, MqttMessage message) throws Exception {
-					System.out.println("topic: " + topic);
-					System.out.println("Qos: " + message.getQos());
-					System.out.println("message content: " + new String(message.getPayload()));
 					handleMessage(topic, message.toString());
 				}
 
@@ -61,8 +61,57 @@ public class MQTTConnector {
 						LinearVelocityEvent le = new LinearVelocityEvent();
 						le.setLinearVelocity(Double.parseDouble(data));
 						esperManager.update(le);
+					} else if (topic.contains("scan/ranges")) {
+						CollisionEvent ce = new CollisionEvent();
+						ce.setDistanceNearestObstacle(getClosestDistance(data));
+						esperManager.update(ce);
+					}
+				}
+
+				/**
+				 * Gets the closest distance of a String containing the ranges.
+				 * 
+				 * @param data The string array.
+				 * @return
+				 */
+				private double getClosestDistance(String data) {
+					// parse the string
+					String intermStr = data.replaceAll("[\\[\\]]", "").replaceAll(",", "");
+					intermStr = intermStr.replaceAll("\"", "").replaceAll("\n", "").replaceAll("None", "");
+					String[] strArr = intermStr.split("\\s+");
+					List<Double> distanceArr = new ArrayList<Double>();
+
+					// get only the doubles
+					for (int i = 0; i < strArr.length; i++) {
+						if (!strArr[i].isEmpty()) {
+							distanceArr.add(Double.parseDouble(strArr[i]));
+						}
 					}
 
+					// find minimum
+					return getMinimum(distanceArr);
+				}
+
+				/**
+				 * Returns the minimum of a List of doubles.
+				 * 
+				 * @param distanceArr The list containting the doubles.
+				 * @return
+				 */
+				private double getMinimum(List<Double> distanceArr) {
+					double currMin = 99.0;
+
+					// if too far away from any wall, no ranges will be measured
+					if (distanceArr.isEmpty()) {
+						return currMin;
+					}
+
+					for (int i = 0; i < distanceArr.size(); i++) {
+						if (currMin > distanceArr.get(i)) {
+							currMin = distanceArr.get(i);
+						}
+					}
+					return currMin;
 				}
 
 				@Override

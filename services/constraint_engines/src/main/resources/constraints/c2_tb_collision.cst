@@ -1,0 +1,3 @@
+NAME=LinearVelocityExceed
+CONSTRAINT=select * from CollisionEvent(distanceNearestObstacle < 0.35)
+;
