@@ -30,7 +30,8 @@ class NotFoundError(Exception):
 
 def get_exact_current_time_in_millis():
     """Returns the current time in milliseconds"""
-    return time.time_ns() // 1_000_000
+    return time.time_ns()
+    # return time.time_ns() // 1_000_000
 
 
 def singleton(class_):
@@ -146,7 +147,7 @@ def setup():
         datefmt='%Y-%m-%d\t%H:%M:%S',
         handlers=[
             logging.FileHandler(
-                f"output/gazebo_tb/delay/run_3/{get_current_time()}_output.log"),
+                f"output/gazebo_tb/effective_processing_time/run_3/{get_current_time()}_output.log"),
             logging.StreamHandler()
         ]
     )

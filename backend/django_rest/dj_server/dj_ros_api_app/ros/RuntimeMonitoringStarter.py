@@ -64,7 +64,7 @@ def get_selected_topic_strings(conf_data: str, initial_prefix: str):
 
 def update_ros_data(message, base_topic: str, sub_topic: TopicInfo):
     """The callback function of the ros listener, updates the global ros_mon_data variable"""
-    time_in_millis = get_exact_current_time_in_millis()
+    time_in_millis_at_topic_arrival = get_exact_current_time_in_millis()
     global ros_mon_data
     # flatten dictionary
     flattened_dict = flatten_dict(message)
@@ -72,8 +72,10 @@ def update_ros_data(message, base_topic: str, sub_topic: TopicInfo):
     flattened_dict = add_prefix_to_dict(flattened_dict, f'{base_topic}${sub_topic.in_topic}$')
     # update values in ros_mon_data
     for key, value in flattened_dict.items():
-        # ros_mon_data[key] = value todo comment back in
-        ros_mon_data[key] = time_in_millis
+        ros_mon_data[key] = value
+        time_in_millis_after_cache = get_exact_current_time_in_millis()
+        ros_mon_data[
+            key] = time_in_millis_after_cache - time_in_millis_at_topic_arrival  # tim till cache todo: remove this
 
 
 def monitor_topic(base_topic: str, sub_topic: TopicInfo, thread_event: threading.Event):
@@ -151,8 +153,9 @@ def forward_message(topic: TopicInfo, seconds_to_wait: float, save_type: str, th
     mqtt_topic = get_mqtt_topic(topic.in_topic, save_type)
 
     while not thread_event.is_set():
+        time_before_access = get_exact_current_time_in_millis()
         data_to_publish = get_current_ros_data(topic)
-        mqtt_forwarder.publish(mqtt_topic, ros_msg2json(data_to_publish))
+        mqtt_forwarder.publish(mqtt_topic, ros_msg2json(data_to_publish), time_before_access)
         thread_event.wait(seconds_to_wait)
 
 
