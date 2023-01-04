@@ -6,7 +6,7 @@ import time
 
 from paho.mqtt import client as mqtt_client
 
-from dj_server.dj_ros_api_app.helpers.utils import singleton, get_config
+from dj_server.dj_ros_api_app.helpers.utils import singleton, get_config, get_exact_current_time_in_millis
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(dir_path)
@@ -48,6 +48,10 @@ class _MQTTForwarderLocal:
         logging.info('local mqtt is set up')
 
     def publish_local(self, topic, message):
+        if message.isdigit():
+            current_millis = get_exact_current_time_in_millis()
+            delta = current_millis - int(message)
+            logging.info(f'{delta}ms \t\tfor topic={topic}')
         self.client.publish(topic, str(message))
 
 

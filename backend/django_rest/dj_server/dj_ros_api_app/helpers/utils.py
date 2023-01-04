@@ -1,5 +1,6 @@
 import os
 import sys
+import time
 from pathlib import Path
 
 # for different python versions
@@ -25,6 +26,11 @@ PROJ_ROOT = proj_root = Path(__file__).parent.parent
 class NotFoundError(Exception):
     """A custom error if nothing is found in the DB"""
     pass
+
+
+def get_exact_current_time_in_millis():
+    """Returns the current time in milliseconds"""
+    return time.time_ns() // 1_000_000
 
 
 def singleton(class_):
@@ -140,7 +146,7 @@ def setup():
         datefmt='%Y-%m-%d %H:%M:%S %Z',
         handlers=[
             logging.FileHandler(
-                f"output/gazebo_tb/throughput/selective_monitoring/run_3/{get_current_time()}_output.log"),
+                f"output/gazebo_tb/average_processing_time/run_1/{get_current_time()}_output.log"),
             logging.StreamHandler()
         ]
     )
