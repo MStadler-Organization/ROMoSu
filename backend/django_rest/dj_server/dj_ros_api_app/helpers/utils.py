@@ -137,7 +137,11 @@ def setup():
     logging.basicConfig(
         format='%(asctime)s %(levelname)-8s %(message)s',
         level=logging.INFO,
-        datefmt='%Y-%m-%d %H:%M:%S %Z'
+        datefmt='%Y-%m-%d %H:%M:%S %Z',
+        handlers=[
+            logging.FileHandler(f"output/gazebo_tb/throughput/single/run_3/{get_current_time()}_output.log"),
+            logging.StreamHandler()
+        ]
     )
 
 

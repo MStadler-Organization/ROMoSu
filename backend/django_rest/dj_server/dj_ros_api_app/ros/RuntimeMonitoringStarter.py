@@ -63,6 +63,7 @@ def get_selected_topic_strings(conf_data: str, initial_prefix: str):
 
 def update_ros_data(message, base_topic: str, sub_topic: TopicInfo):
     """The callback function of the ros listener, updates the global ros_mon_data variable"""
+    logging.info(f'received new topic: {base_topic}/{sub_topic.in_topic}')
     global ros_mon_data
     # flatten dictionary
     flattened_dict = flatten_dict(message)
