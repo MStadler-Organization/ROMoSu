@@ -1,0 +1,5 @@
+NAME=InfiniteRangesAmount
+CONSTRAINT=select * 
+from CollisionEvent.win:time(10 sec)
+having avg(amountOfInfiniteRangeUnits) > 330.0
+;

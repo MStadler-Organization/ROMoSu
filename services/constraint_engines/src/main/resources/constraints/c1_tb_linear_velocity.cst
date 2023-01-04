@@ -1,0 +1,3 @@
+NAME=LinearVelocityExceed
+CONSTRAINT=select * from LinearVelocityEvent(linearVelocity > 22.0)
+;

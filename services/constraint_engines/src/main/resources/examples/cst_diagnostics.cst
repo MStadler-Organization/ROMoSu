@@ -1,0 +1,11 @@
+NAME=UnsafeGPS
+CONSTRAINT=
+select * from pattern
+[ every a=Diagnostics(levelOfOperationActuator =  3) -> 
+
+(
+(timer:interval(10.1 sec) and  not b=Diagnostics(levelOfOperationActuator =  0 and b.id = a.id )) 
+ )
+ ]
+;
+

@@ -1,0 +1,12 @@
+NAME=Constraint2
+
+CONSTRAINT=select * from DroneState match_recognize (
+measures A as temp1, B as temp2, C as temp3, D as temp
+pattern (A B C D)
+define
+A as A.speed > 10,
+B as (A.speed < B.speed),
+C as (B.speed < C.speed),
+D as (C.speed < D.speed) and D.speed >
+(A.speed * 1.2))
+;

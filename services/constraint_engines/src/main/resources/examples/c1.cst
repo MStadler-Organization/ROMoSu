@@ -1,0 +1,3 @@
+NAME=Constraint1
+CONSTRAINT=select * from  DroneState(status='OK') having speed > 36.0
+;

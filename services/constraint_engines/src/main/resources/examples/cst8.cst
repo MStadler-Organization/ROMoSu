@@ -1,0 +1,5 @@
+NAME=StateEventTooLate
+CONSTRAINT=
+select * from  pattern 
+[ every a=DroneState -> (timer:interval(9 sec) and not b=DroneState(id=a.id))   ]
+;
