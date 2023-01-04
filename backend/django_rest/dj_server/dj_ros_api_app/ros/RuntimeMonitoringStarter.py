@@ -63,7 +63,6 @@ def get_selected_topic_strings(conf_data: str, initial_prefix: str):
 
 def update_ros_data(message, base_topic: str, sub_topic: TopicInfo):
     """The callback function of the ros listener, updates the global ros_mon_data variable"""
-    logging.info(f'received new topic: {base_topic}/{sub_topic.in_topic}')
     global ros_mon_data
     # flatten dictionary
     flattened_dict = flatten_dict(message)
@@ -150,6 +149,7 @@ def forward_message(topic: TopicInfo, seconds_to_wait: float, save_type: str, th
 
     while not thread_event.is_set():
         data_to_publish = get_current_ros_data(topic)
+        logging.info(f'Forwarding topic: {mqtt_topic}')
         mqtt_forwarder.publish(mqtt_topic, ros_msg2json(data_to_publish))
         thread_event.wait(seconds_to_wait)
 
