@@ -141,12 +141,12 @@ def get_sub_topic_string(p_topic_string):
 def setup():
     """Basic configs for the application """
     logging.basicConfig(
-        format='%(asctime)s %(levelname)-8s %(message)s',
+        format='%(asctime)s.%(msecs)03d %(levelname)-8s %(message)s',
         level=logging.INFO,
-        datefmt='%Y-%m-%d %H:%M:%S %Z',
+        datefmt='%Y-%m-%d\t%H:%M:%S',
         handlers=[
             logging.FileHandler(
-                f"output/gazebo_tb/average_processing_time/run_1/{get_current_time()}_output.log"),
+                f"output/gazebo_tb/delay/run_3/{get_current_time()}_output.log"),
             logging.StreamHandler()
         ]
     )
