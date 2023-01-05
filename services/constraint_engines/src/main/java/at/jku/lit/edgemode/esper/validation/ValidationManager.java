@@ -4,6 +4,7 @@ import at.jku.lit.edgemode.esper.validation.api.IEventStreamListener;
 import at.jku.lit.edgemode.esper.validation.api.IViolation;
 import net.mv.tools.logging.ILogger;
 import net.mv.tools.logging.LoggerProvider;
+import util.Util;
 
 /**
  * 
@@ -32,7 +33,7 @@ public class ValidationManager {
 	}
 
 	public void sendViolation(IViolation violation) {
-		System.out.println("New violation occured: " + violation);
+		System.out.println(Util.getTimestampString() + "\t Violation occured >> " + violation);
 
 	}
 
