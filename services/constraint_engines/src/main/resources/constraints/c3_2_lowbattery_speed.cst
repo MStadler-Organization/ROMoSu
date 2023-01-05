@@ -1,0 +1,6 @@
+NAME=BatteryVelocityUsage
+CONSTRAINT=
+select * from pattern
+[ every a=BatteryEvent(percentage <  25)  -> b=LinearVelocityEvent -> c=LinearVelocityEvent -> d=LinearVelocityEvent -> e=LinearVelocityEvent -> f=LinearVelocityEvent 
+ while  ((b.linearVelocity+c.linearVelocity+d.linearVelocity+e.linearVelocity+f.linearVelocity)/5 > .10)]
+;
