@@ -33,7 +33,7 @@ public class ValidationManager {
 	}
 
 	public void sendViolation(IViolation violation) {
-		System.out.println(Util.getTimestampString() + "\t Violation occured >> " + violation);
+		System.out.println(Util.getTimestampString() + "\t Violation occured >> " + violation.getConstraint().getFile());
 
 	}
 

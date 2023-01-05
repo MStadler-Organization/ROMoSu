@@ -14,6 +14,7 @@ import com.espertech.esper.client.EPServiceProvider;
 import com.espertech.esper.client.EPServiceProviderManager;
 import com.espertech.esper.client.EPStatement;
 
+import at.jku.lit.edgemode.esper.eventtypes.BatteryEvent;
 import at.jku.lit.edgemode.esper.eventtypes.CollisionEvent;
 import at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent;
 import at.jku.lit.edgemode.esper.validation.ValidationFactory;
@@ -69,6 +70,7 @@ public class EsperManager {
 	private void registerEventTypes(Configuration cepConfig) {
 		cepConfig.addEventType(LinearVelocityEvent.class);
 		cepConfig.addEventType(CollisionEvent.class);
+		cepConfig.addEventType(BatteryEvent.class);
 	}
 
 	private void readConstraints() throws IOException {

@@ -13,6 +13,7 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.MqttSecurityException;
 
 import at.jku.lit.edgemode.esper.EsperManager;
+import at.jku.lit.edgemode.esper.eventtypes.BatteryEvent;
 import at.jku.lit.edgemode.esper.eventtypes.CollisionEvent;
 import at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent;
 import net.mv.tools.logging.ILogger;
@@ -66,7 +67,27 @@ public class MQTTConnector {
 						ce.setDistanceNearestObstacle(getClosestDistance(data));
 						ce.setAmountOfInfiniteRangeUnits(getAmountOfInfiniteUnits(data));
 						esperManager.update(ce);
+					} else if (topic.contains("battery_state")) {
+						BatteryEvent be = new BatteryEvent();
+						be.setPercentage(getBatteryPercentage(data));
+						esperManager.update(be);
 					}
+				}
+
+				/**
+				 * Calculates the battery percentage.
+				 * 
+				 * @param data The mqtt topic data.
+				 * @return the percentage as double.
+				 */
+				private double getBatteryPercentage(String data) {
+					if (data.isEmpty()) {
+						System.out.println("ERROR: Got empty data");
+					}
+
+					double weighted_percentage = Double.parseDouble(data) - 1;
+					weighted_percentage *= 1000;
+					return weighted_percentage;
 				}
 
 				/**
