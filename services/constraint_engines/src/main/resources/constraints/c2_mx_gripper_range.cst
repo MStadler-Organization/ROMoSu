@@ -1,0 +1,3 @@
+NAME=GripperRange
+CONSTRAINT=select * from GripperPositionEvent(gripperPositionZ < 0.0)
+;
