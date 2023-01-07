@@ -10,8 +10,7 @@ from dj_server.dj_ros_api_app.helpers.InternalDBConnector import InternalDBConne
 from dj_server.dj_ros_api_app.helpers.mqtt_forwarder import MQTTForwarder
 from dj_server.dj_ros_api_app.helpers.object_classes import RuntimeStarterRESTObject, RosTopicConfigObj, TopicInfo
 from dj_server.dj_ros_api_app.helpers.utils import singleton, convert_to_json, ros_msg2json, convert_json_to_conf_obj, \
-    NotFoundError, generate_unique_id, get_current_time, flatten_dict, add_prefix_to_dict, get_query_prefix, unflatten, \
-    get_exact_current_time_in_millis
+    NotFoundError, generate_unique_id, get_current_time, flatten_dict, add_prefix_to_dict, get_query_prefix, unflatten
 from dj_server.dj_ros_api_app.models import MonitoringConfig
 from dj_server.dj_ros_api_app.ros.RosConnector import RosConnector
 from dj_server.dj_ros_api_app.ros.RosListener import RosListener
@@ -30,8 +29,12 @@ def get_list_of_checked_topics(topic_config_obj: RosTopicConfigObj, name_prefix:
 
     result_topic_list: [TopicInfo] = []
 
-    # create qualified topic name to avoid name clashes
-    complete_name = name_prefix + '/' + topic_config_obj.name
+    # in rare cases ros provides lists, ignore the empty root item
+    if isinstance(topic_config_obj, list):
+        return result_topic_list
+    else:
+        # create qualified topic name to avoid name clashes
+        complete_name = name_prefix + '/' + topic_config_obj.name
 
     if topic_config_obj.isChecked:
         # topic is selected -> add it to the list (subtopics will be covered automatically)
@@ -64,7 +67,7 @@ def get_selected_topic_strings(conf_data: str, initial_prefix: str):
 
 def update_ros_data(message, base_topic: str, sub_topic: TopicInfo):
     """The callback function of the ros listener, updates the global ros_mon_data variable"""
-    time_in_millis_at_topic_arrival = get_exact_current_time_in_millis()
+
     global ros_mon_data
     # flatten dictionary
     flattened_dict = flatten_dict(message)
@@ -72,10 +75,7 @@ def update_ros_data(message, base_topic: str, sub_topic: TopicInfo):
     flattened_dict = add_prefix_to_dict(flattened_dict, f'{base_topic}${sub_topic.in_topic}$')
     # update values in ros_mon_data
     for key, value in flattened_dict.items():
-        ros_mon_data[key] = value
-        time_in_millis_after_cache = get_exact_current_time_in_millis()
-        ros_mon_data[
-            key] = time_in_millis_after_cache - time_in_millis_at_topic_arrival  # tim till cache todo: remove this
+        ros_mon_data[get_query_prefix(key)] = value
 
 
 def monitor_topic(base_topic: str, sub_topic: TopicInfo, thread_event: threading.Event):
@@ -153,9 +153,8 @@ def forward_message(topic: TopicInfo, seconds_to_wait: float, save_type: str, th
     mqtt_topic = get_mqtt_topic(topic.in_topic, save_type)
 
     while not thread_event.is_set():
-        time_before_access = get_exact_current_time_in_millis()
         data_to_publish = get_current_ros_data(topic)
-        mqtt_forwarder.publish(mqtt_topic, ros_msg2json(data_to_publish), time_before_access)
+        mqtt_forwarder.publish(mqtt_topic, ros_msg2json(data_to_publish))
         thread_event.wait(seconds_to_wait)
 
 

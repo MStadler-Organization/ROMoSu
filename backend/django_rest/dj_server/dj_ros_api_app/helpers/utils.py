@@ -30,8 +30,7 @@ class NotFoundError(Exception):
 
 def get_exact_current_time_in_millis():
     """Returns the current time in milliseconds"""
-    return time.time_ns()
-    # return time.time_ns() // 1_000_000
+    return time.time_ns() // 1_000_000
 
 
 def singleton(class_):
@@ -131,7 +130,7 @@ def get_sub_topic_string(p_topic_string):
     """Takes a topic string and returns the next sub-topic string. E.g., /tb3_2/joint_states => joint_states"""
 
     # check if subtopic is possible
-    if not p_topic_string or p_topic_string.count('/') != 2:
+    if not p_topic_string or p_topic_string.count('/') < 2:
         logging.warning(f'Could not derive subtopic string for topic: {p_topic_string}')
         return None
 
@@ -146,8 +145,7 @@ def setup():
         level=logging.INFO,
         datefmt='%Y-%m-%d\t%H:%M:%S',
         handlers=[
-            logging.FileHandler(
-                f"output/gazebo_tb/effective_processing_time/run_3/{get_current_time()}_output.log"),
+            logging.FileHandler(f"output/{get_current_time()}_output.log"),
             logging.StreamHandler()
         ]
     )
