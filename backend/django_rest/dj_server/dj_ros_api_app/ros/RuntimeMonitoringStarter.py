@@ -29,8 +29,12 @@ def get_list_of_checked_topics(topic_config_obj: RosTopicConfigObj, name_prefix:
 
     result_topic_list: [TopicInfo] = []
 
-    # create qualified topic name to avoid name clashes
-    complete_name = name_prefix + '/' + topic_config_obj.name
+    # in rare cases ros provides lists, ignore the empty root item
+    if isinstance(topic_config_obj, list):
+        return result_topic_list
+    else:
+        # create qualified topic name to avoid name clashes
+        complete_name = name_prefix + '/' + topic_config_obj.name
 
     if topic_config_obj.isChecked:
         # topic is selected -> add it to the list (subtopics will be covered automatically)
@@ -63,6 +67,7 @@ def get_selected_topic_strings(conf_data: str, initial_prefix: str):
 
 def update_ros_data(message, base_topic: str, sub_topic: TopicInfo):
     """The callback function of the ros listener, updates the global ros_mon_data variable"""
+
     global ros_mon_data
     # flatten dictionary
     flattened_dict = flatten_dict(message)
@@ -70,7 +75,7 @@ def update_ros_data(message, base_topic: str, sub_topic: TopicInfo):
     flattened_dict = add_prefix_to_dict(flattened_dict, f'{base_topic}${sub_topic.in_topic}$')
     # update values in ros_mon_data
     for key, value in flattened_dict.items():
-        ros_mon_data[key] = value
+        ros_mon_data[get_query_prefix(key)] = value
 
 
 def monitor_topic(base_topic: str, sub_topic: TopicInfo, thread_event: threading.Event):

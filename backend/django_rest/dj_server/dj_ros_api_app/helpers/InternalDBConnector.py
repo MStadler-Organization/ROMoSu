@@ -5,7 +5,7 @@ from dj_server.dj_ros_api_app.models import MonitoringConfig
 
 
 def is_valid_single_queryset(queryset_to_test: QuerySet):
-    """Checks if the queryset contains only a single result"""
+    """Checks if the queryset contains only a brute_force_monitoring result"""
     if queryset_to_test.count() != 1: return False
     return True
 

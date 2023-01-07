@@ -1,0 +1,6 @@
+NAME=InvalidGripperOpening
+CONSTRAINT=
+select * from  pattern 
+[ every a=ManipulatorStateEvent(movingState="IS_MOVING") ->  GripperSubPositionEvent(command>0.0f)  where timer:within(2 sec)             ]
+
+;

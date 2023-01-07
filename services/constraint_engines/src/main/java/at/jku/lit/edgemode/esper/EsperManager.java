@@ -14,8 +14,13 @@ import com.espertech.esper.client.EPServiceProvider;
 import com.espertech.esper.client.EPServiceProviderManager;
 import com.espertech.esper.client.EPStatement;
 
+import at.jku.lit.edgemode.esper.eventtypes.BatteryEvent;
 import at.jku.lit.edgemode.esper.eventtypes.CollisionEvent;
+import at.jku.lit.edgemode.esper.eventtypes.GripperPositionEvent;
+import at.jku.lit.edgemode.esper.eventtypes.GripperSubPositionEvent;
+import at.jku.lit.edgemode.esper.eventtypes.JointEffortEvent;
 import at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent;
+import at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent;
 import at.jku.lit.edgemode.esper.validation.ValidationFactory;
 import at.jku.lit.edgemode.esper.validation.api.IConstraint;
 import net.mv.tools.logging.ILogger;
@@ -69,6 +74,11 @@ public class EsperManager {
 	private void registerEventTypes(Configuration cepConfig) {
 		cepConfig.addEventType(LinearVelocityEvent.class);
 		cepConfig.addEventType(CollisionEvent.class);
+		cepConfig.addEventType(BatteryEvent.class);
+		cepConfig.addEventType(JointEffortEvent.class);
+		cepConfig.addEventType(GripperPositionEvent.class);
+		cepConfig.addEventType(GripperSubPositionEvent.class);
+		cepConfig.addEventType(ManipulatorStateEvent.class);
 	}
 
 	private void readConstraints() throws IOException {
@@ -81,7 +91,6 @@ public class EsperManager {
 				LOGGER.error(p.toString() + " not loaded");
 			}
 		});
-
 	}
 
 	private void loadConstraint(Path p) throws IOException {

@@ -13,8 +13,13 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.MqttSecurityException;
 
 import at.jku.lit.edgemode.esper.EsperManager;
+import at.jku.lit.edgemode.esper.eventtypes.BatteryEvent;
 import at.jku.lit.edgemode.esper.eventtypes.CollisionEvent;
+import at.jku.lit.edgemode.esper.eventtypes.GripperPositionEvent;
+import at.jku.lit.edgemode.esper.eventtypes.GripperSubPositionEvent;
+import at.jku.lit.edgemode.esper.eventtypes.JointEffortEvent;
 import at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent;
+import at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent;
 import net.mv.tools.logging.ILogger;
 import net.mv.tools.logging.LoggerProvider;
 
@@ -66,7 +71,63 @@ public class MQTTConnector {
 						ce.setDistanceNearestObstacle(getClosestDistance(data));
 						ce.setAmountOfInfiniteRangeUnits(getAmountOfInfiniteUnits(data));
 						esperManager.update(ce);
+					} else if (topic.contains("battery_state")) {
+						BatteryEvent be = new BatteryEvent();
+						be.setPercentage(getBatteryPercentage(data));
+						esperManager.update(be);
+					} else if (topic.contains("joint_states")) {
+						JointEffortEvent jee = new JointEffortEvent();
+						jee.setHighestJointEffort(getHighestJointEffort(data));
+						esperManager.update(jee);
+					} else if (topic.contains("kinematics_pose")) {
+						GripperPositionEvent gpe = new GripperPositionEvent();
+						gpe.setGripperPositionZ(Double.parseDouble(data));
+						esperManager.update(gpe);
+					} else if (topic.contains("open_manipulator/states/open_manipulator_moving_state")) {
+						ManipulatorStateEvent mse = new ManipulatorStateEvent();
+						mse.setMovingState(data.replace("\"", ""));
+						esperManager.update(mse);
+					} else if (topic.contains("open_manipulator/gripper_sub_position/command/data")) {
+						GripperSubPositionEvent gspe = new GripperSubPositionEvent();
+						gspe.setCommand(Double.parseDouble(data));
+						esperManager.update(gspe);
 					}
+				}
+
+				/**
+				 * Returns the highest joint effort value of a joint effort string array
+				 * 
+				 * @param data the joint efforts as string
+				 * @return the highest joint effort as String
+				 */
+				private double getHighestJointEffort(String data) {
+					String intermStr = data.replaceAll("\\[", "").replaceAll("\\]", "");
+					String[] jeStr = intermStr.split(",");
+					double result = 0.0;
+					double currJe;
+					for (int i = 0; i < jeStr.length; i++) {
+						currJe = Double.parseDouble(jeStr[i]);
+						if (currJe > result) {
+							result = currJe;
+						}
+					}
+					return result;
+				}
+
+				/**
+				 * Calculates the battery percentage.
+				 * 
+				 * @param data The mqtt topic data.
+				 * @return the percentage as double.
+				 */
+				private double getBatteryPercentage(String data) {
+					if (data.isEmpty()) {
+						System.out.println("ERROR: Got empty data");
+					}
+
+					double weighted_percentage = Double.parseDouble(data) - 1;
+					weighted_percentage *= 1000;
+					return weighted_percentage;
 				}
 
 				/**

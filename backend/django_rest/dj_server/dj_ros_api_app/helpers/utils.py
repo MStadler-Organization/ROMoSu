@@ -1,5 +1,6 @@
 import os
 import sys
+import time
 from pathlib import Path
 
 # for different python versions
@@ -25,6 +26,11 @@ PROJ_ROOT = proj_root = Path(__file__).parent.parent
 class NotFoundError(Exception):
     """A custom error if nothing is found in the DB"""
     pass
+
+
+def get_exact_current_time_in_millis():
+    """Returns the current time in milliseconds"""
+    return time.time_ns() // 1_000_000
 
 
 def singleton(class_):
@@ -124,7 +130,7 @@ def get_sub_topic_string(p_topic_string):
     """Takes a topic string and returns the next sub-topic string. E.g., /tb3_2/joint_states => joint_states"""
 
     # check if subtopic is possible
-    if not p_topic_string or p_topic_string.count('/') != 2:
+    if not p_topic_string or p_topic_string.count('/') < 2:
         logging.warning(f'Could not derive subtopic string for topic: {p_topic_string}')
         return None
 
@@ -135,9 +141,13 @@ def get_sub_topic_string(p_topic_string):
 def setup():
     """Basic configs for the application """
     logging.basicConfig(
-        format='%(asctime)s %(levelname)-8s %(message)s',
+        format='%(asctime)s.%(msecs)03d %(levelname)-8s %(message)s',
         level=logging.INFO,
-        datefmt='%Y-%m-%d %H:%M:%S %Z'
+        datefmt='%Y-%m-%d\t%H:%M:%S',
+        handlers=[
+            logging.FileHandler(f"output/{get_current_time()}_output.log"),
+            logging.StreamHandler()
+        ]
     )
 
 

@@ -1,0 +1,3 @@
+NAME=JointEffortExceed
+CONSTRAINT=select * from JointEffortEvent(highestJointEffort > 5.0)
+;

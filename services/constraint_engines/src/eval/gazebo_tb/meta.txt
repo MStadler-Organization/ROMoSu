@@ -1,0 +1,11 @@
+
+
+used this config:
+
+{
+    "pRTConfig": {
+        "prefix": "tb3_0",
+        "sum_type_id": 1,
+        "config_id": 17
+    }
+}

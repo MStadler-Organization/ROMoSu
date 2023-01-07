@@ -1,0 +1,160 @@
+ %%% Logging Path set to: /home/marco/git/edgemodeswitching/implementation/net.mv.tools.logging/target/net.mv.logger/
+SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+2023.01.05 	 16:35:48.015	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:35:50.797	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:35:54.050	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:35:55.677	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:35:57.884	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:35:58.631	 Violation occured >> c1_tb_linear_velocity.cst
+2023.01.05 	 16:35:59.535	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:36:01.269	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:36:02.088	 Violation occured >> c1_tb_linear_velocity.cst
+{a=BeanEventBean eventType=BeanEventType name=BatteryEvent clazz=at.jku.lit.edgemode.esper.eventtypes.BatteryEvent bean=at.jku.lit.edgemode.esper.eventtypes.BatteryEvent@630724b, b=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@34dae65e, c=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@71cf2a80, d=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@7792eb94, e=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@74f3ba3a, f=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@703ecca9}
+2023.01.05 	 16:36:02.088	 Violation occured >> c3_2_lowbattery_speed.cst
+2023.01.05 	 16:36:02.997	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:36:03.189	 Violation occured >> c1_tb_linear_velocity.cst
+2023.01.05 	 16:36:04.195	 Violation occured >> c2_tb_collision.cst
+{a=BeanEventBean eventType=BeanEventType name=BatteryEvent clazz=at.jku.lit.edgemode.esper.eventtypes.BatteryEvent bean=at.jku.lit.edgemode.esper.eventtypes.BatteryEvent@56ca75f2, b=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@7792eb94, c=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@74f3ba3a, d=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@703ecca9, e=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@2ccd04fe, f=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@55de675c}
+2023.01.05 	 16:36:04.205	 Violation occured >> c3_2_lowbattery_speed.cst
+2023.01.05 	 16:36:05.544	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:36:07.391	 Violation occured >> c1_tb_linear_velocity.cst
+{a=BeanEventBean eventType=BeanEventType name=BatteryEvent clazz=at.jku.lit.edgemode.esper.eventtypes.BatteryEvent bean=at.jku.lit.edgemode.esper.eventtypes.BatteryEvent@122bfbdf, b=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@703ecca9, c=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@2ccd04fe, d=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@55de675c, e=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@77a8420c, f=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@30f7c3fd}
+2023.01.05 	 16:36:07.391	 Violation occured >> c3_2_lowbattery_speed.cst
+2023.01.05 	 16:36:07.752	 Violation occured >> c2_tb_collision.cst
+{a=BeanEventBean eventType=BeanEventType name=BatteryEvent clazz=at.jku.lit.edgemode.esper.eventtypes.BatteryEvent bean=at.jku.lit.edgemode.esper.eventtypes.BatteryEvent@6a75ff16, b=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@2ccd04fe, c=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@55de675c, d=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@77a8420c, e=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@30f7c3fd, f=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@274d1484}
+2023.01.05 	 16:36:09.458	 Violation occured >> c3_2_lowbattery_speed.cst
+2023.01.05 	 16:36:09.566	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:36:16.590	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:36:18.237	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:36:19.955	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:36:21.463	 Violation occured >> c1_tb_linear_velocity.cst
+2023.01.05 	 16:36:24.432	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:36:26.719	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:36:28.582	 Violation occured >> c2_tb_collision.cst
+{a=BeanEventBean eventType=BeanEventType name=BatteryEvent clazz=at.jku.lit.edgemode.esper.eventtypes.BatteryEvent bean=at.jku.lit.edgemode.esper.eventtypes.BatteryEvent@61f37ea7, b=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@6813db84, c=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@5e9e436, d=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@64352e17, e=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@1ec97270, f=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@687045d6}
+2023.01.05 	 16:36:29.973	 Violation occured >> c3_2_lowbattery_speed.cst
+2023.01.05 	 16:36:30.122	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:36:31.481	 Violation occured >> c2_tb_collision.cst
+{a=BeanEventBean eventType=BeanEventType name=BatteryEvent clazz=at.jku.lit.edgemode.esper.eventtypes.BatteryEvent bean=at.jku.lit.edgemode.esper.eventtypes.BatteryEvent@603e5402, b=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@64352e17, c=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@1ec97270, d=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@687045d6, e=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@54484e8b, f=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@6159f15d}
+2023.01.05 	 16:36:32.244	 Violation occured >> c3_2_lowbattery_speed.cst
+2023.01.05 	 16:36:33.679	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:36:35.600	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:36:38.026	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:36:39.846	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:36:40.326	 Violation occured >> c1_tb_linear_velocity.cst
+{a=BeanEventBean eventType=BeanEventType name=BatteryEvent clazz=at.jku.lit.edgemode.esper.eventtypes.BatteryEvent bean=at.jku.lit.edgemode.esper.eventtypes.BatteryEvent@1acd4d26, b=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@54484e8b, c=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@6159f15d, d=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@17cbb464, e=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@8dc7182, f=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@187b741}
+2023.01.05 	 16:36:40.326	 Violation occured >> c3_2_lowbattery_speed.cst
+2023.01.05 	 16:36:42.889	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:36:46.201	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:36:49.456	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:36:49.778	 Violation occured >> c1_tb_linear_velocity.cst
+2023.01.05 	 16:36:50.671	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:36:54.119	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:36:54.656	 Violation occured >> c1_tb_linear_velocity.cst
+2023.01.05 	 16:36:57.121	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:36:59.708	 Violation occured >> c1_tb_linear_velocity.cst
+2023.01.05 	 16:37:00.357	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:37:01.539	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:37:02.702	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:37:05.202	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:37:05.333	 Violation occured >> c1_tb_linear_velocity.cst
+2023.01.05 	 16:37:07.505	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:37:08.711	 Violation occured >> c1_tb_linear_velocity.cst
+2023.01.05 	 16:37:09.887	 Violation occured >> c1_tb_linear_velocity.cst
+2023.01.05 	 16:37:10.428	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:37:12.983	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:37:14.037	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:37:16.302	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:37:17.756	 Violation occured >> c1_tb_linear_velocity.cst
+2023.01.05 	 16:37:19.656	 Violation occured >> c2_tb_collision.cst
+{a=BeanEventBean eventType=BeanEventType name=BatteryEvent clazz=at.jku.lit.edgemode.esper.eventtypes.BatteryEvent bean=at.jku.lit.edgemode.esper.eventtypes.BatteryEvent@451e1956, b=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@1f282d7, c=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@4b51a70a, d=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@64a2b597, e=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@1c86865f, f=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@5143c4fc}
+2023.01.05 	 16:37:20.279	 Violation occured >> c3_2_lowbattery_speed.cst
+2023.01.05 	 16:37:20.978	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:37:21.340	 Violation occured >> c1_tb_linear_velocity.cst
+2023.01.05 	 16:37:22.026	 Violation occured >> c2_tb_collision.cst
+{a=BeanEventBean eventType=BeanEventType name=BatteryEvent clazz=at.jku.lit.edgemode.esper.eventtypes.BatteryEvent bean=at.jku.lit.edgemode.esper.eventtypes.BatteryEvent@3ee9232, b=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@1c86865f, c=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@5143c4fc, d=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@66f8306, e=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@387a4ea8, f=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@689df346}
+2023.01.05 	 16:37:24.139	 Violation occured >> c3_2_lowbattery_speed.cst
+2023.01.05 	 16:37:24.822	 Violation occured >> c2_tb_collision.cst
+{a=BeanEventBean eventType=BeanEventType name=BatteryEvent clazz=at.jku.lit.edgemode.esper.eventtypes.BatteryEvent bean=at.jku.lit.edgemode.esper.eventtypes.BatteryEvent@7cb44886, b=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@5143c4fc, c=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@66f8306, d=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@387a4ea8, e=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@689df346, f=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@16d146b6}
+2023.01.05 	 16:37:25.409	 Violation occured >> c3_2_lowbattery_speed.cst
+2023.01.05 	 16:37:27.416	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:37:30.529	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:37:32.343	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:37:32.692	 Violation occured >> c1_tb_linear_velocity.cst
+2023.01.05 	 16:37:33.769	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:37:36.283	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:37:37.400	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:37:39.253	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:37:41.622	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:37:43.851	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:37:45.529	 Violation occured >> c2_tb_collision.cst
+{a=BeanEventBean eventType=BeanEventType name=BatteryEvent clazz=at.jku.lit.edgemode.esper.eventtypes.BatteryEvent bean=at.jku.lit.edgemode.esper.eventtypes.BatteryEvent@36c8906a, b=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@23d4ea38, c=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@570bd82c, d=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@36109bdc, e=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@44a916b4, f=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@4028a133}
+2023.01.05 	 16:37:48.935	 Violation occured >> c3_2_lowbattery_speed.cst
+2023.01.05 	 16:37:50.191	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:37:51.349	 Violation occured >> c1_tb_linear_velocity.cst
+2023.01.05 	 16:37:52.806	 Violation occured >> c1_tb_linear_velocity.cst
+{a=BeanEventBean eventType=BeanEventType name=BatteryEvent clazz=at.jku.lit.edgemode.esper.eventtypes.BatteryEvent bean=at.jku.lit.edgemode.esper.eventtypes.BatteryEvent@14439eb2, b=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@36109bdc, c=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@44a916b4, d=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@4028a133, e=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@30adda6c, f=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@2e10b7cc}
+2023.01.05 	 16:37:52.806	 Violation occured >> c3_2_lowbattery_speed.cst
+{a=BeanEventBean eventType=BeanEventType name=BatteryEvent clazz=at.jku.lit.edgemode.esper.eventtypes.BatteryEvent bean=at.jku.lit.edgemode.esper.eventtypes.BatteryEvent@21781edb, b=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@4028a133, c=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@30adda6c, d=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@2e10b7cc, e=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@c124a09, f=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@62ecaecf}
+2023.01.05 	 16:37:56.648	 Violation occured >> c3_2_lowbattery_speed.cst
+2023.01.05 	 16:37:57.262	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:37:57.966	 Violation occured >> c1_tb_linear_velocity.cst
+{a=BeanEventBean eventType=BeanEventType name=BatteryEvent clazz=at.jku.lit.edgemode.esper.eventtypes.BatteryEvent bean=at.jku.lit.edgemode.esper.eventtypes.BatteryEvent@76018b69, b=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@30adda6c, c=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@2e10b7cc, d=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@c124a09, e=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@62ecaecf, f=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@68ddd679}
+2023.01.05 	 16:37:57.966	 Violation occured >> c3_2_lowbattery_speed.cst
+2023.01.05 	 16:37:59.971	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:38:00.381	 Violation occured >> c1_tb_linear_velocity.cst
+2023.01.05 	 16:38:03.182	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:38:04.293	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:38:05.773	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:38:07.203	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:38:09.884	 Violation occured >> c1_tb_linear_velocity.cst
+2023.01.05 	 16:38:09.898	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:38:10.960	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:38:12.506	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:38:14.744	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:38:16.863	 Violation occured >> c1_tb_linear_velocity.cst
+2023.01.05 	 16:38:17.090	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:38:18.737	 Violation occured >> c1_tb_linear_velocity.cst
+2023.01.05 	 16:38:19.176	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:38:22.660	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:38:25.182	 Violation occured >> c1_tb_linear_velocity.cst
+2023.01.05 	 16:38:27.449	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:38:28.177	 Violation occured >> c1_tb_linear_velocity.cst
+2023.01.05 	 16:38:29.146	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:38:29.246	 Violation occured >> c1_tb_linear_velocity.cst
+2023.01.05 	 16:38:31.166	 Violation occured >> c1_tb_linear_velocity.cst
+2023.01.05 	 16:38:33.515	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:38:37.531	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:38:41.352	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:38:41.666	 Violation occured >> c1_tb_linear_velocity.cst
+2023.01.05 	 16:38:42.850	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:38:46.376	 Violation occured >> c1_tb_linear_velocity.cst
+2023.01.05 	 16:38:46.727	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:38:49.138	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:38:51.809	 Violation occured >> c1_tb_linear_velocity.cst
+{a=BeanEventBean eventType=BeanEventType name=BatteryEvent clazz=at.jku.lit.edgemode.esper.eventtypes.BatteryEvent bean=at.jku.lit.edgemode.esper.eventtypes.BatteryEvent@54094c09, b=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@2b75459f, c=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@6180e7c0, d=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@2807f5ab, e=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@71dac212, f=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@5b704e8f}
+2023.01.05 	 16:38:51.809	 Violation occured >> c3_2_lowbattery_speed.cst
+2023.01.05 	 16:38:53.505	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:38:53.633	 Violation occured >> c1_tb_linear_velocity.cst
+2023.01.05 	 16:38:54.562	 Violation occured >> c2_tb_collision.cst
+{a=BeanEventBean eventType=BeanEventType name=BatteryEvent clazz=at.jku.lit.edgemode.esper.eventtypes.BatteryEvent bean=at.jku.lit.edgemode.esper.eventtypes.BatteryEvent@1d7f4285, b=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@2807f5ab, c=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@71dac212, d=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@5b704e8f, e=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@39a57857, f=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@447014e7}
+2023.01.05 	 16:38:54.663	 Violation occured >> c3_2_lowbattery_speed.cst
+2023.01.05 	 16:38:56.290	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:38:58.994	 Violation occured >> c1_tb_linear_velocity.cst
+2023.01.05 	 16:39:00.339	 Violation occured >> c1_tb_linear_velocity.cst
+2023.01.05 	 16:39:00.662	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:39:01.713	 Violation occured >> c2_tb_collision.cst
+{a=BeanEventBean eventType=BeanEventType name=BatteryEvent clazz=at.jku.lit.edgemode.esper.eventtypes.BatteryEvent bean=at.jku.lit.edgemode.esper.eventtypes.BatteryEvent@3ec156c5, b=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@7c1ddfad, c=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@33d77ec8, d=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@495e751, e=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@1e9b80b0, f=BeanEventBean eventType=BeanEventType name=LinearVelocityEvent clazz=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent bean=at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@9b2105d}
+2023.01.05 	 16:39:01.718	 Violation occured >> c3_2_lowbattery_speed.cst
+2023.01.05 	 16:39:04.082	 Violation occured >> c1_tb_linear_velocity.cst
+2023.01.05 	 16:39:04.620	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:39:05.163	 Violation occured >> c1_tb_linear_velocity.cst
+2023.01.05 	 16:39:05.731	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:39:06.857	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:39:09.582	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:39:09.718	 Violation occured >> c1_tb_linear_velocity.cst
+2023.01.05 	 16:39:11.472	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:39:12.984	 Violation occured >> c2_tb_collision.cst
+2023.01.05 	 16:39:14.471	 Violation occured >> c1_tb_linear_velocity.cst
