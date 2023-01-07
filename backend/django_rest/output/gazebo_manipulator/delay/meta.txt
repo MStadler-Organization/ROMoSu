@@ -12,19 +12,3 @@ These runs measure the time of the arrival of a new ROS message from the rosbrid
 ]
 
 
-open_manipulator/gripper_position/command
-open_manipulator/gripper_position/command/data
-open_manipulator/gripper_position/pid/parameter_descriptions/dflt/doubles/value
-open_manipulator/gripper_position/pid/parameter_updates/bools/name
-open_manipulator/gripper_position/state/process_value_dot
-open_manipulator/gripper_sub_position/pid/parameter_descriptions/dflt/bools/value
-open_manipulator/gripper_sub_position/pid/parameter_updates/doubles/name
-open_manipulator/gripper_sub_position/state/command
-open_manipulator/joint1_position/command
-open_manipulator/joint1_position/command/data
-open_manipulator/joint2_position/command
-open_manipulator/joint2_position/command/data
-open_manipulator/joint3_position/command
-open_manipulator/joint3_position/command/data
-open_manipulator/joint4_position/command
-open_manipulator/joint4_position/command/data
