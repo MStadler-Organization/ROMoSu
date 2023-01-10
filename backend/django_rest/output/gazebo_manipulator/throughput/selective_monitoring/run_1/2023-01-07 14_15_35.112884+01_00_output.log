@@ -1,31 +1,3 @@
-2023-01-07	13:15:35.141 INFO     Watching for file changes with StatReloader
-2023-01-07	13:15:35.263 INFO     Connection to ROS ready.
-2023-01-07	13:15:35.264 INFO     Successfully connected to ROS bridge from listener
-2023-01-07	13:15:35.264 INFO     Starting factory <roslibpy.comm.comm_autobahn.AutobahnRosBridgeClientFactory object at 0x7fae4f3015e0>
-2023-01-07	13:15:40.008 INFO     Connection to ROS ready.
-2023-01-07	13:15:40.008 INFO     Successfully connected to ROS bridge from Ros Connector
-2023-01-07	13:15:40.008 INFO     Generating new MQTT Forwarder
-2023-01-07	13:15:40.009 INFO     local mqtt is set up
-2023-01-07	13:15:46.403 INFO     publishing topic >>	open_manipulator/meta
-2023-01-07	13:15:47.603 INFO     Created subscriber on gripper_position/command
-2023-01-07	13:15:47.603 INFO     Created subscriber on gripper/kinematics_pose
-2023-01-07	13:15:47.604 INFO     Created subscriber on gripper_position/state
-2023-01-07	13:15:47.604 INFO     Created subscriber on gripper_position/pid/parameter_updates
-2023-01-07	13:15:47.605 INFO     Created subscriber on gripper_sub_position/state
-2023-01-07	13:15:47.610 INFO     publishing topic >>	open_manipulator/gripper/kinematics_pose/pose/position/z
-2023-01-07	13:15:47.611 INFO     publishing topic >>	open_manipulator/joint_states/effort
-2023-01-07	13:15:47.611 INFO     Created subscriber on joint3_position/command
-2023-01-07	13:15:47.611 INFO     Created subscriber on joint4_position/command
-2023-01-07	13:15:47.611 INFO     Created subscriber on gripper_sub_position/pid/parameter_descriptions
-2023-01-07	13:15:47.611 INFO     Created subscriber on gripper_position/pid/parameter_descriptions
-2023-01-07	13:15:47.617 INFO     publishing topic >>	open_manipulator/states/open_manipulator_moving_state
-2023-01-07	13:15:47.618 INFO     Created subscriber on joint_states
-2023-01-07	13:15:47.618 INFO     Created subscriber on gripper_sub_position/pid/parameter_updates
-2023-01-07	13:15:47.618 INFO     Created subscriber on joint1_position/command
-2023-01-07	13:15:47.618 INFO     Created subscriber on joint2_position/command
-2023-01-07	13:15:47.627 INFO     publishing topic >>	open_manipulator/gripper_sub_position/command
-2023-01-07	13:15:47.628 INFO     Created subscriber on gripper_sub_position/command
-2023-01-07	13:15:47.639 INFO     Created subscriber on states
 2023-01-07	13:15:47.651 INFO     publishing topic >>	open_manipulator/gripper_sub_position/command/data
 2023-01-07	13:15:49.748 INFO     publishing topic >>	open_manipulator/gripper/kinematics_pose/pose/position/z
 2023-01-07	13:15:50.468 INFO     publishing topic >>	open_manipulator/states/open_manipulator_moving_state
@@ -210,45 +182,3 @@
 2023-01-07	13:18:44.855 INFO     publishing topic >>	open_manipulator/states/open_manipulator_moving_state
 2023-01-07	13:18:44.876 INFO     publishing topic >>	open_manipulator/joint_states/effort
 2023-01-07	13:18:46.644 INFO     publishing topic >>	open_manipulator/gripper/kinematics_pose/pose/position/z
-2023-01-07	13:18:48.457 INFO     publishing topic >>	open_manipulator/gripper_sub_position/command
-2023-01-07	13:18:51.080 INFO     publishing topic >>	open_manipulator/gripper_sub_position/command/data
-2023-01-07	13:18:52.801 INFO     publishing topic >>	open_manipulator/states/open_manipulator_moving_state
-2023-01-07	13:18:55.192 INFO     publishing topic >>	open_manipulator/joint_states/effort
-2023-01-07	13:18:55.276 INFO     publishing topic >>	open_manipulator/gripper_sub_position/command
-2023-01-07	13:18:55.967 INFO     publishing topic >>	open_manipulator/gripper/kinematics_pose/pose/position/z
-2023-01-07	13:18:56.293 INFO     publishing topic >>	open_manipulator/gripper_sub_position/command/data
-2023-01-07	13:18:58.511 INFO     publishing topic >>	open_manipulator/states/open_manipulator_moving_state
-2023-01-07	13:18:58.704 INFO     publishing topic >>	open_manipulator/gripper_sub_position/command
-2023-01-07	13:18:59.009 INFO     publishing topic >>	open_manipulator/gripper/kinematics_pose/pose/position/z
-2023-01-07	13:18:59.888 INFO     publishing topic >>	open_manipulator/gripper_sub_position/command/data
-2023-01-07	13:18:59.889 INFO     publishing topic >>	open_manipulator/joint_states/effort
-2023-01-07	13:18:59.890 INFO     publishing topic >>	open_manipulator/states/open_manipulator_moving_state
-2023-01-07	13:19:00.466 INFO     publishing topic >>	open_manipulator/gripper_sub_position/command
-2023-01-07	13:19:02.147 INFO     publishing topic >>	open_manipulator/gripper/kinematics_pose/pose/position/z
-2023-01-07	13:19:03.204 INFO     publishing topic >>	open_manipulator/gripper_sub_position/command/data
-2023-01-07	13:19:04.490 INFO     publishing topic >>	open_manipulator/states/open_manipulator_moving_state
-2023-01-07	13:19:04.491 INFO     publishing topic >>	open_manipulator/joint_states/effort
-2023-01-07	13:19:07.977 INFO     publishing topic >>	open_manipulator/gripper/kinematics_pose/pose/position/z
-2023-01-07	13:19:08.523 INFO     publishing topic >>	open_manipulator/gripper_sub_position/command
-2023-01-07	13:19:09.173 INFO     publishing topic >>	open_manipulator/gripper_sub_position/command/data
-2023-01-07	13:19:09.191 INFO     publishing topic >>	open_manipulator/states/open_manipulator_moving_state
-2023-01-07	13:19:10.306 INFO     publishing topic >>	open_manipulator/joint_states/effort
-2023-01-07	13:19:11.259 INFO     publishing topic >>	open_manipulator/gripper_sub_position/command
-2023-01-07	13:19:11.737 INFO     publishing topic >>	open_manipulator/gripper_sub_position/command/data
-2023-01-07	13:19:11.737 INFO     publishing topic >>	open_manipulator/states/open_manipulator_moving_state
-2023-01-07	13:19:13.848 INFO     publishing topic >>	open_manipulator/gripper/kinematics_pose/pose/position/z
-2023-01-07	13:19:15.447 INFO     publishing topic >>	open_manipulator/gripper_sub_position/command/data
-2023-01-07	13:19:16.295 INFO     publishing topic >>	open_manipulator/gripper_sub_position/command
-2023-01-07	13:19:17.220 INFO     publishing topic >>	open_manipulator/joint_states/effort
-2023-01-07	13:19:17.226 INFO     publishing topic >>	open_manipulator/states/open_manipulator_moving_state
-2023-01-07	13:19:18.784 INFO     publishing topic >>	open_manipulator/gripper/kinematics_pose/pose/position/z
-2023-01-07	13:19:19.884 INFO     publishing topic >>	open_manipulator/gripper_sub_position/command/data
-2023-01-07	13:19:21.354 INFO     publishing topic >>	open_manipulator/gripper_sub_position/command
-2023-01-07	13:19:22.706 INFO     publishing topic >>	open_manipulator/gripper_sub_position/command/data
-2023-01-07	13:19:22.713 INFO     publishing topic >>	open_manipulator/joint_states/effort
-2023-01-07	13:19:22.840 INFO     publishing topic >>	open_manipulator/gripper/kinematics_pose/pose/position/z
-2023-01-07	13:19:23.719 INFO     publishing topic >>	open_manipulator/states/open_manipulator_moving_state
-2023-01-07	13:19:24.333 INFO     publishing topic >>	open_manipulator/gripper_sub_position/command
-2023-01-07	13:19:26.100 INFO     publishing topic >>	open_manipulator/gripper_sub_position/command/data
-2023-01-07	13:19:27.104 INFO     publishing topic >>	open_manipulator/joint_states/effort
-2023-01-07	13:19:28.326 INFO     publishing topic >>	open_manipulator/gripper/kinematics_pose/pose/position/z

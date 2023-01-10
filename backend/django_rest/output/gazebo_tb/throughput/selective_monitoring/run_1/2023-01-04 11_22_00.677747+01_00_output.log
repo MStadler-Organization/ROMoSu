@@ -1,17 +1,3 @@
-2023-01-04 10:22:00 UTC INFO     Watching for file changes with StatReloader
-2023-01-04 10:22:00 UTC INFO     Connection to ROS ready.
-2023-01-04 10:22:00 UTC INFO     Successfully connected to ROS bridge from listener
-2023-01-04 10:22:00 UTC INFO     Starting factory <roslibpy.comm.comm_autobahn.AutobahnRosBridgeClientFactory object at 0x7fcc48a16550>
-2023-01-04 10:22:05 UTC INFO     Connection to ROS ready.
-2023-01-04 10:22:05 UTC INFO     Successfully connected to ROS bridge from Ros Connector
-2023-01-04 10:22:05 UTC INFO     Generating new MQTT Forwarder
-2023-01-04 10:22:05 UTC INFO     local mqtt is set up
-2023-01-04 10:22:23 UTC INFO     Created subscriber on odom
-2023-01-04 10:22:23 UTC INFO     Created subscriber on imu
-2023-01-04 10:22:23 UTC INFO     Created subscriber on cmd_vel
-2023-01-04 10:22:23 UTC INFO     Forwarding topic: tb3_0/scan/ranges
-2023-01-04 10:22:23 UTC INFO     Created subscriber on joint_states
-2023-01-04 10:22:23 UTC INFO     Created subscriber on scan
 2023-01-04 10:22:23 UTC INFO     Forwarding topic: tb3_0/cmd_vel/linear/x
 2023-01-04 10:22:24 UTC INFO     Forwarding topic: tb3_0/scan/ranges
 2023-01-04 10:22:26 UTC INFO     Forwarding topic: tb3_0/scan/ranges
@@ -199,28 +185,3 @@
 2023-01-04 10:25:21 UTC INFO     Forwarding topic: tb3_0/scan/ranges
 2023-01-04 10:25:23 UTC INFO     Forwarding topic: tb3_0/scan/ranges
 2023-01-04 10:25:23 UTC INFO     Forwarding topic: tb3_0/cmd_vel/linear/x
-2023-01-04 10:25:24 UTC INFO     Forwarding topic: tb3_0/scan/ranges
-2023-01-04 10:25:25 UTC INFO     Forwarding topic: tb3_0/scan/ranges
-2023-01-04 10:25:26 UTC INFO     Forwarding topic: tb3_0/cmd_vel/linear/x
-2023-01-04 10:25:27 UTC INFO     Forwarding topic: tb3_0/scan/ranges
-2023-01-04 10:25:29 UTC INFO     Forwarding topic: tb3_0/cmd_vel/linear/x
-2023-01-04 10:25:30 UTC INFO     Forwarding topic: tb3_0/scan/ranges
-2023-01-04 10:25:31 UTC INFO     Forwarding topic: tb3_0/scan/ranges
-2023-01-04 10:25:32 UTC INFO     Forwarding topic: tb3_0/cmd_vel/linear/x
-2023-01-04 10:25:32 UTC INFO     Forwarding topic: tb3_0/scan/ranges
-2023-01-04 10:25:33 UTC INFO     Forwarding topic: tb3_0/scan/ranges
-2023-01-04 10:25:35 UTC INFO     Forwarding topic: tb3_0/scan/ranges
-2023-01-04 10:25:35 UTC INFO     Forwarding topic: tb3_0/cmd_vel/linear/x
-2023-01-04 10:25:37 UTC INFO     Forwarding topic: tb3_0/scan/ranges
-2023-01-04 10:25:38 UTC INFO     Forwarding topic: tb3_0/scan/ranges
-2023-01-04 10:25:38 UTC INFO     Forwarding topic: tb3_0/cmd_vel/linear/x
-2023-01-04 10:25:41 UTC INFO     Forwarding topic: tb3_0/scan/ranges
-2023-01-04 10:25:41 UTC INFO     Forwarding topic: tb3_0/cmd_vel/linear/x
-2023-01-04 10:25:42 UTC INFO     Forwarding topic: tb3_0/scan/ranges
-2023-01-04 10:25:44 UTC INFO     Forwarding topic: tb3_0/scan/ranges
-2023-01-04 10:25:44 UTC INFO     Forwarding topic: tb3_0/cmd_vel/linear/x
-2023-01-04 10:25:45 UTC INFO     Forwarding topic: tb3_0/scan/ranges
-2023-01-04 10:25:47 UTC INFO     Forwarding topic: tb3_0/cmd_vel/linear/x
-2023-01-04 10:25:47 UTC INFO     Forwarding topic: tb3_0/scan/ranges
-2023-01-04 10:25:49 UTC INFO     Forwarding topic: tb3_0/scan/ranges
-2023-01-04 10:25:49 UTC INFO     Forwarding topic: tb3_0/cmd_vel/linear/x

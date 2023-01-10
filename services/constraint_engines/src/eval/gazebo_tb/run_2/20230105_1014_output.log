@@ -1,7 +1,3 @@
- %%% Logging Path set to: /home/marco/git/edgemodeswitching/implementation/net.mv.tools.logging/target/net.mv.logger/
-SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
-SLF4J: Defaulting to no-operation (NOP) logger implementation
-SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
 2023.01.05 	 10:15:01.899	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@6583ada0
 2023.01.05 	 10:15:02.969	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@253abddf
 2023.01.05 	 10:15:04.142	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@5d2cfa75
@@ -115,11 +111,3 @@ SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further detail
 2023.01.05 	 10:18:00.293	 Violation occured >> c2_tb_collision.cst | CollisionAvoidance | select * from CollisionEvent(distanceNearestObstacle < 0.35)  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@1bdf518
 2023.01.05 	 10:18:00.293	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@1bdf518
 2023.01.05 	 10:18:01.814	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@3dd5c676
-2023.01.05 	 10:18:03.033	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@dfb18cf
-2023.01.05 	 10:18:04.149	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@496cc4fa
-2023.01.05 	 10:18:05.346	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@2717edfa
-2023.01.05 	 10:18:06.469	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@34627918
-2023.01.05 	 10:18:08.035	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@610a323b
-2023.01.05 	 10:18:09.553	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@4e6e71f4
-2023.01.05 	 10:18:13.690	 Violation occured >> c2_tb_collision.cst | CollisionAvoidance | select * from CollisionEvent(distanceNearestObstacle < 0.35)  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@568e2dfe
-2023.01.05 	 10:18:16.671	 Violation occured >> c2_tb_collision.cst | CollisionAvoidance | select * from CollisionEvent(distanceNearestObstacle < 0.35)  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@7183348e

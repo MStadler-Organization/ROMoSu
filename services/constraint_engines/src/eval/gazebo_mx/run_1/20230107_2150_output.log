@@ -1,8 +1,3 @@
- %%% Logging Path set to: /home/marco/git/edgemodeswitching/implementation/net.mv.tools.logging/target/net.mv.logger/
-SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
-SLF4J: Defaulting to no-operation (NOP) logger implementation
-SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
-{a=BeanEventBean eventType=BeanEventType name=ManipulatorStateEvent clazz=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent bean=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent@5842c5a9}
 2023.01.07 	 21:50:08.257	 Violation occured >> c3_mx_gripper_opening.cst
 2023.01.07 	 21:50:08.706	 Violation occured >> c2_mx_gripper_range.cst
 2023.01.07 	 21:50:09.933	 Violation occured >> c1_mx_joint_effort.cst
@@ -13,15 +8,11 @@ SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further detail
 2023.01.07 	 21:50:20.237	 Violation occured >> c1_mx_joint_effort.cst
 2023.01.07 	 21:50:22.319	 Violation occured >> c1_mx_joint_effort.cst
 2023.01.07 	 21:50:23.549	 Violation occured >> c2_mx_gripper_range.cst
-{a=BeanEventBean eventType=BeanEventType name=ManipulatorStateEvent clazz=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent bean=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent@198743b7}
 2023.01.07 	 21:50:24.690	 Violation occured >> c3_mx_gripper_opening.cst
-{a=BeanEventBean eventType=BeanEventType name=ManipulatorStateEvent clazz=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent bean=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent@4689de32}
 2023.01.07 	 21:50:29.991	 Violation occured >> c3_mx_gripper_opening.cst
 2023.01.07 	 21:50:31.883	 Violation occured >> c2_mx_gripper_range.cst
-{a=BeanEventBean eventType=BeanEventType name=ManipulatorStateEvent clazz=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent bean=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent@34d6ff8b}
 2023.01.07 	 21:50:33.989	 Violation occured >> c3_mx_gripper_opening.cst
 2023.01.07 	 21:50:37.098	 Violation occured >> c1_mx_joint_effort.cst
-{a=BeanEventBean eventType=BeanEventType name=ManipulatorStateEvent clazz=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent bean=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent@49fd71a6}
 2023.01.07 	 21:50:40.011	 Violation occured >> c3_mx_gripper_opening.cst
 2023.01.07 	 21:50:40.016	 Violation occured >> c2_mx_gripper_range.cst
 2023.01.07 	 21:50:40.720	 Violation occured >> c1_mx_joint_effort.cst
@@ -29,97 +20,75 @@ SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further detail
 2023.01.07 	 21:50:43.743	 Violation occured >> c2_mx_gripper_range.cst
 2023.01.07 	 21:50:46.766	 Violation occured >> c2_mx_gripper_range.cst
 2023.01.07 	 21:50:50.753	 Violation occured >> c2_mx_gripper_range.cst
-{a=BeanEventBean eventType=BeanEventType name=ManipulatorStateEvent clazz=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent bean=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent@5183aafe}
 2023.01.07 	 21:50:52.202	 Violation occured >> c3_mx_gripper_opening.cst
 2023.01.07 	 21:50:53.183	 Violation occured >> c1_mx_joint_effort.cst
 2023.01.07 	 21:50:53.885	 Violation occured >> c2_mx_gripper_range.cst
 2023.01.07 	 21:50:55.546	 Violation occured >> c2_mx_gripper_range.cst
-{a=BeanEventBean eventType=BeanEventType name=ManipulatorStateEvent clazz=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent bean=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent@5978a1c6}
 2023.01.07 	 21:51:00.311	 Violation occured >> c3_mx_gripper_opening.cst
 2023.01.07 	 21:51:01.852	 Violation occured >> c2_mx_gripper_range.cst
 2023.01.07 	 21:51:02.247	 Violation occured >> c1_mx_joint_effort.cst
 2023.01.07 	 21:51:03.539	 Violation occured >> c2_mx_gripper_range.cst
-{a=BeanEventBean eventType=BeanEventType name=ManipulatorStateEvent clazz=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent bean=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent@4f220e0b}
 2023.01.07 	 21:51:04.055	 Violation occured >> c3_mx_gripper_opening.cst
 2023.01.07 	 21:51:05.057	 Violation occured >> c1_mx_joint_effort.cst
-{a=BeanEventBean eventType=BeanEventType name=ManipulatorStateEvent clazz=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent bean=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent@77596d36}
 2023.01.07 	 21:51:07.308	 Violation occured >> c3_mx_gripper_opening.cst
 2023.01.07 	 21:51:07.735	 Violation occured >> c1_mx_joint_effort.cst
 2023.01.07 	 21:51:07.911	 Violation occured >> c2_mx_gripper_range.cst
 2023.01.07 	 21:51:08.887	 Violation occured >> c1_mx_joint_effort.cst
 2023.01.07 	 21:51:10.336	 Violation occured >> c1_mx_joint_effort.cst
 2023.01.07 	 21:51:12.312	 Violation occured >> c2_mx_gripper_range.cst
-{a=BeanEventBean eventType=BeanEventType name=ManipulatorStateEvent clazz=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent bean=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent@61ade183}
 2023.01.07 	 21:51:13.841	 Violation occured >> c3_mx_gripper_opening.cst
 2023.01.07 	 21:51:14.600	 Violation occured >> c1_mx_joint_effort.cst
-{a=BeanEventBean eventType=BeanEventType name=ManipulatorStateEvent clazz=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent bean=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent@3a35770b}
 2023.01.07 	 21:51:19.975	 Violation occured >> c3_mx_gripper_opening.cst
 2023.01.07 	 21:51:21.853	 Violation occured >> c1_mx_joint_effort.cst
 2023.01.07 	 21:51:22.387	 Violation occured >> c2_mx_gripper_range.cst
-{a=BeanEventBean eventType=BeanEventType name=ManipulatorStateEvent clazz=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent bean=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent@6e19fbce}
 2023.01.07 	 21:51:23.908	 Violation occured >> c3_mx_gripper_opening.cst
 2023.01.07 	 21:51:25.118	 Violation occured >> c1_mx_joint_effort.cst
 2023.01.07 	 21:51:26.253	 Violation occured >> c1_mx_joint_effort.cst
 2023.01.07 	 21:51:27.822	 Violation occured >> c2_mx_gripper_range.cst
 2023.01.07 	 21:51:28.565	 Violation occured >> c1_mx_joint_effort.cst
-{a=BeanEventBean eventType=BeanEventType name=ManipulatorStateEvent clazz=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent bean=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent@155f3a30}
 2023.01.07 	 21:51:31.707	 Violation occured >> c3_mx_gripper_opening.cst
-{a=BeanEventBean eventType=BeanEventType name=ManipulatorStateEvent clazz=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent bean=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent@371a9f9a}
 2023.01.07 	 21:51:37.750	 Violation occured >> c3_mx_gripper_opening.cst
 2023.01.07 	 21:51:39.512	 Violation occured >> c1_mx_joint_effort.cst
 2023.01.07 	 21:51:40.030	 Violation occured >> c2_mx_gripper_range.cst
 2023.01.07 	 21:51:42.245	 Violation occured >> c1_mx_joint_effort.cst
 2023.01.07 	 21:51:44.698	 Violation occured >> c1_mx_joint_effort.cst
 2023.01.07 	 21:51:46.038	 Violation occured >> c2_mx_gripper_range.cst
-{a=BeanEventBean eventType=BeanEventType name=ManipulatorStateEvent clazz=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent bean=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent@39895d05}
 2023.01.07 	 21:51:48.748	 Violation occured >> c3_mx_gripper_opening.cst
 2023.01.07 	 21:51:51.419	 Violation occured >> c1_mx_joint_effort.cst
 2023.01.07 	 21:51:52.741	 Violation occured >> c1_mx_joint_effort.cst
 2023.01.07 	 21:51:54.699	 Violation occured >> c2_mx_gripper_range.cst
-{a=BeanEventBean eventType=BeanEventType name=ManipulatorStateEvent clazz=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent bean=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent@77431520}
 2023.01.07 	 21:51:54.715	 Violation occured >> c3_mx_gripper_opening.cst
 2023.01.07 	 21:51:55.377	 Violation occured >> c1_mx_joint_effort.cst
 2023.01.07 	 21:51:58.531	 Violation occured >> c1_mx_joint_effort.cst
-{a=BeanEventBean eventType=BeanEventType name=ManipulatorStateEvent clazz=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent bean=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent@4b21bdd3}
 2023.01.07 	 21:51:58.536	 Violation occured >> c3_mx_gripper_opening.cst
-{a=BeanEventBean eventType=BeanEventType name=ManipulatorStateEvent clazz=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent bean=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent@139351cb}
 2023.01.07 	 21:52:02.753	 Violation occured >> c3_mx_gripper_opening.cst
-{a=BeanEventBean eventType=BeanEventType name=ManipulatorStateEvent clazz=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent bean=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent@15802f16}
 2023.01.07 	 21:52:06.405	 Violation occured >> c3_mx_gripper_opening.cst
 2023.01.07 	 21:52:06.411	 Violation occured >> c1_mx_joint_effort.cst
-{a=BeanEventBean eventType=BeanEventType name=ManipulatorStateEvent clazz=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent bean=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent@50c7ac3f}
 2023.01.07 	 21:52:09.692	 Violation occured >> c3_mx_gripper_opening.cst
 2023.01.07 	 21:52:11.983	 Violation occured >> c1_mx_joint_effort.cst
 2023.01.07 	 21:52:12.855	 Violation occured >> c2_mx_gripper_range.cst
-{a=BeanEventBean eventType=BeanEventType name=ManipulatorStateEvent clazz=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent bean=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent@54965b38}
 2023.01.07 	 21:52:14.014	 Violation occured >> c3_mx_gripper_opening.cst
 2023.01.07 	 21:52:14.076	 Violation occured >> c1_mx_joint_effort.cst
-{a=BeanEventBean eventType=BeanEventType name=ManipulatorStateEvent clazz=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent bean=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent@2cb24df5}
 2023.01.07 	 21:52:22.442	 Violation occured >> c3_mx_gripper_opening.cst
 2023.01.07 	 21:52:23.730	 Violation occured >> c2_mx_gripper_range.cst
 2023.01.07 	 21:52:25.889	 Violation occured >> c1_mx_joint_effort.cst
-{a=BeanEventBean eventType=BeanEventType name=ManipulatorStateEvent clazz=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent bean=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent@758a171a}
 2023.01.07 	 21:52:29.928	 Violation occured >> c3_mx_gripper_opening.cst
 2023.01.07 	 21:52:30.465	 Violation occured >> c2_mx_gripper_range.cst
 2023.01.07 	 21:52:33.148	 Violation occured >> c2_mx_gripper_range.cst
 2023.01.07 	 21:52:39.261	 Violation occured >> c1_mx_joint_effort.cst
-{a=BeanEventBean eventType=BeanEventType name=ManipulatorStateEvent clazz=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent bean=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent@14684def}
 2023.01.07 	 21:52:39.374	 Violation occured >> c3_mx_gripper_opening.cst
 2023.01.07 	 21:52:40.488	 Violation occured >> c1_mx_joint_effort.cst
 2023.01.07 	 21:52:41.968	 Violation occured >> c1_mx_joint_effort.cst
 2023.01.07 	 21:52:43.413	 Violation occured >> c1_mx_joint_effort.cst
 2023.01.07 	 21:52:45.646	 Violation occured >> c1_mx_joint_effort.cst
 2023.01.07 	 21:52:48.106	 Violation occured >> c2_mx_gripper_range.cst
-{a=BeanEventBean eventType=BeanEventType name=ManipulatorStateEvent clazz=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent bean=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent@6d7f1d7c}
 2023.01.07 	 21:52:49.122	 Violation occured >> c3_mx_gripper_opening.cst
 2023.01.07 	 21:52:51.047	 Violation occured >> c1_mx_joint_effort.cst
 2023.01.07 	 21:52:54.953	 Violation occured >> c1_mx_joint_effort.cst
 2023.01.07 	 21:52:54.964	 Violation occured >> c2_mx_gripper_range.cst
 2023.01.07 	 21:52:56.652	 Violation occured >> c2_mx_gripper_range.cst
 2023.01.07 	 21:52:58.191	 Violation occured >> c2_mx_gripper_range.cst
-{a=BeanEventBean eventType=BeanEventType name=ManipulatorStateEvent clazz=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent bean=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent@434d7412}
 2023.01.07 	 21:52:58.611	 Violation occured >> c3_mx_gripper_opening.cst
-{a=BeanEventBean eventType=BeanEventType name=ManipulatorStateEvent clazz=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent bean=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent@719d7565}
 2023.01.07 	 21:53:01.625	 Violation occured >> c3_mx_gripper_opening.cst
 2023.01.07 	 21:53:02.286	 Violation occured >> c1_mx_joint_effort.cst
 2023.01.07 	 21:53:03.673	 Violation occured >> c1_mx_joint_effort.cst
@@ -127,24 +96,3 @@ SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further detail
 2023.01.07 	 21:53:04.763	 Violation occured >> c1_mx_joint_effort.cst
 2023.01.07 	 21:53:05.792	 Violation occured >> c1_mx_joint_effort.cst
 2023.01.07 	 21:53:08.867	 Violation occured >> c2_mx_gripper_range.cst
-2023.01.07 	 21:53:11.577	 Violation occured >> c2_mx_gripper_range.cst
-2023.01.07 	 21:53:13.310	 Violation occured >> c2_mx_gripper_range.cst
-{a=BeanEventBean eventType=BeanEventType name=ManipulatorStateEvent clazz=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent bean=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent@4d8bc609}
-2023.01.07 	 21:53:15.654	 Violation occured >> c3_mx_gripper_opening.cst
-2023.01.07 	 21:53:16.734	 Violation occured >> c2_mx_gripper_range.cst
-2023.01.07 	 21:53:21.817	 Violation occured >> c1_mx_joint_effort.cst
-2023.01.07 	 21:53:23.989	 Violation occured >> c1_mx_joint_effort.cst
-2023.01.07 	 21:53:26.785	 Violation occured >> c1_mx_joint_effort.cst
-2023.01.07 	 21:53:28.562	 Violation occured >> c2_mx_gripper_range.cst
-{a=BeanEventBean eventType=BeanEventType name=ManipulatorStateEvent clazz=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent bean=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent@239cb50}
-2023.01.07 	 21:53:31.326	 Violation occured >> c3_mx_gripper_opening.cst
-2023.01.07 	 21:53:33.432	 Violation occured >> c2_mx_gripper_range.cst
-2023.01.07 	 21:53:34.980	 Violation occured >> c1_mx_joint_effort.cst
-2023.01.07 	 21:53:37.452	 Violation occured >> c2_mx_gripper_range.cst
-2023.01.07 	 21:53:39.578	 Violation occured >> c2_mx_gripper_range.cst
-2023.01.07 	 21:53:40.748	 Violation occured >> c1_mx_joint_effort.cst
-2023.01.07 	 21:53:41.601	 Violation occured >> c2_mx_gripper_range.cst
-{a=BeanEventBean eventType=BeanEventType name=ManipulatorStateEvent clazz=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent bean=at.jku.lit.edgemode.esper.eventtypes.ManipulatorStateEvent@13fe27a0}
-2023.01.07 	 21:53:41.834	 Violation occured >> c3_mx_gripper_opening.cst
-2023.01.07 	 21:53:43.197	 Violation occured >> c2_mx_gripper_range.cst
-2023.01.07 	 21:53:49.056	 Violation occured >> c2_mx_gripper_range.cst

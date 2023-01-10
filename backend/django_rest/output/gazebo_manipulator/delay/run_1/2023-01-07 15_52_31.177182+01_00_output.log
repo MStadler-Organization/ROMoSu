@@ -1,60 +1,3 @@
-2023-01-07	14:52:31.205 INFO     Watching for file changes with StatReloader
-2023-01-07	14:52:31.328 INFO     Connection to ROS ready.
-2023-01-07	14:52:31.328 INFO     Successfully connected to ROS bridge from listener
-2023-01-07	14:52:31.328 INFO     Starting factory <roslibpy.comm.comm_autobahn.AutobahnRosBridgeClientFactory object at 0x7fcc2420b610>
-2023-01-07	14:52:36.008 INFO     Connection to ROS ready.
-2023-01-07	14:52:36.009 INFO     Successfully connected to ROS bridge from Ros Connector
-2023-01-07	14:52:36.009 INFO     Generating new MQTT Forwarder
-2023-01-07	14:52:36.009 INFO     local mqtt is set up
-2023-01-07	14:52:38.624 INFO     Created subscriber on gripper/kinematics_pose
-2023-01-07	14:52:38.625 INFO     Created subscriber on gripper_position/pid/parameter_descriptions
-2023-01-07	14:52:38.626 INFO     Created subscriber on gripper_position/pid/parameter_updates
-2023-01-07	14:52:38.626 INFO     Created subscriber on gripper_sub_position/state
-2023-01-07	14:52:38.627 INFO     Created subscriber on joint2_position/command
-2023-01-07	14:52:38.636 INFO     Created subscriber on joint1_position/command
-2023-01-07	14:52:38.636 INFO     Created subscriber on gripper_sub_position/command
-2023-01-07	14:52:38.636 INFO     Created subscriber on gripper_position/state
-2023-01-07	14:52:38.636 INFO     Created subscriber on gripper_sub_position/pid/parameter_updates
-2023-01-07	14:52:38.645 INFO     Created subscriber on states
-2023-01-07	14:52:38.646 INFO     Created subscriber on gripper_position/command
-2023-01-07	14:52:38.646 INFO     Created subscriber on gripper_sub_position/pid/parameter_descriptions
-2023-01-07	14:52:38.646 INFO     Created subscriber on joint4_position/command
-2023-01-07	14:52:38.653 INFO     Created subscriber on joint_states
-2023-01-07	14:52:38.653 INFO     Created subscriber on joint3_position/command
-2023-01-07	14:52:39.713 INFO     277ms delay for topic >> open_manipulator/gripper_sub_position/command/data
-2023-01-07	14:52:39.714 INFO     278ms delay for topic >> open_manipulator/gripper_position/command/data
-2023-01-07	14:52:39.782 INFO     345ms delay for topic >> open_manipulator/states/open_manipulator_actuator_state
-2023-01-07	14:52:39.834 INFO     397ms delay for topic >> open_manipulator/joint4_position/command/data
-2023-01-07	14:52:40.159 INFO     6ms delay for topic >> open_manipulator/joint_states/effort
-2023-01-07	14:52:40.472 INFO     123ms delay for topic >> open_manipulator/gripper/kinematics_pose/pose/position/z
-2023-01-07	14:52:40.671 INFO     321ms delay for topic >> open_manipulator/joint3_position/command/data
-2023-01-07	14:52:41.593 INFO     189ms delay for topic >> open_manipulator/gripper_sub_position/command/data
-2023-01-07	14:52:41.593 INFO     190ms delay for topic >> open_manipulator/gripper_position/command/data
-2023-01-07	14:52:41.722 INFO     319ms delay for topic >> open_manipulator/gripper_sub_position/state/command
-2023-01-07	14:52:41.740 INFO     16ms delay for topic >> open_manipulator/gripper_position/state/process_value_dot
-2023-01-07	14:52:41.740 INFO     15ms delay for topic >> open_manipulator/joint2_position/command/data
-2023-01-07	14:52:42.766 INFO     336ms delay for topic >> open_manipulator/states/open_manipulator_actuator_state
-2023-01-07	14:52:42.849 INFO     419ms delay for topic >> open_manipulator/joint4_position/command/data
-2023-01-07	14:52:42.884 INFO     454ms delay for topic >> open_manipulator/joint1_position/command/data
-2023-01-07	14:52:45.809 INFO     661ms delay for topic >> open_manipulator/joint_states/effort
-2023-01-07	14:52:46.101 INFO     185ms delay for topic >> open_manipulator/gripper/kinematics_pose/pose/position/z
-2023-01-07	14:52:47.299 INFO     264ms delay for topic >> open_manipulator/joint3_position/command/data
-2023-01-07	14:52:47.336 INFO     6ms delay for topic >> open_manipulator/gripper_sub_position/command/data
-2023-01-07	14:52:48.151 INFO     278ms delay for topic >> open_manipulator/gripper_position/command/data
-2023-01-07	14:52:49.939 INFO     525ms delay for topic >> open_manipulator/gripper_sub_position/state/command
-2023-01-07	14:52:51.303 INFO     881ms delay for topic >> open_manipulator/gripper_position/state/process_value_dot
-2023-01-07	14:52:51.303 INFO     881ms delay for topic >> open_manipulator/states/open_manipulator_actuator_state
-2023-01-07	14:52:51.367 INFO     48ms delay for topic >> open_manipulator/joint2_position/command/data
-2023-01-07	14:52:52.625 INFO     261ms delay for topic >> open_manipulator/joint4_position/command/data
-2023-01-07	14:52:54.077 INFO     10ms delay for topic >> open_manipulator/gripper/kinematics_pose/pose/position/z
-2023-01-07	14:52:54.084 INFO     14ms delay for topic >> open_manipulator/joint_states/effort
-2023-01-07	14:52:54.504 INFO     47ms delay for topic >> open_manipulator/gripper_sub_position/command/data
-2023-01-07	14:52:54.769 INFO     312ms delay for topic >> open_manipulator/joint3_position/command/data
-2023-01-07	14:52:55.630 INFO     1173ms delay for topic >> open_manipulator/joint1_position/command/data
-2023-01-07	14:52:56.244 INFO     597ms delay for topic >> open_manipulator/gripper_position/command/data
-2023-01-07	14:52:57.429 INFO     1783ms delay for topic >> open_manipulator/gripper_sub_position/state/command
-2023-01-07	14:52:57.435 INFO     1792ms delay for topic >> open_manipulator/states/open_manipulator_actuator_state
-2023-01-07	14:52:57.965 INFO     439ms delay for topic >> open_manipulator/gripper_position/state/process_value_dot
 2023-01-07	14:53:00.680 INFO     11ms delay for topic >> open_manipulator/joint2_position/command/data
 2023-01-07	14:53:01.482 INFO     811ms delay for topic >> open_manipulator/joint4_position/command/data
 2023-01-07	14:53:02.515 INFO     340ms delay for topic >> open_manipulator/gripper/kinematics_pose/pose/position/z
@@ -293,7 +236,3 @@
 2023-01-07	14:55:58.497 INFO     334ms delay for topic >> open_manipulator/joint1_position/command/data
 2023-01-07	14:55:59.333 INFO     48ms delay for topic >> open_manipulator/gripper_position/state/process_value_dot
 2023-01-07	14:56:00.303 INFO     1027ms delay for topic >> open_manipulator/gripper/kinematics_pose/pose/position/z
-2023-01-07	14:56:01.662 INFO     373ms delay for topic >> open_manipulator/gripper_sub_position/state/command
-2023-01-07	14:56:03.918 INFO     240ms delay for topic >> open_manipulator/gripper_sub_position/command/data
-2023-01-07	14:56:04.407 INFO     163ms delay for topic >> open_manipulator/joint_states/effort
-2023-01-07	14:56:05.695 INFO     253ms delay for topic >> open_manipulator/gripper_position/command/data

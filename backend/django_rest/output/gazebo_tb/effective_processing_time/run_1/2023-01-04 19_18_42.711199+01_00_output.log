@@ -1,16 +1,3 @@
-2023-01-04	18:18:42.739 INFO     Watching for file changes with StatReloader
-2023-01-04	18:18:42.860 INFO     Connection to ROS ready.
-2023-01-04	18:18:42.861 INFO     Successfully connected to ROS bridge from listener
-2023-01-04	18:18:42.861 INFO     Starting factory <roslibpy.comm.comm_autobahn.AutobahnRosBridgeClientFactory object at 0x7f17bc7c0610>
-2023-01-04	18:18:47.008 INFO     Connection to ROS ready.
-2023-01-04	18:18:47.008 INFO     Successfully connected to ROS bridge from Ros Connector
-2023-01-04	18:18:47.008 INFO     Generating new MQTT Forwarder
-2023-01-04	18:18:47.009 INFO     local mqtt is set up
-2023-01-04	18:19:29.162 INFO     Created subscriber on imu
-2023-01-04	18:19:29.164 INFO     Created subscriber on scan
-2023-01-04	18:19:29.164 INFO     Created subscriber on cmd_vel
-2023-01-04	18:19:29.165 INFO     Created subscriber on odom
-2023-01-04	18:19:29.165 INFO     Created subscriber on joint_states
 2023-01-04	18:19:30.217 INFO     371359nanosecs 		for topic=tb3_0/scan/ranges
 2023-01-04	18:19:30.222 INFO     170424nanosecs 		for topic=tb3_0/cmd_vel/linear/x
 2023-01-04	18:19:31.183 INFO     354267nanosecs 		for topic=tb3_0/imu/linear_acceleration/x
@@ -462,53 +449,3 @@
 2023-01-04	18:22:30.451 INFO     371389nanosecs 		for topic=tb3_0/imu/linear_acceleration/x
 2023-01-04	18:22:30.456 INFO     245845nanosecs 		for topic=tb3_0/scan/ranges
 2023-01-04	18:22:30.472 INFO     218435nanosecs 		for topic=tb3_0/cmd_vel/linear/x
-2023-01-04	18:22:31.585 INFO     438060nanosecs 		for topic=tb3_0/scan/ranges
-2023-01-04	18:22:31.976 INFO     324377nanosecs 		for topic=tb3_0/cmd_vel/linear/x
-2023-01-04	18:22:32.474 INFO     317116nanosecs 		for topic=tb3_0/imu/linear_acceleration/x
-2023-01-04	18:22:32.514 INFO     325777nanosecs 		for topic=tb3_0/odom/twist/twist/angular/z
-2023-01-04	18:22:32.622 INFO     309217nanosecs 		for topic=tb3_0/scan/ranges
-2023-01-04	18:22:32.789 INFO     218485nanosecs 		for topic=tb3_0/joint_states/position
-2023-01-04	18:22:32.991 INFO     317808nanosecs 		for topic=tb3_0/cmd_vel/linear/x
-2023-01-04	18:22:33.990 INFO     336407nanosecs 		for topic=tb3_0/scan/ranges
-2023-01-04	18:22:34.153 INFO     348698nanosecs 		for topic=tb3_0/cmd_vel/linear/x
-2023-01-04	18:22:34.557 INFO     276756nanosecs 		for topic=tb3_0/imu/linear_acceleration/x
-2023-01-04	18:22:34.738 INFO     329957nanosecs 		for topic=tb3_0/odom/twist/twist/angular/z
-2023-01-04	18:22:35.867 INFO     304327nanosecs 		for topic=tb3_0/cmd_vel/linear/x
-2023-01-04	18:22:35.884 INFO     206155nanosecs 		for topic=tb3_0/scan/ranges
-2023-01-04	18:22:36.682 INFO     367689nanosecs 		for topic=tb3_0/imu/linear_acceleration/x
-2023-01-04	18:22:36.777 INFO     357657nanosecs 		for topic=tb3_0/odom/twist/twist/angular/z
-2023-01-04	18:22:37.213 INFO     349277nanosecs 		for topic=tb3_0/scan/ranges
-2023-01-04	18:22:37.223 INFO     188594nanosecs 		for topic=tb3_0/cmd_vel/linear/x
-2023-01-04	18:22:37.935 INFO     272246nanosecs 		for topic=tb3_0/joint_states/position
-2023-01-04	18:22:38.388 INFO     252196nanosecs 		for topic=tb3_0/cmd_vel/linear/x
-2023-01-04	18:22:38.623 INFO     228574nanosecs 		for topic=tb3_0/scan/ranges
-2023-01-04	18:22:38.711 INFO     417279nanosecs 		for topic=tb3_0/imu/linear_acceleration/x
-2023-01-04	18:22:38.936 INFO     389479nanosecs 		for topic=tb3_0/odom/twist/twist/angular/z
-2023-01-04	18:22:40.056 INFO     296076nanosecs 		for topic=tb3_0/scan/ranges
-2023-01-04	18:22:40.143 INFO     329027nanosecs 		for topic=tb3_0/cmd_vel/linear/x
-2023-01-04	18:22:40.728 INFO     309987nanosecs 		for topic=tb3_0/imu/linear_acceleration/x
-2023-01-04	18:22:40.974 INFO     280326nanosecs 		for topic=tb3_0/odom/twist/twist/angular/z
-2023-01-04	18:22:41.463 INFO     320547nanosecs 		for topic=tb3_0/cmd_vel/linear/x
-2023-01-04	18:22:41.463 INFO     308557nanosecs 		for topic=tb3_0/scan/ranges
-2023-01-04	18:22:42.746 INFO     301387nanosecs 		for topic=tb3_0/imu/linear_acceleration/x
-2023-01-04	18:22:42.752 INFO     338787nanosecs 		for topic=tb3_0/cmd_vel/linear/x
-2023-01-04	18:22:43.025 INFO     262535nanosecs 		for topic=tb3_0/odom/twist/twist/angular/z
-2023-01-04	18:22:43.041 INFO     291547nanosecs 		for topic=tb3_0/joint_states/position
-2023-01-04	18:22:43.041 INFO     193945nanosecs 		for topic=tb3_0/scan/ranges
-2023-01-04	18:22:44.339 INFO     255975nanosecs 		for topic=tb3_0/cmd_vel/linear/x
-2023-01-04	18:22:45.009 INFO     272505nanosecs 		for topic=tb3_0/scan/ranges
-2023-01-04	18:22:45.090 INFO     334667nanosecs 		for topic=tb3_0/imu/linear_acceleration/x
-2023-01-04	18:22:45.522 INFO     297367nanosecs 		for topic=tb3_0/cmd_vel/linear/x
-2023-01-04	18:22:45.533 INFO     214394nanosecs 		for topic=tb3_0/odom/twist/twist/angular/z
-2023-01-04	18:22:46.025 INFO     335647nanosecs 		for topic=tb3_0/scan/ranges
-2023-01-04	18:22:47.533 INFO     307997nanosecs 		for topic=tb3_0/imu/linear_acceleration/x
-2023-01-04	18:22:47.534 INFO     339727nanosecs 		for topic=tb3_0/cmd_vel/linear/x
-2023-01-04	18:22:47.534 INFO     325517nanosecs 		for topic=tb3_0/scan/ranges
-2023-01-04	18:22:48.408 INFO     338547nanosecs 		for topic=tb3_0/odom/twist/twist/angular/z
-2023-01-04	18:22:48.542 INFO     199884nanosecs 		for topic=tb3_0/joint_states/position
-2023-01-04	18:22:48.968 INFO     275486nanosecs 		for topic=tb3_0/cmd_vel/linear/x
-2023-01-04	18:22:49.100 INFO     245356nanosecs 		for topic=tb3_0/scan/ranges
-2023-01-04	18:22:49.899 INFO     332198nanosecs 		for topic=tb3_0/imu/linear_acceleration/x
-2023-01-04	18:22:50.102 INFO     316306nanosecs 		for topic=tb3_0/cmd_vel/linear/x
-2023-01-04	18:22:50.142 INFO     320768nanosecs 		for topic=tb3_0/scan/ranges
-2023-01-04	18:22:50.498 INFO     311097nanosecs 		for topic=tb3_0/odom/twist/twist/angular/z

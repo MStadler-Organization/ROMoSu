@@ -1,16 +1,3 @@
-2023-01-04	17:43:54.371 INFO     Watching for file changes with StatReloader
-2023-01-04	17:43:54.491 INFO     Connection to ROS ready.
-2023-01-04	17:43:54.492 INFO     Successfully connected to ROS bridge from listener
-2023-01-04	17:43:54.492 INFO     Starting factory <roslibpy.comm.comm_autobahn.AutobahnRosBridgeClientFactory object at 0x7fa77b685610>
-2023-01-04	17:43:59.009 INFO     Connection to ROS ready.
-2023-01-04	17:43:59.009 INFO     Successfully connected to ROS bridge from Ros Connector
-2023-01-04	17:43:59.009 INFO     Generating new MQTT Forwarder
-2023-01-04	17:43:59.010 INFO     local mqtt is set up
-2023-01-04	17:44:41.177 INFO     Created subscriber on cmd_vel
-2023-01-04	17:44:41.178 INFO     Created subscriber on scan
-2023-01-04	17:44:41.178 INFO     Created subscriber on odom
-2023-01-04	17:44:41.179 INFO     Created subscriber on imu
-2023-01-04	17:44:41.181 INFO     Created subscriber on joint_states
 2023-01-04	17:44:42.194 INFO     114ms 		for topic=tb3_0/scan/ranges
 2023-01-04	17:44:42.194 INFO     77ms 		for topic=tb3_0/cmd_vel/linear/x
 2023-01-04	17:44:43.182 INFO     37ms 		for topic=tb3_0/imu/linear_acceleration/x
@@ -457,37 +444,3 @@
 2023-01-04	17:47:42.015 INFO     56ms 		for topic=tb3_0/scan/ranges
 2023-01-04	17:47:42.727 INFO     6ms 		for topic=tb3_0/odom/twist/twist/angular/z
 2023-01-04	17:47:42.920 INFO     748ms 		for topic=tb3_0/cmd_vel/linear/x
-2023-01-04	17:47:43.254 INFO     311ms 		for topic=tb3_0/scan/ranges
-2023-01-04	17:47:44.080 INFO     233ms 		for topic=tb3_0/imu/linear_acceleration/x
-2023-01-04	17:47:44.081 INFO     274ms 		for topic=tb3_0/cmd_vel/linear/x
-2023-01-04	17:47:44.565 INFO     751ms 		for topic=tb3_0/scan/ranges
-2023-01-04	17:47:45.209 INFO     553ms 		for topic=tb3_0/odom/twist/twist/angular/z
-2023-01-04	17:47:45.243 INFO     14ms 		for topic=tb3_0/cmd_vel/linear/x
-2023-01-04	17:47:45.599 INFO     1785ms 		for topic=tb3_0/scan/ranges
-2023-01-04	17:47:46.160 INFO     528ms 		for topic=tb3_0/imu/linear_acceleration/x
-2023-01-04	17:47:46.523 INFO     159ms 		for topic=tb3_0/joint_states/position
-2023-01-04	17:47:46.655 INFO     291ms 		for topic=tb3_0/scan/ranges
-2023-01-04	17:47:46.661 INFO     288ms 		for topic=tb3_0/cmd_vel/linear/x
-2023-01-04	17:47:47.241 INFO     202ms 		for topic=tb3_0/odom/twist/twist/angular/z
-2023-01-04	17:47:47.701 INFO     2ms 		for topic=tb3_0/cmd_vel/linear/x
-2023-01-04	17:47:47.951 INFO     22ms 		for topic=tb3_0/scan/ranges
-2023-01-04	17:47:48.450 INFO     0ms 		for topic=tb3_0/imu/linear_acceleration/x
-2023-01-04	17:47:48.860 INFO     389ms 		for topic=tb3_0/cmd_vel/linear/x
-2023-01-04	17:47:49.130 INFO     860ms 		for topic=tb3_0/scan/ranges
-2023-01-04	17:47:49.261 INFO     15ms 		for topic=tb3_0/odom/twist/twist/angular/z
-2023-01-04	17:47:50.261 INFO     459ms 		for topic=tb3_0/cmd_vel/linear/x
-2023-01-04	17:47:50.261 INFO     438ms 		for topic=tb3_0/scan/ranges
-2023-01-04	17:47:50.485 INFO     0ms 		for topic=tb3_0/imu/linear_acceleration/x
-2023-01-04	17:47:51.326 INFO     88ms 		for topic=tb3_0/odom/twist/twist/angular/z
-2023-01-04	17:47:51.733 INFO     550ms 		for topic=tb3_0/cmd_vel/linear/x
-2023-01-04	17:47:51.733 INFO     426ms 		for topic=tb3_0/joint_states/position
-2023-01-04	17:47:51.742 INFO     568ms 		for topic=tb3_0/scan/ranges
-2023-01-04	17:47:53.113 INFO     172ms 		for topic=tb3_0/cmd_vel/linear/x
-2023-01-04	17:47:53.166 INFO     6ms 		for topic=tb3_0/imu/linear_acceleration/x
-2023-01-04	17:47:53.417 INFO     286ms 		for topic=tb3_0/odom/twist/twist/angular/z
-2023-01-04	17:47:53.688 INFO     268ms 		for topic=tb3_0/scan/ranges
-2023-01-04	17:47:54.475 INFO     783ms 		for topic=tb3_0/cmd_vel/linear/x
-2023-01-04	17:47:55.454 INFO     47ms 		for topic=tb3_0/scan/ranges
-2023-01-04	17:47:55.556 INFO     106ms 		for topic=tb3_0/cmd_vel/linear/x
-2023-01-04	17:47:56.801 INFO     1146ms 		for topic=tb3_0/imu/linear_acceleration/x
-2023-01-04	17:47:56.801 INFO     1147ms 		for topic=tb3_0/scan/ranges

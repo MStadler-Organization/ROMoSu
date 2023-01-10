@@ -1,31 +1,3 @@
-2023-01-05	21:20:07.859 INFO     Watching for file changes with StatReloader
-2023-01-05	21:20:07.983 INFO     Connection to ROS ready.
-2023-01-05	21:20:07.984 INFO     Successfully connected to ROS bridge from listener
-2023-01-05	21:20:07.984 INFO     Starting factory <roslibpy.comm.comm_autobahn.AutobahnRosBridgeClientFactory object at 0x7f91f5b235b0>
-2023-01-05	21:20:12.008 INFO     Connection to ROS ready.
-2023-01-05	21:20:12.009 INFO     Successfully connected to ROS bridge from Ros Connector
-2023-01-05	21:20:12.009 INFO     Generating new MQTT Forwarder
-2023-01-05	21:20:12.009 INFO     local mqtt is set up
-2023-01-05	21:20:18.417 INFO     publishing topic >>	tb3_0/meta
-2023-01-05	21:20:19.608 INFO     Created subscriber on cmd_vel
-2023-01-05	21:20:19.608 INFO     Created subscriber on cmd_vel_rc100
-2023-01-05	21:20:19.608 INFO     Created subscriber on battery_state
-2023-01-05	21:20:19.614 INFO     Created subscriber on firmware_version
-2023-01-05	21:20:19.614 INFO     Created subscriber on odom
-2023-01-05	21:20:19.614 INFO     Created subscriber on rpms
-2023-01-05	21:20:19.614 INFO     Created subscriber on sensor_state
-2023-01-05	21:20:19.615 INFO     publishing topic >>	tb3_0/battery_state/percentage
-2023-01-05	21:20:19.615 INFO     publishing topic >>	tb3_0/cmd_vel/linear/x
-2023-01-05	21:20:19.616 INFO     publishing topic >>	tb3_0/scan/ranges
-2023-01-05	21:20:19.616 INFO     Created subscriber on imu
-2023-01-05	21:20:19.616 INFO     Created subscriber on joint_states
-2023-01-05	21:20:19.624 INFO     Created subscriber on reset
-2023-01-05	21:20:19.624 INFO     Created subscriber on version_info
-2023-01-05	21:20:19.624 INFO     Created subscriber on diagnostics
-2023-01-05	21:20:19.626 INFO     Created subscriber on scan
-2023-01-05	21:20:19.631 INFO     Created subscriber on magnetic_field
-2023-01-05	21:20:19.646 INFO     Created subscriber on sound
-2023-01-05	21:20:19.646 INFO     Created subscriber on motor_power
 2023-01-05	21:20:21.867 INFO     publishing topic >>	tb3_0/scan/ranges
 2023-01-05	21:20:21.888 INFO     publishing topic >>	tb3_0/cmd_vel/linear/x
 2023-01-05	21:20:23.327 INFO     publishing topic >>	tb3_0/battery_state/percentage
@@ -218,45 +190,3 @@
 2023-01-05	21:23:19.933 INFO     publishing topic >>	tb3_0/scan/ranges
 2023-01-05	21:23:20.076 INFO     publishing topic >>	tb3_0/cmd_vel/linear/x
 2023-01-05	21:23:21.091 INFO     publishing topic >>	tb3_0/cmd_vel/linear/x
-2023-01-05	21:23:22.114 INFO     publishing topic >>	tb3_0/battery_state/percentage
-2023-01-05	21:23:23.233 INFO     publishing topic >>	tb3_0/scan/ranges
-2023-01-05	21:23:23.489 INFO     publishing topic >>	tb3_0/cmd_vel/linear/x
-2023-01-05	21:23:24.933 INFO     publishing topic >>	tb3_0/cmd_vel/linear/x
-2023-01-05	21:23:25.277 INFO     publishing topic >>	tb3_0/scan/ranges
-2023-01-05	21:23:25.577 INFO     publishing topic >>	tb3_0/battery_state/percentage
-2023-01-05	21:23:26.582 INFO     publishing topic >>	tb3_0/cmd_vel/linear/x
-2023-01-05	21:23:27.966 INFO     publishing topic >>	tb3_0/scan/ranges
-2023-01-05	21:23:27.977 INFO     publishing topic >>	tb3_0/cmd_vel/linear/x
-2023-01-05	21:23:29.390 INFO     publishing topic >>	tb3_0/battery_state/percentage
-2023-01-05	21:23:30.915 INFO     publishing topic >>	tb3_0/scan/ranges
-2023-01-05	21:23:31.969 INFO     publishing topic >>	tb3_0/cmd_vel/linear/x
-2023-01-05	21:23:33.479 INFO     publishing topic >>	tb3_0/cmd_vel/linear/x
-2023-01-05	21:23:34.109 INFO     publishing topic >>	tb3_0/battery_state/percentage
-2023-01-05	21:23:35.251 INFO     publishing topic >>	tb3_0/scan/ranges
-2023-01-05	21:23:37.046 INFO     publishing topic >>	tb3_0/cmd_vel/linear/x
-2023-01-05	21:23:38.315 INFO     publishing topic >>	tb3_0/scan/ranges
-2023-01-05	21:23:38.530 INFO     publishing topic >>	tb3_0/battery_state/percentage
-2023-01-05	21:23:38.581 INFO     publishing topic >>	tb3_0/cmd_vel/linear/x
-2023-01-05	21:23:39.525 INFO     publishing topic >>	tb3_0/scan/ranges
-2023-01-05	21:23:39.595 INFO     publishing topic >>	tb3_0/cmd_vel/linear/x
-2023-01-05	21:23:41.970 INFO     publishing topic >>	tb3_0/cmd_vel/linear/x
-2023-01-05	21:23:41.991 INFO     publishing topic >>	tb3_0/battery_state/percentage
-2023-01-05	21:23:42.175 INFO     publishing topic >>	tb3_0/scan/ranges
-2023-01-05	21:23:43.551 INFO     publishing topic >>	tb3_0/cmd_vel/linear/x
-2023-01-05	21:23:43.706 INFO     publishing topic >>	tb3_0/scan/ranges
-2023-01-05	21:23:45.087 INFO     publishing topic >>	tb3_0/battery_state/percentage
-2023-01-05	21:23:45.087 INFO     publishing topic >>	tb3_0/cmd_vel/linear/x
-2023-01-05	21:23:45.334 INFO     publishing topic >>	tb3_0/scan/ranges
-2023-01-05	21:23:47.910 INFO     publishing topic >>	tb3_0/cmd_vel/linear/x
-2023-01-05	21:23:48.889 INFO     publishing topic >>	tb3_0/scan/ranges
-2023-01-05	21:23:48.931 INFO     publishing topic >>	tb3_0/battery_state/percentage
-2023-01-05	21:23:49.945 INFO     publishing topic >>	tb3_0/cmd_vel/linear/x
-2023-01-05	21:23:52.976 INFO     publishing topic >>	tb3_0/battery_state/percentage
-2023-01-05	21:23:53.432 INFO     publishing topic >>	tb3_0/scan/ranges
-2023-01-05	21:23:54.042 INFO     publishing topic >>	tb3_0/cmd_vel/linear/x
-2023-01-05	21:23:55.150 INFO     publishing topic >>	tb3_0/cmd_vel/linear/x
-2023-01-05	21:23:55.264 INFO     publishing topic >>	tb3_0/scan/ranges
-2023-01-05	21:23:57.172 INFO     publishing topic >>	tb3_0/cmd_vel/linear/x
-2023-01-05	21:23:57.183 INFO     publishing topic >>	tb3_0/battery_state/percentage
-2023-01-05	21:23:57.306 INFO     publishing topic >>	tb3_0/scan/ranges
-2023-01-05	21:23:58.514 INFO     publishing topic >>	tb3_0/cmd_vel/linear/x
