@@ -1,113 +1,113 @@
-2023.01.05 	 10:15:01.899	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@6583ada0
-2023.01.05 	 10:15:02.969	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@253abddf
-2023.01.05 	 10:15:04.142	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@5d2cfa75
-2023.01.05 	 10:15:06.561	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@40eecac4
-2023.01.05 	 10:15:08.585	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@4818abaa
-2023.01.05 	 10:15:09.633	 Violation occured >> c2_tb_collision.cst | CollisionAvoidance | select * from CollisionEvent(distanceNearestObstacle < 0.35)  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@6043ea02
-2023.01.05 	 10:15:09.633	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@6043ea02
-2023.01.05 	 10:15:10.909	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@2e3cc608
-2023.01.05 	 10:15:12.789	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@249a34e6
-2023.01.05 	 10:15:13.832	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@667a1943
-2023.01.05 	 10:15:15.168	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@1916fc74
-2023.01.05 	 10:15:16.388	 Violation occured >> c1_tb_linear_velocity.cst | LinearVelocityExceed | select * from LinearVelocityEvent(linearVelocity > 22.0)  ==> at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@51d275d8
-2023.01.05 	 10:15:16.560	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@241a5600
-2023.01.05 	 10:15:18.604	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@121ce3c1
-2023.01.05 	 10:15:18.913	 Violation occured >> c1_tb_linear_velocity.cst | LinearVelocityExceed | select * from LinearVelocityEvent(linearVelocity > 22.0)  ==> at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@3c4758aa
-2023.01.05 	 10:15:19.706	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@7e79964f
-2023.01.05 	 10:15:21.094	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@82565d6
-2023.01.05 	 10:15:22.741	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@7d529df8
-2023.01.05 	 10:15:25.644	 Violation occured >> c2_tb_collision.cst | CollisionAvoidance | select * from CollisionEvent(distanceNearestObstacle < 0.35)  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@6a07e51d
-2023.01.05 	 10:15:26.786	 Violation occured >> c1_tb_linear_velocity.cst | LinearVelocityExceed | select * from LinearVelocityEvent(linearVelocity > 22.0)  ==> at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@3d318f8
-2023.01.05 	 10:15:29.927	 Violation occured >> c2_tb_collision.cst | CollisionAvoidance | select * from CollisionEvent(distanceNearestObstacle < 0.35)  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@480911fa
-2023.01.05 	 10:15:35.077	 Violation occured >> c1_tb_linear_velocity.cst | LinearVelocityExceed | select * from LinearVelocityEvent(linearVelocity > 22.0)  ==> at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@78075cba
-2023.01.05 	 10:15:36.368	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@2dfd61aa
-2023.01.05 	 10:15:37.607	 Violation occured >> c1_tb_linear_velocity.cst | LinearVelocityExceed | select * from LinearVelocityEvent(linearVelocity > 22.0)  ==> at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@36f2a835
-2023.01.05 	 10:15:38.532	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@36f4e9d0
-2023.01.05 	 10:15:39.769	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@74d49138
-2023.01.05 	 10:15:40.185	 Violation occured >> c1_tb_linear_velocity.cst | LinearVelocityExceed | select * from LinearVelocityEvent(linearVelocity > 22.0)  ==> at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@32e25e39
-2023.01.05 	 10:15:41.150	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@11f2fb50
-2023.01.05 	 10:15:43.344	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@592ad7
-2023.01.05 	 10:15:44.525	 Violation occured >> c2_tb_collision.cst | CollisionAvoidance | select * from CollisionEvent(distanceNearestObstacle < 0.35)  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@76c9e427
-2023.01.05 	 10:15:44.526	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@76c9e427
-2023.01.05 	 10:15:45.723	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@3f0f67bb
-2023.01.05 	 10:15:46.885	 Violation occured >> c2_tb_collision.cst | CollisionAvoidance | select * from CollisionEvent(distanceNearestObstacle < 0.35)  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@4e9f0f61
-2023.01.05 	 10:15:46.885	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@4e9f0f61
-2023.01.05 	 10:15:48.815	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@37d100b
-2023.01.05 	 10:15:50.230	 Violation occured >> c2_tb_collision.cst | CollisionAvoidance | select * from CollisionEvent(distanceNearestObstacle < 0.35)  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@3a2c249f
-2023.01.05 	 10:15:51.871	 Violation occured >> c2_tb_collision.cst | CollisionAvoidance | select * from CollisionEvent(distanceNearestObstacle < 0.35)  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@7e5abede
-2023.01.05 	 10:15:52.940	 Violation occured >> c2_tb_collision.cst | CollisionAvoidance | select * from CollisionEvent(distanceNearestObstacle < 0.35)  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@48084273
-2023.01.05 	 10:15:56.174	 Violation occured >> c2_tb_collision.cst | CollisionAvoidance | select * from CollisionEvent(distanceNearestObstacle < 0.35)  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@231efe31
-2023.01.05 	 10:15:57.509	 Violation occured >> c2_tb_collision.cst | CollisionAvoidance | select * from CollisionEvent(distanceNearestObstacle < 0.35)  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@78cd3e11
-2023.01.05 	 10:16:01.079	 Violation occured >> c2_tb_collision.cst | CollisionAvoidance | select * from CollisionEvent(distanceNearestObstacle < 0.35)  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@534ad398
-2023.01.05 	 10:16:04.367	 Violation occured >> c2_tb_collision.cst | CollisionAvoidance | select * from CollisionEvent(distanceNearestObstacle < 0.35)  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@595b1858
-2023.01.05 	 10:16:07.804	 Violation occured >> c2_tb_collision.cst | CollisionAvoidance | select * from CollisionEvent(distanceNearestObstacle < 0.35)  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@de08a34
-2023.01.05 	 10:16:17.412	 Violation occured >> c2_tb_collision.cst | CollisionAvoidance | select * from CollisionEvent(distanceNearestObstacle < 0.35)  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@1ccc002f
-2023.01.05 	 10:16:17.412	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@1ccc002f
-2023.01.05 	 10:16:19.048	 Violation occured >> c1_tb_linear_velocity.cst | LinearVelocityExceed | select * from LinearVelocityEvent(linearVelocity > 22.0)  ==> at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@191fc63d
-2023.01.05 	 10:16:19.341	 Violation occured >> c2_tb_collision.cst | CollisionAvoidance | select * from CollisionEvent(distanceNearestObstacle < 0.35)  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@1807849e
-2023.01.05 	 10:16:19.341	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@1807849e
-2023.01.05 	 10:16:20.980	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@11bf0c80
-2023.01.05 	 10:16:23.074	 Violation occured >> c2_tb_collision.cst | CollisionAvoidance | select * from CollisionEvent(distanceNearestObstacle < 0.35)  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@6d0eabe0
-2023.01.05 	 10:16:23.074	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@6d0eabe0
-2023.01.05 	 10:16:24.124	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@ac7b652
-2023.01.05 	 10:16:27.147	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@2e40e0e0
-2023.01.05 	 10:16:29.216	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@47f222a4
-2023.01.05 	 10:16:30.281	 Violation occured >> c2_tb_collision.cst | CollisionAvoidance | select * from CollisionEvent(distanceNearestObstacle < 0.35)  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@5f3bc011
-2023.01.05 	 10:16:30.281	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@5f3bc011
-2023.01.05 	 10:16:32.886	 Violation occured >> c2_tb_collision.cst | CollisionAvoidance | select * from CollisionEvent(distanceNearestObstacle < 0.35)  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@68799882
-2023.01.05 	 10:16:34.386	 Violation occured >> c2_tb_collision.cst | CollisionAvoidance | select * from CollisionEvent(distanceNearestObstacle < 0.35)  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@4197328d
-2023.01.05 	 10:16:35.872	 Violation occured >> c2_tb_collision.cst | CollisionAvoidance | select * from CollisionEvent(distanceNearestObstacle < 0.35)  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@1726cf19
-2023.01.05 	 10:16:37.194	 Violation occured >> c2_tb_collision.cst | CollisionAvoidance | select * from CollisionEvent(distanceNearestObstacle < 0.35)  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@169caea4
-2023.01.05 	 10:16:38.319	 Violation occured >> c2_tb_collision.cst | CollisionAvoidance | select * from CollisionEvent(distanceNearestObstacle < 0.35)  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@3285997d
-2023.01.05 	 10:16:39.117	 Violation occured >> c1_tb_linear_velocity.cst | LinearVelocityExceed | select * from LinearVelocityEvent(linearVelocity > 22.0)  ==> at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@4afed6fa
-2023.01.05 	 10:16:41.676	 Violation occured >> c1_tb_linear_velocity.cst | LinearVelocityExceed | select * from LinearVelocityEvent(linearVelocity > 22.0)  ==> at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@6b0196bb
-2023.01.05 	 10:16:44.548	 Violation occured >> c2_tb_collision.cst | CollisionAvoidance | select * from CollisionEvent(distanceNearestObstacle < 0.35)  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@181bfcf1
-2023.01.05 	 10:16:44.548	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@181bfcf1
-2023.01.05 	 10:16:46.945	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@6cbd0fe
-2023.01.05 	 10:16:48.034	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@3abe9fdb
-2023.01.05 	 10:16:49.156	 Violation occured >> c2_tb_collision.cst | CollisionAvoidance | select * from CollisionEvent(distanceNearestObstacle < 0.35)  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@5d6d6279
-2023.01.05 	 10:16:49.156	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@5d6d6279
-2023.01.05 	 10:16:50.757	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@1ad6e151
-2023.01.05 	 10:16:51.895	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@42c28ed5
-2023.01.05 	 10:16:52.526	 Violation occured >> c1_tb_linear_velocity.cst | LinearVelocityExceed | select * from LinearVelocityEvent(linearVelocity > 22.0)  ==> at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@c4c8111
-2023.01.05 	 10:16:53.249	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@3a04444b
-2023.01.05 	 10:16:54.322	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@1775e633
-2023.01.05 	 10:16:55.790	 Violation occured >> c1_tb_linear_velocity.cst | LinearVelocityExceed | select * from LinearVelocityEvent(linearVelocity > 22.0)  ==> at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@4197762e
-2023.01.05 	 10:16:56.394	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@293b3304
-2023.01.05 	 10:16:58.953	 Violation occured >> c1_tb_linear_velocity.cst | LinearVelocityExceed | select * from LinearVelocityEvent(linearVelocity > 22.0)  ==> at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@31851c74
-2023.01.05 	 10:17:00.726	 Violation occured >> c2_tb_collision.cst | CollisionAvoidance | select * from CollisionEvent(distanceNearestObstacle < 0.35)  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@9792009
-2023.01.05 	 10:17:09.127	 Violation occured >> c1_tb_linear_velocity.cst | LinearVelocityExceed | select * from LinearVelocityEvent(linearVelocity > 22.0)  ==> at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@73a5110e
-2023.01.05 	 10:17:12.017	 Violation occured >> c1_tb_linear_velocity.cst | LinearVelocityExceed | select * from LinearVelocityEvent(linearVelocity > 22.0)  ==> at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@376af6d
-2023.01.05 	 10:17:12.029	 Violation occured >> c2_tb_collision.cst | CollisionAvoidance | select * from CollisionEvent(distanceNearestObstacle < 0.35)  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@1a0975cb
-2023.01.05 	 10:17:17.816	 Violation occured >> c2_tb_collision.cst | CollisionAvoidance | select * from CollisionEvent(distanceNearestObstacle < 0.35)  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@5a3067eb
-2023.01.05 	 10:17:27.885	 Violation occured >> c2_tb_collision.cst | CollisionAvoidance | select * from CollisionEvent(distanceNearestObstacle < 0.35)  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@14620c2
-2023.01.05 	 10:17:28.242	 Violation occured >> c1_tb_linear_velocity.cst | LinearVelocityExceed | select * from LinearVelocityEvent(linearVelocity > 22.0)  ==> at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@37fdea40
-2023.01.05 	 10:17:30.748	 Violation occured >> c2_tb_collision.cst | CollisionAvoidance | select * from CollisionEvent(distanceNearestObstacle < 0.35)  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@660b7659
-2023.01.05 	 10:17:30.749	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@660b7659
-2023.01.05 	 10:17:33.377	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@3fdd5a4c
-2023.01.05 	 10:17:34.622	 Violation occured >> c2_tb_collision.cst | CollisionAvoidance | select * from CollisionEvent(distanceNearestObstacle < 0.35)  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@fad2d45
-2023.01.05 	 10:17:34.622	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@fad2d45
-2023.01.05 	 10:17:35.742	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@575a691a
-2023.01.05 	 10:17:37.321	 Violation occured >> c2_tb_collision.cst | CollisionAvoidance | select * from CollisionEvent(distanceNearestObstacle < 0.35)  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@6a5e6416
-2023.01.05 	 10:17:37.322	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@6a5e6416
-2023.01.05 	 10:17:38.722	 Violation occured >> c2_tb_collision.cst | CollisionAvoidance | select * from CollisionEvent(distanceNearestObstacle < 0.35)  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@3f844c2b
-2023.01.05 	 10:17:38.723	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@3f844c2b
-2023.01.05 	 10:17:39.975	 Violation occured >> c2_tb_collision.cst | CollisionAvoidance | select * from CollisionEvent(distanceNearestObstacle < 0.35)  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@5925899b
-2023.01.05 	 10:17:39.975	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@5925899b
-2023.01.05 	 10:17:40.345	 Violation occured >> c1_tb_linear_velocity.cst | LinearVelocityExceed | select * from LinearVelocityEvent(linearVelocity > 22.0)  ==> at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@5db3291c
-2023.01.05 	 10:17:41.577	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@44d49868
-2023.01.05 	 10:17:42.760	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@592c71cd
-2023.01.05 	 10:17:43.207	 Violation occured >> c1_tb_linear_velocity.cst | LinearVelocityExceed | select * from LinearVelocityEvent(linearVelocity > 22.0)  ==> at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@2c305222
-2023.01.05 	 10:17:44.142	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@688f7571
-2023.01.05 	 10:17:47.484	 Violation occured >> c2_tb_collision.cst | CollisionAvoidance | select * from CollisionEvent(distanceNearestObstacle < 0.35)  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@8f8a7d0
-2023.01.05 	 10:17:53.352	 Violation occured >> c2_tb_collision.cst | CollisionAvoidance | select * from CollisionEvent(distanceNearestObstacle < 0.35)  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@32e00d1b
-2023.01.05 	 10:17:54.616	 Violation occured >> c1_tb_linear_velocity.cst | LinearVelocityExceed | select * from LinearVelocityEvent(linearVelocity > 22.0)  ==> at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@1c6fe827
-2023.01.05 	 10:17:55.754	 Violation occured >> c2_tb_collision.cst | CollisionAvoidance | select * from CollisionEvent(distanceNearestObstacle < 0.35)  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@fd83226
-2023.01.05 	 10:17:57.090	 Violation occured >> c2_tb_collision.cst | CollisionAvoidance | select * from CollisionEvent(distanceNearestObstacle < 0.35)  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@4253c22a
-2023.01.05 	 10:17:57.090	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@4253c22a
-2023.01.05 	 10:17:58.142	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@70e987ae
-2023.01.05 	 10:17:59.238	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@13a46744
-2023.01.05 	 10:17:59.831	 Violation occured >> c1_tb_linear_velocity.cst | LinearVelocityExceed | select * from LinearVelocityEvent(linearVelocity > 22.0)  ==> at.jku.lit.edgemode.esper.eventtypes.LinearVelocityEvent@5da33e14
-2023.01.05 	 10:18:00.293	 Violation occured >> c2_tb_collision.cst | CollisionAvoidance | select * from CollisionEvent(distanceNearestObstacle < 0.35)  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@1bdf518
-2023.01.05 	 10:18:00.293	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@1bdf518
-2023.01.05 	 10:18:01.814	 Violation occured >> c3_1_tb_infinite_ranges.cst | InfiniteRangesAmount | select *  from CollisionEvent.win:time(10 sec) having avg(amountOfInfiniteRangeUnits) > 330.0  ==> at.jku.lit.edgemode.esper.eventtypes.CollisionEvent@3dd5c676
+2023.01.05 	 10:15:01.899	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:15:02.969	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:15:04.142	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:15:06.561	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:15:08.585	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:15:09.633	 Violation occured >> c2_tb_collision.cst 
+2023.01.05 	 10:15:09.633	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:15:10.909	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:15:12.789	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:15:13.832	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:15:15.168	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:15:16.388	 Violation occured >> c1_tb_linear_velocity.cst 
+2023.01.05 	 10:15:16.560	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:15:18.604	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:15:18.913	 Violation occured >> c1_tb_linear_velocity.cst 
+2023.01.05 	 10:15:19.706	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:15:21.094	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:15:22.741	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:15:25.644	 Violation occured >> c2_tb_collision.cst 
+2023.01.05 	 10:15:26.786	 Violation occured >> c1_tb_linear_velocity.cst 
+2023.01.05 	 10:15:29.927	 Violation occured >> c2_tb_collision.cst 
+2023.01.05 	 10:15:35.077	 Violation occured >> c1_tb_linear_velocity.cst 
+2023.01.05 	 10:15:36.368	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:15:37.607	 Violation occured >> c1_tb_linear_velocity.cst 
+2023.01.05 	 10:15:38.532	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:15:39.769	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:15:40.185	 Violation occured >> c1_tb_linear_velocity.cst 
+2023.01.05 	 10:15:41.150	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:15:43.344	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:15:44.525	 Violation occured >> c2_tb_collision.cst 
+2023.01.05 	 10:15:44.526	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:15:45.723	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:15:46.885	 Violation occured >> c2_tb_collision.cst 
+2023.01.05 	 10:15:46.885	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:15:48.815	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:15:50.230	 Violation occured >> c2_tb_collision.cst 
+2023.01.05 	 10:15:51.871	 Violation occured >> c2_tb_collision.cst 
+2023.01.05 	 10:15:52.940	 Violation occured >> c2_tb_collision.cst 
+2023.01.05 	 10:15:56.174	 Violation occured >> c2_tb_collision.cst 
+2023.01.05 	 10:15:57.509	 Violation occured >> c2_tb_collision.cst 
+2023.01.05 	 10:16:01.079	 Violation occured >> c2_tb_collision.cst 
+2023.01.05 	 10:16:04.367	 Violation occured >> c2_tb_collision.cst 
+2023.01.05 	 10:16:07.804	 Violation occured >> c2_tb_collision.cst 
+2023.01.05 	 10:16:17.412	 Violation occured >> c2_tb_collision.cst 
+2023.01.05 	 10:16:17.412	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:16:19.048	 Violation occured >> c1_tb_linear_velocity.cst 
+2023.01.05 	 10:16:19.341	 Violation occured >> c2_tb_collision.cst 
+2023.01.05 	 10:16:19.341	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:16:20.980	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:16:23.074	 Violation occured >> c2_tb_collision.cst 
+2023.01.05 	 10:16:23.074	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:16:24.124	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:16:27.147	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:16:29.216	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:16:30.281	 Violation occured >> c2_tb_collision.cst 
+2023.01.05 	 10:16:30.281	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:16:32.886	 Violation occured >> c2_tb_collision.cst 
+2023.01.05 	 10:16:34.386	 Violation occured >> c2_tb_collision.cst 
+2023.01.05 	 10:16:35.872	 Violation occured >> c2_tb_collision.cst 
+2023.01.05 	 10:16:37.194	 Violation occured >> c2_tb_collision.cst 
+2023.01.05 	 10:16:38.319	 Violation occured >> c2_tb_collision.cst 
+2023.01.05 	 10:16:39.117	 Violation occured >> c1_tb_linear_velocity.cst 
+2023.01.05 	 10:16:41.676	 Violation occured >> c1_tb_linear_velocity.cst 
+2023.01.05 	 10:16:44.548	 Violation occured >> c2_tb_collision.cst 
+2023.01.05 	 10:16:44.548	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:16:46.945	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:16:48.034	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:16:49.156	 Violation occured >> c2_tb_collision.cst 
+2023.01.05 	 10:16:49.156	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:16:50.757	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:16:51.895	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:16:52.526	 Violation occured >> c1_tb_linear_velocity.cst 
+2023.01.05 	 10:16:53.249	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:16:54.322	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:16:55.790	 Violation occured >> c1_tb_linear_velocity.cst 
+2023.01.05 	 10:16:56.394	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:16:58.953	 Violation occured >> c1_tb_linear_velocity.cst 
+2023.01.05 	 10:17:00.726	 Violation occured >> c2_tb_collision.cst 
+2023.01.05 	 10:17:09.127	 Violation occured >> c1_tb_linear_velocity.cst 
+2023.01.05 	 10:17:12.017	 Violation occured >> c1_tb_linear_velocity.cst 
+2023.01.05 	 10:17:12.029	 Violation occured >> c2_tb_collision.cst 
+2023.01.05 	 10:17:17.816	 Violation occured >> c2_tb_collision.cst 
+2023.01.05 	 10:17:27.885	 Violation occured >> c2_tb_collision.cst 
+2023.01.05 	 10:17:28.242	 Violation occured >> c1_tb_linear_velocity.cst 
+2023.01.05 	 10:17:30.748	 Violation occured >> c2_tb_collision.cst 
+2023.01.05 	 10:17:30.749	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:17:33.377	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:17:34.622	 Violation occured >> c2_tb_collision.cst 
+2023.01.05 	 10:17:34.622	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:17:35.742	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:17:37.321	 Violation occured >> c2_tb_collision.cst 
+2023.01.05 	 10:17:37.322	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:17:38.722	 Violation occured >> c2_tb_collision.cst 
+2023.01.05 	 10:17:38.723	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:17:39.975	 Violation occured >> c2_tb_collision.cst 
+2023.01.05 	 10:17:39.975	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:17:40.345	 Violation occured >> c1_tb_linear_velocity.cst 
+2023.01.05 	 10:17:41.577	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:17:42.760	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:17:43.207	 Violation occured >> c1_tb_linear_velocity.cst 
+2023.01.05 	 10:17:44.142	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:17:47.484	 Violation occured >> c2_tb_collision.cst 
+2023.01.05 	 10:17:53.352	 Violation occured >> c2_tb_collision.cst 
+2023.01.05 	 10:17:54.616	 Violation occured >> c1_tb_linear_velocity.cst 
+2023.01.05 	 10:17:55.754	 Violation occured >> c2_tb_collision.cst 
+2023.01.05 	 10:17:57.090	 Violation occured >> c2_tb_collision.cst 
+2023.01.05 	 10:17:57.090	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:17:58.142	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:17:59.238	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:17:59.831	 Violation occured >> c1_tb_linear_velocity.cst 
+2023.01.05 	 10:18:00.293	 Violation occured >> c2_tb_collision.cst 
+2023.01.05 	 10:18:00.293	 Violation occured >> c3_1_tb_infinite_ranges.cst 
+2023.01.05 	 10:18:01.814	 Violation occured >> c3_1_tb_infinite_ranges.cst 

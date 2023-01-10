@@ -361,7 +361,6 @@
 2023-01-04	18:30:50.949 INFO     310787nanosecs 		for topic=tb3_0/cmd_vel/linear/x
 2023-01-04	18:30:51.418 INFO     277926nanosecs 		for topic=tb3_0/odom/twist/twist/angular/z
 2023-01-04	18:30:51.478 INFO     345868nanosecs 		for topic=tb3_0/imu/linear_acceleration/x
-2023-01-04	18:30:51.932 INFO     212681089nanosecs 		for topic=tb3_0/scan/ranges
 2023-01-04	18:30:51.963 INFO     278636nanosecs 		for topic=tb3_0/cmd_vel/linear/x
 2023-01-04	18:30:52.507 INFO     331548nanosecs 		for topic=tb3_0/joint_states/position
 2023-01-04	18:30:52.954 INFO     344457nanosecs 		for topic=tb3_0/scan/ranges

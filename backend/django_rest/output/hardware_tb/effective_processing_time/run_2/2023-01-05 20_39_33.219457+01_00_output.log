@@ -100,7 +100,6 @@
 2023-01-05	19:40:57.379 INFO     247216nanosecs 		for topic=tb3_0/odom/header/seq
 2023-01-05	19:40:57.960 INFO     202944nanosecs 		for topic=tb3_0/odom/header/frame_id
 2023-01-05	19:41:00.141 INFO     193264nanosecs 		for topic=tb3_0/firmware_version/hardware
-2023-01-05	19:41:00.363 INFO     5307741nanosecs 		for topic=tb3_0/odom/header/stamp/nsecs
 2023-01-05	19:41:00.534 INFO     173653nanosecs 		for topic=tb3_0/version_info/software
 2023-01-05	19:41:00.767 INFO     192664nanosecs 		for topic=tb3_0/diagnostics/header/stamp/nsecs
 2023-01-05	19:41:01.445 INFO     139664nanosecs 		for topic=tb3_0/diagnostics/header/seq

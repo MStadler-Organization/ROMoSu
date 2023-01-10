@@ -99,7 +99,6 @@
 2023-01-07	14:36:27.171 INFO     345418nanosecs 		for topic=open_manipulator/gripper/kinematics_pose/pose/position/z
 2023-01-07	14:36:28.500 INFO     367468nanosecs 		for topic=open_manipulator/gripper_position/state/process_value_dot
 2023-01-07	14:36:28.988 INFO     354497nanosecs 		for topic=open_manipulator/joint_states/effort
-2023-01-07	14:36:28.989 INFO     526358424nanosecs 		for topic=open_manipulator/gripper_sub_position/state/command
 2023-01-07	14:36:33.081 INFO     338887nanosecs 		for topic=open_manipulator/gripper_sub_position/command/data
 2023-01-07	14:36:33.710 INFO     196604nanosecs 		for topic=open_manipulator/states/open_manipulator_actuator_state
 2023-01-07	14:36:33.730 INFO     236555nanosecs 		for topic=open_manipulator/gripper_position/command/data
